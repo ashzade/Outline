@@ -43,13 +43,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         tableView.rowHeight = UITableViewAutomaticDimension
         
         // Edit button
-        let editButton = UIButton()
-        editButton.setImage(#imageLiteral(resourceName: "pencil").withRenderingMode(.alwaysOriginal), for: .normal)
-        editButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        editButton.imageView?.contentMode = .scaleAspectFit
-        editButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-        editButton.addTarget(self, action: #selector(showEditing), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
+//        let editButton = UIButton()
+//        editButton.setImage(#imageLiteral(resourceName: "pencil").withRenderingMode(.alwaysOriginal), for: .normal)
+//        editButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+//        editButton.imageView?.contentMode = .scaleAspectFit
+//        editButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+//        editButton.addTarget(self, action: #selector(showEditing), for: .touchUpInside)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
         
         // Fetch Note Data
         getNote()
@@ -579,7 +579,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
 //            editing = false
 //        }
 //    }
-//    
+//
     // Resize Images
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
         
