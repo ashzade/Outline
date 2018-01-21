@@ -1,0 +1,6 @@
+framework module LongPressReorder {
+  umbrella header "LongPressReorder-umbrella.h"
+
+  export *
+  module * { export * }
+}

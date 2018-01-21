@@ -1,0 +1,6 @@
+framework module Pods_Outline {
+  umbrella header "Pods-Outline-umbrella.h"
+
+  export *
+  module * { export * }
+}

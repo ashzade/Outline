@@ -1,0 +1,12 @@
+PODS:
+  - LongPressReorder (1.1.0)
+
+DEPENDENCIES:
+  - LongPressReorder (~> 1.1)
+
+SPEC CHECKSUMS:
+  LongPressReorder: 1f652eb6572dbd37fb3e10d0af459ac76351b84d
+
+PODFILE CHECKSUM: 9d40320a319b7c5e96bcabd363ff77515d33af35
+
+COCOAPODS: 1.4.0
