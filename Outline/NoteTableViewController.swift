@@ -42,15 +42,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        // Edit button
-//        let editButton = UIButton()
-//        editButton.setImage(#imageLiteral(resourceName: "pencil").withRenderingMode(.alwaysOriginal), for: .normal)
-//        editButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-//        editButton.imageView?.contentMode = .scaleAspectFit
-//        editButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-//        editButton.addTarget(self, action: #selector(showEditing), for: .touchUpInside)
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
-        
         // Fetch Note Data
         getNote()
         
@@ -98,21 +89,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         return note!.groups[section]
     }
     
-    // Show group options on edit
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        if (editing) {
-            super.setEditing(true, animated: true)
-        } else {
-            super.setEditing(false, animated: true)
-        }
-        // Create array of Group index numbers
-        var groupIndices = [Int]()
-        for (i, _) in note!.groups.enumerated() {
-            groupIndices.append(i)
-        }
-        // Reload group headers to fire button display logic
-//        tableView.reloadSections(IndexSet(groupIndices), with: .automatic)
-    }
     
     // Group header view
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -206,21 +182,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         return true
     }
     
-    // Placeholder when editing is done
-    func textViewDidEndEditing(_ textView: UITextView) {
-        
-    }
-    
-    // Reorder rows
-//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        let movedObject = note!.groupItems[sourceIndexPath.section][sourceIndexPath.row]
-//        note!.groupItems[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-//        note!.groupItems[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
-//
-//        // Save Data
-//        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-//
-//    }
     
     // Don't indent background on editing
     override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -261,45 +222,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         addNewGroup()
     }
     
-    // Rename group
-//    @objc func renameGroup(_ sender: UIButton!) {
-//        //1. Create the alert controller.
-//        let alert = UIAlertController(title: "Rename Group", message: "", preferredStyle: .alert)
-//        //2. Add the text field. You can configure it however you need.
-//        alert.addTextField { (textField) in
-//            textField.text = self.note!.groups[sender.tag]
-//            textField.autocapitalizationType = .sentences
-//            textField.autocorrectionType = .yes
-//        }
-//
-//        // 3. Grab the value from the text field, and print it when the user clicks OK.
-//
-//        alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak alert] (_) in
-//            let textField = alert?.textFields![0]
-//            if (textField?.text?.isEmpty)! {
-//
-//            } else {
-//                self.note!.groups[sender.tag] = (textField?.text)!
-//
-//                // Save Data
-//                self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-//
-//                self.tableView.reloadData()
-//            }
-//
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
-//            // Cancels
-//            return
-//        }))
-//
-//        // 4. Present the alert.
-//        self.present(alert, animated: true, completion: nil)
-//    }
-    
     
     // Remove group
+    // TODO: Deleting first group doesn't work
     @objc func deleteGroup(_ sender: UIButton!) {
         // Remove group and its items
         note!.groups.remove(at: sender.tag)
@@ -569,17 +494,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         }
     }
     
-    // Table editing
-//    @objc func showEditing() {
-//        tableView.reloadData()
-//        tableView.setEditing(!tableView.isEditing, animated: true)
-//        if tableView.isEditing {
-//            editing = true
-//        } else {
-//            editing = false
-//        }
-//    }
-//
     // Resize Images
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
         
@@ -663,6 +577,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     
 }
 
+// Border creator
 extension CALayer {
     
     func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
