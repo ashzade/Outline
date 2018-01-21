@@ -113,8 +113,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         label.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
-        label.tag = section
-        label.delegate = self
+        label.tag = 100+section
         label.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         label.addTarget(self, action: #selector(textFieldInFocus(_:)), for: .editingDidBegin)
         label.addTarget(self, action: #selector(textFieldLostFocus(_:)), for: .editingDidEnd)
@@ -122,7 +121,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         // Add them to the header
         header.addSubview(label)
         header.addSubview(headerImageView)
-
         
         return header
     }
@@ -168,14 +166,18 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     // Enter creates a new cell
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n") {
-            // On enter add empty item at the end of the array
-            note!.groupItems[note!.groupItems.count - 1].insert("", at: note!.groupItems[note!.groupItems.count - 1].count)
-            
-            // Save Data
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-
-            // Reload the table to reflect the new item
-            tableView.reloadData()
+            if let cell = textView.superview?.superview as? UITableViewCell {
+                
+                let indexPath = tableView.indexPath(for: cell)!
+                // On enter add empty item at the end of the array
+                note!.groupItems[indexPath.section].insert("", at: note!.groupItems[indexPath.section].count)
+                
+                // Save Data
+                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                
+                // Reload the table to reflect the new item
+                tableView.reloadData()
+            }
             
             return false
         }
@@ -188,14 +190,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         return false
     }
     
-    // Hide delete icon
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if tableView.isEditing {
-            return .none
-        }
-        
-        return .delete
-    }
     
     // Swipe row options
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -224,22 +218,33 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     
     
     // Remove group
-    // TODO: Deleting first group doesn't work
     @objc func deleteGroup(_ sender: UIButton!) {
+        
+        // Remove textfield focus
+        for subView in sender.superview?.subviews as! [UIView] {
+            if let textField = subView as? UITextField {
+                textField.resignFirstResponder()
+            }
+        }
+        
         // Remove group and its items
-        note!.groups.remove(at: sender.tag)
-        note!.groupItems.remove(at: sender.tag)
+        note!.groups.remove(at: sender.tag - 100)
+        note!.groupItems.remove(at: sender.tag - 100)
+        
+        print(note!.groups)
+        print(note!.groupItems)
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
         self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
         
         tableView.reloadData()
-        sender.superview?.removeFromSuperview()
     }
     
     // Move group down
     @objc func moveGroupDown(_ sender: UIButton!) {
+        
+        let tag = sender.tag - 100
         
         // Remove textfield focus
         for subView in sender.superview?.subviews as! [UIView] {
@@ -248,14 +253,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             }
         }
 
-        if note!.groups.indices.contains(sender.tag + 1) {
+        if note!.groups.indices.contains(tag + 1) {
             // Move group title
-            let group = note!.groups.remove(at: sender.tag)
-            note!.groups.insert(group, at: sender.tag + 1)
+            let group = note!.groups.remove(at: tag)
+            note!.groups.insert(group, at: tag + 1)
             
             // Move group items
-            let items = note!.groupItems.remove(at: sender.tag)
-            note!.groupItems.insert(items, at: sender.tag + 1)
+            let items = note!.groupItems.remove(at: tag)
+            note!.groupItems.insert(items, at: tag + 1)
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
@@ -269,6 +274,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     // Move group up
     @objc func moveGroupUp(_ sender: UIButton!) {
         
+        let tag = sender.tag - 100
+        
         // Remove textfield focus and set it
         for subView in sender.superview?.subviews as! [UIView] {
             if let textField = subView as? UITextField {
@@ -276,14 +283,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             }
         }
         
-        if note!.groups.indices.contains(sender.tag - 1) {
+        if note!.groups.indices.contains(tag - 1) {
             // Move group title
-            let group = note!.groups.remove(at: sender.tag)
-            note!.groups.insert(group, at: sender.tag - 1)
+            let group = note!.groups.remove(at: tag)
+            note!.groups.insert(group, at: tag - 1)
             
             // Move group items
-            let items = note!.groupItems.remove(at: sender.tag)
-            note!.groupItems.insert(items, at: sender.tag - 1)
+            let items = note!.groupItems.remove(at: tag)
+            note!.groupItems.insert(items, at: tag - 1)
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
@@ -291,6 +298,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             
             // Reload the table
             tableView.reloadData()
+            
         }
     }
     
@@ -623,8 +631,3 @@ extension NoteTableViewController {
     }
 }
 
-// TextField delegate methods
-extension NoteTableViewController: UITextFieldDelegate {
-    
-    
-}
