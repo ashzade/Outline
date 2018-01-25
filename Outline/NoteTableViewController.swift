@@ -24,22 +24,23 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     var note = Note(noteTitle: "", groupItems: [[""]], groups: [""], date: currentDate)
     
     // Create note title button
-    let noteTitleButton = UITextField()
+    let noteTitleText = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Tableview header view
         let nodeTitleView = UIView(frame: CGRect(x: 20, y: 0, width: tableView.frame.width, height: 50))
-        self.noteTitleButton.frame = CGRect(x: 20, y: 0, width: tableView.frame.width, height: 50)
-        self.noteTitleButton.placeholder = "Add a Title"
-        self.noteTitleButton.font = UIFont(name: "Gill Sans", size: 24)
-        self.noteTitleButton.adjustsFontSizeToFitWidth = true
-        self.noteTitleButton.textAlignment = .left
-        self.noteTitleButton.textColor = UIColor(red: 0.0392, green: 0.3961, blue: 0.4549, alpha: 1.0)
-        self.noteTitleButton.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        self.noteTitleButton.tag = 1
-        nodeTitleView.addSubview(noteTitleButton)
+        self.noteTitleText.frame = CGRect(x: 20, y: 0, width: tableView.frame.width, height: 50)
+        self.noteTitleText.placeholder = "Add a Title"
+        self.noteTitleText.font = UIFont(name: "Gill Sans", size: 24)
+        self.noteTitleText.adjustsFontSizeToFitWidth = true
+        self.noteTitleText.textAlignment = .left
+        self.noteTitleText.textColor = UIColor(red: 0.0392, green: 0.3961, blue: 0.4549, alpha: 1.0)
+        self.noteTitleText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.noteTitleText.tag = 1
+        self.noteTitleText.delegate = self
+        nodeTitleView.addSubview(noteTitleText)
         tableView.tableHeaderView = nodeTitleView
         
         // Add Share Button
@@ -353,52 +354,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         self.tableView.reloadData()
     }
     
-    // Edit Title
-    @objc func editTitle(_ sender: UIButton!) {
-//        //1. Create the alert controller.
-//        let alert = UIAlertController(title: "Edit title", message: "", preferredStyle: .alert)
-//
-//        print(self.noteTitleButton.text)
-//
-//        //2. Add the text field. You can configure it however you need.
-//        alert.addTextField { (textField) in
-//            textField.placeholder = "Add a title"
-//            textField.autocapitalizationType = .sentences
-//            textField.autocorrectionType = .yes
-//            textField.text = self.noteTitleButton.text
-//        }
-//
-//        // 3. Grab the value from the text field, and print it when the user clicks OK.
-//
-//        alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak alert] (_) in
-//            let textField = alert?.textFields![0]
-//            if (textField?.text?.isEmpty)! {
-//                self.noteTitleButton.text = self.note!.noteTitle
-//            } else {
-//                // Set note object and title
-//                self.note!.noteTitle = (textField?.text)!
-//                self.noteTitleButton.text = self.note!.noteTitle
-//
-//                // Save to core data
-//                self.updateEntity(id: selectedID, attribute: "title", value: self.note!.noteTitle)
-//
-//                self.tableView.reloadData()
-//            }
-//
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
-//
-////            self.noteTitleButton.titleLabel?.text = self.note!.noteTitle
-//            return
-//
-//        }))
-//
-//        // 4. Present the alert.
-//        self.present(alert, animated: true, completion: nil)
-        
-        
-    }
     
     // Get Note
     func getNote() {
@@ -415,7 +370,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
                 if selectedID != nil && data.objectID == selectedID as! NSManagedObjectID {
                     // Fetch Title
                     if data.value(forKey: "title") != nil {
-                        self.noteTitleButton.text = data.value(forKey: "title") as? String
+                        self.noteTitleText.text = data.value(forKey: "title") as? String
                     }
                     // Fetch Groups
                     if data.value(forKey: "groups") != nil {
@@ -612,7 +567,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     @objc func shareNote(_ sender: UIButton!) {
         
         // text to share
-        var text = self.noteTitleButton.text?.uppercased()
+        var text = self.noteTitleText.text?.uppercased()
         text?.append("\n")
         
         for (index, group) in self.note!.groups.enumerated() {
@@ -682,14 +637,23 @@ extension NoteTableViewController {
     }
 }
 
-// Group title return behaviour
+// Textfield return behaviour
 extension NoteTableViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Set first item in group as focus
-        let nextIndexPath = NSIndexPath(row: 0, section: textField.tag - 100)
-        let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
-        textCell.textView.becomeFirstResponder()
+
+        // Group titles
+        if textField.tag > 1 {
+            
+            // Set first item in group as focus
+            let nextIndexPath = NSIndexPath(row: 0, section: textField.tag - 100)
+            let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
+            textCell.textView.becomeFirstResponder()
+            
+        } else if textField.tag == 1 {
+            textField.resignFirstResponder()
+        }
+        
         
         return false
     } 
