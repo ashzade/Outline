@@ -66,7 +66,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         
     }
     
-    
+    // Hide add new note button
     override func viewDidAppear(_ animated: Bool) {
     
         // Remove Add button
@@ -131,6 +131,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         label.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         label.addTarget(self, action: #selector(textFieldInFocus(_:)), for: .editingDidBegin)
         label.addTarget(self, action: #selector(textFieldLostFocus(_:)), for: .editingDidEnd)
+        label.delegate = self
 
         // Add them to the header
         header.addSubview(label)
@@ -220,10 +221,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     }
     
     // Don't indent background on editing
-    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
 
     
     // Swipe row options
@@ -250,7 +247,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     @IBAction func AddGroup(_ sender: UIButton) {
         addNewGroup()
     }
-    
     
     // Remove group
     @objc func deleteGroup(_ sender: UIButton!) {
@@ -367,6 +363,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             textField.autocapitalizationType = .sentences
             textField.autocorrectionType = .yes
             textField.text = self.note!.noteTitle
+            print(self.note!.noteTitle)
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
@@ -607,7 +604,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             text?.append("\n")
         }
         
-        text?.append("- Shared from the Outline App -")
+        text?.append("\n [Shared from the Outline App]")
         
         // set up activity view controller
         let textToShare = [ text ]
@@ -666,3 +663,15 @@ extension NoteTableViewController {
     }
 }
 
+// Group title return behaviour
+extension NoteTableViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Set first item in group as focus
+        let nextIndexPath = NSIndexPath(row: 0, section: textField.tag - 100)
+        let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
+        textCell.textView.becomeFirstResponder()
+        
+        return false
+    } 
+}
