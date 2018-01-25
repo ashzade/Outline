@@ -13,6 +13,7 @@ import LongPressReorder
 // Get current timestamp
 let currentDate = Date()
 var editing = false
+var headerTag : Int = 0
 
 class NoteTableViewController: UITableViewController, UITextViewDelegate{
     // Row reorder
@@ -37,6 +38,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         self.noteTitleButton.setTitleColor(UIColor(red: 0.0392, green: 0.3961, blue: 0.4549, alpha: 1.0), for: .normal)
         self.noteTitleButton.addTarget(self, action: #selector(editTitle), for: .touchUpInside)
         self.navigationItem.titleView = noteTitleButton
+        
+        // Add Edit Button
+        let editButton = UIButton()
+        editButton.setImage(#imageLiteral(resourceName: "pencil").withRenderingMode(.alwaysOriginal), for: .normal)
+        editButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        editButton.imageView?.contentMode = .scaleAspectFit
+        editButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        editButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
 
         // Used for cell resizing
         tableView.estimatedRowHeight = 44
@@ -50,11 +61,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         reorderTableView.delegate = self
         reorderTableView.enableLongPressReorder()
         
+        // Reset group title focus
+        headerTag = 0
+        
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
-        
+    
         // Remove Add button
         addButtonView?.removeFromSuperview()
         
@@ -122,20 +136,25 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         header.addSubview(label)
         header.addSubview(headerImageView)
         
+        // Set group title focus after moving
+        if headerTag != 0 {
+            label.viewWithTag(headerTag)?.becomeFirstResponder()
+        }
+        
         return header
     }
     
     // Create groups
     override func numberOfSections(in tableView: UITableView) -> Int {
         if note!.groups.isEmpty || (note!.groups.count == 1 && note!.groups[0] == "") {
-            addNewGroup()
+//            addNewGroup()
         }
         return note!.groups.count
     }
     
     // Create rows per group
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
+        
         return note!.groupItems[section].count
     }
     
@@ -154,10 +173,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
         cell.textView.tag = indexPath.row
-        if cell.textView.text == "" {
-            cell.textView.becomeFirstResponder()
-        }
         
+        // Add left border
         cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         return cell
@@ -165,18 +182,36 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
 
     // Enter creates a new cell
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
+        if(text == "\n" || text == "\r") {
             if let cell = textView.superview?.superview as? UITableViewCell {
+                // Take focus of header
+                headerTag = 0
                 
+                // Which cell are we in?
                 let indexPath = tableView.indexPath(for: cell)!
-                // On enter add empty item at the end of the array
-                note!.groupItems[indexPath.section].insert("", at: note!.groupItems[indexPath.section].count)
                 
-                // Save Data
-                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                // Check if there is already an empty cell at the end
+                let rows = tableView.numberOfRows(inSection: indexPath.section) - 1
+                let lastIndexPath = NSIndexPath(row:rows, section: indexPath.section)
+                let lastCell = tableView.cellForRow(at: lastIndexPath as IndexPath) as! ExpandingCell
+                if lastCell.textView.text != "" {
+                    // On enter add empty item at the end of the array
+                    note!.groupItems[indexPath.section].insert("", at: note!.groupItems[indexPath.section].count)
+                    
+                    // Save Data
+                    self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                    
+                    // Reload the table to reflect the new item
+                    tableView.reloadData()
+                }
                 
-                // Reload the table to reflect the new item
-                tableView.reloadData()
+                // Set textview focus on new textview
+                if indexPath.row < rows {
+                    let nextIndexPath = NSIndexPath(row: indexPath.row + 1, section: indexPath.section)
+                    let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
+                    textCell.textView.becomeFirstResponder()
+                }
+                
             }
             
             return false
@@ -184,12 +219,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         return true
     }
     
-    
     // Don't indent background on editing
     override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
+
     
     // Swipe row options
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -231,9 +266,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         note!.groups.remove(at: sender.tag - 100)
         note!.groupItems.remove(at: sender.tag - 100)
         
-        print(note!.groups)
-        print(note!.groupItems)
-        
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
         self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
@@ -266,8 +298,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
+            headerTag = sender.tag + 1
+            
             // Reload the table
             tableView.reloadData()
+            
         }
     }
     
@@ -291,10 +326,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             // Move group items
             let items = note!.groupItems.remove(at: tag)
             note!.groupItems.insert(items, at: tag - 1)
+        
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            
+            headerTag = sender.tag - 1
             
             // Reload the table
             tableView.reloadData()
@@ -304,47 +342,18 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     
     // Add group alert
     func addNewGroup() {
-        //1. Create the alert controller.
-        let alert = UIAlertController(title: "Add Group", message: "", preferredStyle: .alert)
         
-        //2. Add the text field. You can configure it however you need.
-        alert.addTextField { (textField) in
-            textField.placeholder = "Group name"
-            textField.autocapitalizationType = .sentences
-            textField.autocorrectionType = .yes
-        }
+        self.note!.groups.append("")
+        self.note!.groupItems.append([""])
         
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        // Save Data
+        self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
+        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0]
-            if (textField?.text?.isEmpty)! {
-                
-            } else {
-                if self.note!.groups.count == 1 && self.note!.groups[0] == "" {
-                    self.note!.groups[0] = (textField?.text)!
-                    
-                } else {
-                    self.note!.groups.append((textField?.text)!)
-                    self.note!.groupItems.append([""])
-                }
-                
-                // Save Data
-                self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                
-                self.tableView.reloadData()
-            }
-            
-        }))
+        // Set textfield focus
+        headerTag = self.note!.groups.count + 99
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
-            // Cancels
-            return
-        }))
-        
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
+        self.tableView.reloadData()
     }
     
     // Edit Title
@@ -518,7 +527,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     
     // Update group titles
     @objc func textFieldDidChange(_ textField: UITextField) {
-        self.note!.groups[textField.tag] = textField.text!
+        self.note!.groups[textField.tag - 100] = textField.text!
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
@@ -581,6 +590,32 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             }
         }
         
+    }
+    
+    // Share note function
+    @objc func shareNote(_ sender: UIButton!) {
+        
+        // text to share
+        var text = self.noteTitleButton.titleLabel?.text?.uppercased()
+        text?.append("\n")
+        
+        for (index, group) in self.note!.groups.enumerated() {
+            text?.append("\n *\(group)*")
+            for items in self.note!.groupItems[index] {
+                text?.append("\n - \(items)")
+            }
+            text?.append("\n")
+        }
+        
+        text?.append("- Shared from the Outline App -")
+        
+        // set up activity view controller
+        let textToShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
 }
