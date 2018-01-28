@@ -16,7 +16,7 @@ let currentDate = Date()
 // Initialize group tag
 var headerTag : Int = 0
 
-class NoteTableViewController: UITableViewController, UITextViewDelegate{
+class NoteTableViewController: UITableViewController, UITextViewDelegate {
     // Row reorder
     var reorderTableView: LongPressReorderTableView!
     
@@ -29,23 +29,33 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Tableview header view
-        let nodeTitleView = UIView(frame: CGRect(x: 20, y: 0, width: tableView.frame.width, height: 50))
-        self.noteTitleText.frame = CGRect(x: 20, y: 0, width: tableView.frame.width, height: 50)
+        // Note Title - Tableview header view
+        let nodeTitleView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        self.noteTitleText.frame = CGRect(x: 0, y: 10, width: tableView.frame.width, height: 50)
         self.noteTitleText.placeholder = "Add a Title"
-        self.noteTitleText.font = UIFont(name: "Gill Sans", size: 24)
+        self.noteTitleText.font = UIFont(name: "Gill Sans", size: 28)
         self.noteTitleText.adjustsFontSizeToFitWidth = true
-        self.noteTitleText.textAlignment = .left
-        self.noteTitleText.textColor = UIColor(red: 0.0392, green: 0.3961, blue: 0.4549, alpha: 1.0)
+        self.noteTitleText.textAlignment = .center
+        self.noteTitleText.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
         self.noteTitleText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         self.noteTitleText.tag = 1
         self.noteTitleText.delegate = self
         nodeTitleView.addSubview(noteTitleText)
         tableView.tableHeaderView = nodeTitleView
         
+        // Add Group - Tableview footer view
+        let addGroupButtonView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        let addGroupButton = UIButton(type: .system)
+        addGroupButton.setImage(#imageLiteral(resourceName: "addGroup").withRenderingMode(.alwaysOriginal), for: .normal)
+        addGroupButton.frame = CGRect(x: 12, y: 15, width: 16, height: 16)
+        addGroupButton.imageView?.contentMode = .scaleAspectFit
+        addGroupButton.addTarget(self, action: #selector(AddGroup), for: .touchUpInside)
+        addGroupButtonView.addSubview(addGroupButton)
+        tableView.tableFooterView = addGroupButtonView
+        
         // Add Share Button
         let shareButton = UIButton()
-        shareButton.setImage(#imageLiteral(resourceName: "pencil").withRenderingMode(.alwaysOriginal), for: .normal)
+        shareButton.setImage(#imageLiteral(resourceName: "share").withRenderingMode(.alwaysOriginal), for: .normal)
         shareButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         shareButton.imageView?.contentMode = .scaleAspectFit
         shareButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
@@ -121,29 +131,29 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         headerImageView.image = image
     
         // Group title text
-        let label =  UITextField(frame: CGRect(x: 36, y: 0, width: tableView.frame.width - 115, height: 36))
-        label.text = note!.groups[section]
-        label.placeholder = "Add a group title"
-        label.font = UIFont(name: "GillSans-Light", size: 20)
-        label.autocorrectionType = UITextAutocorrectionType.yes
-        label.keyboardType = UIKeyboardType.default
-        label.returnKeyType = UIReturnKeyType.done
-        label.contentVerticalAlignment = UIControlContentVerticalAlignment.center
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
-        label.tag = 100+section
-        label.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        label.addTarget(self, action: #selector(textFieldInFocus(_:)), for: .editingDidBegin)
-        label.addTarget(self, action: #selector(textFieldLostFocus(_:)), for: .editingDidEnd)
-        label.delegate = self
+        let groupTitle =  UITextField(frame: CGRect(x: 36, y: 0, width: tableView.frame.width - 115, height: 36))
+        groupTitle.text = note!.groups[section]
+        groupTitle.placeholder = "Add a group title"
+        groupTitle.font = UIFont(name: "Gill Sans", size: 20)
+        groupTitle.autocorrectionType = UITextAutocorrectionType.yes
+        groupTitle.keyboardType = UIKeyboardType.default
+        groupTitle.returnKeyType = UIReturnKeyType.done
+        groupTitle.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        groupTitle.adjustsFontSizeToFitWidth = true
+        groupTitle.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        groupTitle.tag = 100+section
+        groupTitle.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        groupTitle.addTarget(self, action: #selector(textFieldInFocus(_:)), for: .editingDidBegin)
+        groupTitle.addTarget(self, action: #selector(textFieldLostFocus(_:)), for: .editingDidEnd)
+        groupTitle.delegate = self
 
         // Add them to the header
-        header.addSubview(label)
+        header.addSubview(groupTitle)
         header.addSubview(headerImageView)
         
         // Set group title focus after moving
         if headerTag != 0 {
-            label.viewWithTag(headerTag)?.becomeFirstResponder()
+            groupTitle.viewWithTag(headerTag)?.becomeFirstResponder()
         }
         
         return header
@@ -245,10 +255,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
         return true
     }
     
-    // Add group button
-    @IBAction func AddGroup(_ sender: UIButton) {
-        addNewGroup()
-    }
     
     // Remove group
     @objc func deleteGroup(_ sender: UIButton!) {
@@ -336,6 +342,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate{
             tableView.reloadData()
             
         }
+    }
+    
+    // Add group button
+    @objc func AddGroup(_ sender: UIButton!) {
+        addNewGroup()
     }
     
     // Add group alert

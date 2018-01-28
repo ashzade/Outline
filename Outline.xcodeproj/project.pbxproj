@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB7A76EB371B832AC8AAEAE7 /* Pods_Outline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70BD0C07A3EF930A1371A92B /* Pods_Outline.framework */; };
+		D5674C40201ABCEC001FB175 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5674C3F201ABCEC001FB175 /* NoteCell.swift */; };
 		D576433B1FF69C4D000D0D7F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576433A1FF69C4D000D0D7F /* Note.swift */; };
 		D576438B1FF96EDA000D0D7F /* Outline.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D57643891FF96EDA000D0D7F /* Outline.xcdatamodeld */; };
 		D57D48AB1FF2C95300F7336B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D48AA1FF2C95300F7336B /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 		70BD0C07A3EF930A1371A92B /* Pods_Outline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A05884FFA527AEF582A26459 /* Pods-Outline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outline.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outline/Pods-Outline.release.xcconfig"; sourceTree = "<group>"; };
 		D0CA425CEBE9E723239E00D8 /* Pods-Outline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outline.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outline/Pods-Outline.debug.xcconfig"; sourceTree = "<group>"; };
+		D5674C3F201ABCEC001FB175 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		D576433A1FF69C4D000D0D7F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		D576438A1FF96EDA000D0D7F /* Outline.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Outline.xcdatamodel; sourceTree = "<group>"; };
 		D57D48A71FF2C95300F7336B /* Outline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 				D576433A1FF69C4D000D0D7F /* Note.swift */,
 				D57643891FF96EDA000D0D7F /* Outline.xcdatamodeld */,
 				D5A3EB581FF9BDFF005C31B2 /* NotesTableViewController.swift */,
+				D5674C3F201ABCEC001FB175 /* NoteCell.swift */,
 			);
 			path = Outline;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				D57D48AB1FF2C95300F7336B /* AppDelegate.swift in Sources */,
 				D57D48BD1FF2CEB200F7336B /* ExpandingCell.swift in Sources */,
 				D576433B1FF69C4D000D0D7F /* Note.swift in Sources */,
+				D5674C40201ABCEC001FB175 /* NoteCell.swift in Sources */,
 				D5A3EB591FF9BDFF005C31B2 /* NotesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

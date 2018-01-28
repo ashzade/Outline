@@ -24,20 +24,21 @@ class NotesTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        tableView.contentInset =  UIEdgeInsetsMake(0, 20, 0, -20)
         
-        // Add Edit Button
-        let editButton = UIButton()
-        editButton.setImage(#imageLiteral(resourceName: "pencil").withRenderingMode(.alwaysOriginal), for: .normal)
-        editButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        editButton.imageView?.contentMode = .scaleAspectFit
-        editButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        // Add Share Button
+        let settingsButton = UIButton()
+        settingsButton.setImage(#imageLiteral(resourceName: "settings").withRenderingMode(.alwaysOriginal), for: .normal)
+        settingsButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        settingsButton.imageView?.contentMode = .scaleAspectFit
+        settingsButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingsButton)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: editButton)
-        
-        // Set Title
-        self.navigationItem.title = "Outline"
+        // Set Outline Logo Image
+        let imageView = UIImageView()
+        var title = UIImage(named: "title")
+        title = resizeImage(image: title!, newWidth: 90)
+        imageView.image = title
+        self.navigationItem.titleView = imageView
         
         // Remove Navigation Bar border
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -52,16 +53,21 @@ class NotesTableViewController: UITableViewController {
         self.navigationController?.navigationBar.backIndicatorImage = backButton
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButton
         
+        // Reorder cells
         reorderTableView = LongPressReorderTableView(tableView)
         reorderTableView.delegate = self
         reorderTableView.enableLongPressReorder()
+        
+        // Used for cell resizing
+        self.tableView.estimatedRowHeight = 88.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         getNotes()
         tableView.reloadData()
-        
         
         // Create addButton view wrapper
         addButtonView = UIView(frame: CGRect(x: view.frame.maxX - 100, y: view.frame.maxY - 100, width: 100, height: 100))
@@ -82,7 +88,6 @@ class NotesTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -95,23 +100,17 @@ class NotesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Note", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Note", for: indexPath) as! NoteCell
 
         // Set title and updated date
-        cell.textLabel?.text = notes[indexPath.row][0] as? String
-        cell.detailTextLabel?.text = notes[indexPath.row][1] as? String
-    
-        // Look & Feel
-        let frame = CGRect(x: -20, y: 18, width: 12, height: 12)
-        let headerImageView = UIImageView(frame: frame)
-        headerImageView.contentMode = .scaleAspectFit
-        var image: UIImage = UIImage(named: "dot")!.withRenderingMode(.alwaysOriginal)
-        image = resizeImage(image: image, newWidth: 12)!
-        headerImageView.image = image
+        cell.noteTitle?.text = notes[indexPath.row][0] as? String
+        cell.noteDate?.text = notes[indexPath.row][1] as? String
         
-        cell.detailTextLabel?.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
+        let dateView = UIImageView(frame : (CGRect(x: (cell.noteDate?.frame.origin.x)! + 62, y: 6, width: 12, height: 12)));
+        let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal);
+        dateView.image = clock;
         
-        cell.contentView.addSubview(headerImageView)
+        cell.noteDate?.addSubview(dateView)
 
         return cell
     }
@@ -138,8 +137,10 @@ class NotesTableViewController: UITableViewController {
     }
     
     // Add Note Function
-    @objc func addNote(_ sender: UIBarButtonItem!) {
+    @objc func addNote(_ sender: UIButton!) {
         selectedID = nil
+        // HIDE BUTTON SUBVIEW HERE
+        sender.isHidden = true
         performSegue(withIdentifier: "editNote", sender: self)
     }
     
