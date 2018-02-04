@@ -22,32 +22,29 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Create new note object
     var note = Note(noteTitle: "", groupItems: [[""]], groups: [""], date: currentDate)
-    
-    // Create note title button
-    let noteTitleText = UITextField()
 
+    @IBOutlet weak var NoteTitle: UITextView!
+    @IBOutlet weak var NoteDate: EdgeInsetLabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Note Title - Tableview header view
-        let nodeTitleView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
-        self.noteTitleText.frame = CGRect(x: 0, y: 10, width: tableView.frame.width, height: 50)
-        self.noteTitleText.placeholder = "Add a Title"
-        self.noteTitleText.font = UIFont(name: "Gill Sans", size: 28)
-        self.noteTitleText.adjustsFontSizeToFitWidth = true
-        self.noteTitleText.textAlignment = .center
-        self.noteTitleText.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
-        self.noteTitleText.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        self.noteTitleText.tag = 1
-        self.noteTitleText.delegate = self
-        nodeTitleView.addSubview(noteTitleText)
-        tableView.tableHeaderView = nodeTitleView
+        self.NoteTitle.tag = 1
+        self.NoteTitle.delegate = self
+        
+        // Add clock and border to date
+        let dateView = UIImageView(frame : (CGRect(x: 3, y: 4, width: 12, height: 12)))
+        let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal)
+        dateView.image = clock
+        self.NoteDate.addSubview(dateView)
+        self.NoteDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         // Add Group - Tableview footer view
         let addGroupButtonView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         let addGroupButton = UIButton(type: .system)
         addGroupButton.setImage(#imageLiteral(resourceName: "addGroup").withRenderingMode(.alwaysOriginal), for: .normal)
-        addGroupButton.frame = CGRect(x: 12, y: 15, width: 16, height: 16)
+        addGroupButton.frame = CGRect(x: 4, y: 7, width: 32, height: 32)
         addGroupButton.imageView?.contentMode = .scaleAspectFit
         addGroupButton.addTarget(self, action: #selector(AddGroup), for: .touchUpInside)
         addGroupButtonView.addSubview(addGroupButton)
@@ -80,11 +77,24 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
     }
     
-    // Hide add new note button
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let headerView = tableView.tableHeaderView {
+            
+            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var headerFrame = headerView.frame
+            
+            //Comparison necessary to avoid infinite loop
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                tableView.tableHeaderView = headerView
+            }
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
-    
-        // Remove Add button
-        addButtonView?.removeFromSuperview()
         
     }
 
@@ -93,23 +103,46 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // Used for cell resizing
+    // Title placeholder & Item plus sign hide
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Add a title" && textView.tag == 1 {
+            textView.text = ""
+        } else {
+            self.view.viewWithTag(9999)?.isHidden = true
+        }
+    }
+    
+    // Update data from title and cells
     func textViewDidChange(_ textView: UITextView) {
-        // Get the cell index info for this textView
-        let cell: UITableViewCell = textView.superview!.superview as! UITableViewCell
-        let table: UITableView = cell.superview as! UITableView
-        let textViewIndexPath = table.indexPath(for: cell)
-        let textViewSection = textViewIndexPath?.section
-        let textViewRow = textViewIndexPath?.row
         
-        // Save cell's textView to items array
-        note!.groupItems[textViewSection!][textViewRow!] = textView.text
+        // If title
+        if textView.tag == 1 {
+            // Set note object and title
+            self.note!.noteTitle = textView.text!
+            
+            // Save to core data
+            self.updateEntity(id: selectedID, attribute: "title", value: self.note!.noteTitle)
+            
+            
+        } else {
+            // Get the cell index info for this textView
+            let cell: UITableViewCell = textView.superview!.superview as! UITableViewCell
+            let table: UITableView = cell.superview as! UITableView
+            let textViewIndexPath = table.indexPath(for: cell)
+            let textViewSection = textViewIndexPath?.section
+            let textViewRow = textViewIndexPath?.row
+            textView.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
+            
+            // Save cell's textView to items array
+            note!.groupItems[textViewSection!][textViewRow!] = textView.text
+            
+            // Save Data
+            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
         
-        // Save Data
-        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
     }
 
     // Add group titles
@@ -123,7 +156,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let header = UIView()
         
         // Group title style
-        let frame = CGRect(x: 14, y: 10, width: 12, height: 12)
+        let frame = CGRect(x: 16, y: 12, width: 10, height: 10)
         let headerImageView = UIImageView(frame: frame)
         headerImageView.contentMode = .scaleAspectFit
         var image: UIImage = UIImage(named: "dot")!.withRenderingMode(.alwaysOriginal)
@@ -187,7 +220,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
-        cell.textView.tag = indexPath.row
+        cell.textView.tag = indexPath.row + 100
+        
+        // Add plus to item
+        let plusView = UIImageView(frame : (CGRect(x: 15, y: 9, width: 10, height: 10)))
+        let plus = UIImage(named: "plus")!.withRenderingMode(.alwaysOriginal)
+        plusView.image = plus
+        plusView.tag = 9999
+        if cell.textView?.text == "" {
+            cell.textView?.addSubview(plusView)
+        }
         
         // Add left border
         cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
@@ -330,7 +372,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Move group items
             let items = note!.groupItems.remove(at: tag)
             note!.groupItems.insert(items, at: tag - 1)
-        
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
@@ -375,14 +416,30 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
         request.returnsObjectsAsFaults = false
         
+        // Setup Date formatter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         do {
             let results = try context.fetch(request)
             for data in results as! [NSManagedObject] {
                 if selectedID != nil && data.objectID == selectedID as! NSManagedObjectID {
                     // Fetch Title
                     if data.value(forKey: "title") != nil {
-                        self.noteTitleText.text = data.value(forKey: "title") as? String
+                        self.NoteTitle.text = data.value(forKey: "title") as? String
+                        self.NoteTitle.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
                     }
+                    
+                    // Fetch Date
+                    if data.value(forKey: "updateDate") != nil {
+                        // Convert Date format
+                        let myString = formatter.string(from: data.value(forKey: "updateDate") as! Date)
+                        let yourDate = formatter.date(from: myString)
+                        formatter.dateFormat = "MMM dd, yyyy - h:mm a"
+                        let myStringafd = formatter.string(from: yourDate!)
+                        self.NoteDate.text = myStringafd
+                    }
+                    
                     // Fetch Groups
                     if data.value(forKey: "groups") != nil {
                         let groupData = data.value(forKey: "groups") as! NSData
@@ -398,6 +455,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         let arrayObject = unarchiveObject as AnyObject! as! [[String]]
                         note?.groupItems = arrayObject
                     }
+                } else if selectedID == nil {
+                    // Set current datetime
+                    let myString = formatter.string(from: currentDate)
+                    let yourDate = formatter.date(from: myString)
+                    formatter.dateFormat = "MMM dd, yyyy - h:mm a"
+                    let myStringafd = formatter.string(from: yourDate!)
+                    self.NoteDate.text = myStringafd
                 }
                 
             }
@@ -503,14 +567,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
             
-        } else if textField.tag == 1 {
-            // Set note object and title
-            self.note!.noteTitle = textField.text!
-            
-            // Save to core data
-            self.updateEntity(id: selectedID, attribute: "title", value: self.note!.noteTitle)
-            
-            self.tableView.reloadData()
         }
         
     }
@@ -521,7 +577,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Group delete button
         let deleteButton = UIButton()
         deleteButton.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysOriginal), for: .normal)
-        deleteButton.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+        deleteButton.frame = CGRect(x: -1, y: -1, width: 38, height: 38)
         deleteButton.imageView?.contentMode = .scaleAspectFit
         deleteButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
         deleteButton.tag = textField.tag
@@ -578,7 +634,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func shareNote(_ sender: UIButton!) {
         
         // text to share
-        var text = self.noteTitleText.text?.uppercased()
+        var text = self.NoteTitle.text?.uppercased()
         text?.append("\n")
         
         for (index, group) in self.note!.groups.enumerated() {
@@ -642,6 +698,10 @@ extension NoteTableViewController {
         note!.groupItems[sourceIndexPath.section].remove(at: sourceIndexPath.row)
         note!.groupItems[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
         
+        if note!.groupItems[sourceIndexPath.section].isEmpty {
+            note!.groupItems[sourceIndexPath.section].append("")
+        }
+        
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
     
@@ -658,13 +718,23 @@ extension NoteTableViewController: UITextFieldDelegate {
             
             // Set first item in group as focus
             let nextIndexPath = NSIndexPath(row: 0, section: textField.tag - 100)
-            let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
-            textCell.textView.becomeFirstResponder()
+            
+            //If the group has items
+            if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
+                textCell.textView.becomeFirstResponder()
+            } else {
+                // Add empty item
+                note!.groupItems[textField.tag - 100].append("")
+                
+                // Save Data
+                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                tableView.reloadData()
+            }
+            
             
         } else if textField.tag == 1 {
             textField.resignFirstResponder()
         }
-        
         
         return false
     } 

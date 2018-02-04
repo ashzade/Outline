@@ -25,13 +25,14 @@ class NotesTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        // Add Share Button
-        let settingsButton = UIButton()
-        settingsButton.setImage(#imageLiteral(resourceName: "settings").withRenderingMode(.alwaysOriginal), for: .normal)
-        settingsButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        settingsButton.imageView?.contentMode = .scaleAspectFit
-        settingsButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingsButton)
+        // Add INfo Button
+        let infoButton = UIButton()
+        infoButton.setImage(#imageLiteral(resourceName: "info").withRenderingMode(.alwaysOriginal), for: .normal)
+        infoButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
+        infoButton.imageView?.contentMode = .scaleAspectFit
+        infoButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
         // Set Outline Logo Image
         let imageView = UIImageView()
@@ -69,18 +70,25 @@ class NotesTableViewController: UITableViewController {
         getNotes()
         tableView.reloadData()
         
-        // Create addButton view wrapper
-        addButtonView = UIView(frame: CGRect(x: view.frame.maxX - 100, y: view.frame.maxY - 100, width: 100, height: 100))
+        // If Add button already exists just show it
+        if ((addButtonView) != nil) {
+            self.parent?.view.viewWithTag(100)?.isHidden = false
+            
+        } else {
+            // Create addButton view wrapper
+            addButtonView = UIView(frame: CGRect(x: view.frame.maxX - 100, y: view.frame.maxY - 100, width: 100, height: 100))
+            
+            // Add Add Button
+            let addButton = UIButton(type: .system)
+            addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
+            addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
+            addButton.tag = 100
+            
+            addButtonView?.addSubview(addButton)
+            self.parent?.view.addSubview(addButtonView!)
+        }
         
-        // Add Add Button
-        let addButton = UIButton(type: .system)
-        addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
-        addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
-        addButton.tag = 100
-        
-        addButtonView?.addSubview(addButton)
-        self.parent?.view.addSubview(addButtonView!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,12 +114,15 @@ class NotesTableViewController: UITableViewController {
         cell.noteTitle?.text = notes[indexPath.row][0] as? String
         cell.noteDate?.text = notes[indexPath.row][1] as? String
         
-        let dateView = UIImageView(frame : (CGRect(x: (cell.noteDate?.frame.origin.x)! + 62, y: 6, width: 12, height: 12)));
+        // Add clock icon
+        let dateView = UIImageView(frame : (CGRect(x: 0, y: 7, width: 12, height: 12)));
         let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal);
         dateView.image = clock;
-        
         cell.noteDate?.addSubview(dateView)
-
+        
+        // Add border
+        cell.noteDate?.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
+        
         return cell
     }
     
@@ -134,14 +145,27 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Pass OjbectID to selectedID for next view
         selectedID = notes[indexPath.row][2]
+        
+        // HIDE ADD BUTTON SUBVIEW HERE
+        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
     }
     
     // Add Note Function
     @objc func addNote(_ sender: UIButton!) {
         selectedID = nil
-        // HIDE BUTTON SUBVIEW HERE
-        sender.isHidden = true
+        // HIDE ADD BUTTON SUBVIEW HERE
+        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+        
         performSegue(withIdentifier: "editNote", sender: self)
+    }
+    
+    // Show Info Function
+    @objc func showInfo (_ sender: UIButton!) {
+
+        // HIDE ADD BUTTON SUBVIEW HERE
+        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+        
+        performSegue(withIdentifier: "showInfo", sender: self)
     }
     
     // Fetch all notes
@@ -168,7 +192,7 @@ class NotesTableViewController: UITableViewController {
                     // Convert Date format
                     let myString = formatter.string(from: data.value(forKey: "updateDate") as! Date)
                     let yourDate = formatter.date(from: myString)
-                    formatter.dateFormat = "MMMM dd, yyyy - h:mm a"
+                    formatter.dateFormat = "MMM dd, yyyy - h:mm a"
                     let myStringafd = formatter.string(from: yourDate!)
                     
                     // Add title and date to notesarray
