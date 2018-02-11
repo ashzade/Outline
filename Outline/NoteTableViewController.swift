@@ -105,7 +105,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Set focus to note title
         for subView in tableView.tableHeaderView?.subviews as! [UIView] {
             if let textView = subView as? UITextView {
-                if (textView.text == "") {
+                if (textView.text == "" && note!.groupItems[0] == [""] && note!.groups == [""]) {
                     textView.becomeFirstResponder()
                 } else {
                     placeholderLabel.isHidden = !textView.text.isEmpty
@@ -117,14 +117,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // Title placeholder & Item plus sign hide
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        // If this is the title
-        if textView.tag == 1 {
-            
-        }
     }
     
     // Update data from title and cells
@@ -270,6 +262,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 if indexPath.row < rows {
                     let nextIndexPath = NSIndexPath(row: indexPath.row + 1, section: indexPath.section)
                     let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
+                    print(textCell)
                     textCell.textView.becomeFirstResponder()
                 }
                 
