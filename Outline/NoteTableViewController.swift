@@ -94,10 +94,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -105,10 +101,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Title placeholder & Item plus sign hide
     func textViewDidBeginEditing(_ textView: UITextView) {
+        // If this is the title
         if textView.text == "Add a title" && textView.tag == 1 {
             textView.text = ""
         } else {
-            self.view.viewWithTag(9999)?.isHidden = true
+            // Hide item + imageview
+            if let viewWithTag = self.view.viewWithTag(9999) {
+                viewWithTag.removeFromSuperview()
+            }
         }
     }
     
@@ -119,6 +119,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         if textView.tag == 1 {
             // Set note object and title
             self.note!.noteTitle = textView.text!
+            textView.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
             
             // Save to core data
             self.updateEntity(id: selectedID, attribute: "title", value: self.note!.noteTitle)
@@ -131,7 +132,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             let textViewIndexPath = table.indexPath(for: cell)
             let textViewSection = textViewIndexPath?.section
             let textViewRow = textViewIndexPath?.row
-            textView.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
             
             // Save cell's textView to items array
             note!.groupItems[textViewSection!][textViewRow!] = textView.text
@@ -195,14 +195,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     // Create groups
     override func numberOfSections(in tableView: UITableView) -> Int {
         if note!.groups.isEmpty || (note!.groups.count == 1 && note!.groups[0] == "") {
-//            addNewGroup()
+//            Set focus to note title
         }
         return note!.groups.count
     }
     
     // Create rows per group
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return note!.groupItems[section].count
     }
     
@@ -634,7 +633,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func shareNote(_ sender: UIButton!) {
         
         // text to share
-        var text = self.NoteTitle.text?.uppercased()
+        var text = self.NoteTitle.text
         text?.append("\n")
         
         for (index, group) in self.note!.groups.enumerated() {
@@ -698,9 +697,9 @@ extension NoteTableViewController {
         note!.groupItems[sourceIndexPath.section].remove(at: sourceIndexPath.row)
         note!.groupItems[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
         
-        if note!.groupItems[sourceIndexPath.section].isEmpty {
-            note!.groupItems[sourceIndexPath.section].append("")
-        }
+//        if note!.groupItems[sourceIndexPath.section].isEmpty {
+//            note!.groupItems[sourceIndexPath.section].append("")
+//        }
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)

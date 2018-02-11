@@ -30,7 +30,7 @@ class NotesTableViewController: UITableViewController {
         infoButton.setImage(#imageLiteral(resourceName: "info").withRenderingMode(.alwaysOriginal), for: .normal)
         infoButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
         infoButton.imageView?.contentMode = .scaleAspectFit
-        infoButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        infoButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 0)
         infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
