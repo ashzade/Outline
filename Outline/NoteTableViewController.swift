@@ -24,6 +24,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     var note = Note(noteTitle: "", groupItems: [[""]], groups: [""], date: currentDate)
 
     @IBOutlet weak var NoteTitle: UITextView!
+    var placeholderLabel : UILabel!
     @IBOutlet weak var NoteDate: EdgeInsetLabel!
     
     override func viewDidLoad() {
@@ -32,6 +33,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Note Title - Tableview header view
         self.NoteTitle.tag = 1
         self.NoteTitle.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Add a title"
+        placeholderLabel.font = UIFont(name: "Gill Sans", size: 24)
+        placeholderLabel.sizeToFit()
+        self.NoteTitle.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 5, y: (self.NoteTitle.font?.pointSize)! / 2)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.isHidden = !self.NoteTitle.text.isEmpty
         
         // Add clock and border to date
         let dateView = UIImageView(frame : (CGRect(x: 3, y: 4, width: 12, height: 12)))
@@ -92,6 +101,17 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 tableView.tableHeaderView = headerView
             }
         }
+        
+        // Set focus to note title
+        for subView in tableView.tableHeaderView?.subviews as! [UIView] {
+            if let textView = subView as? UITextView {
+                if (textView.text == "") {
+                    textView.becomeFirstResponder()
+                } else {
+                    placeholderLabel.isHidden = !textView.text.isEmpty
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,13 +122,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     // Title placeholder & Item plus sign hide
     func textViewDidBeginEditing(_ textView: UITextView) {
         // If this is the title
-        if textView.text == "Add a title" && textView.tag == 1 {
-            textView.text = ""
-        } else {
-            // Hide item + imageview
-//            if let viewWithTag = self.view.viewWithTag(9999) {
-//                viewWithTag.removeFromSuperview()
-//            }
+        if textView.tag == 1 {
+            
         }
     }
     
@@ -117,6 +132,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // If title
         if textView.tag == 1 {
+            placeholderLabel.isHidden = !textView.text.isEmpty
+            
             // Set note object and title
             self.note!.noteTitle = textView.text!
             textView.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
@@ -194,9 +211,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Create groups
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if note!.groups.isEmpty || (note!.groups.count == 1 && note!.groups[0] == "") {
-//            Set focus to note title
-        }
         return note!.groups.count
     }
     
@@ -220,15 +234,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
         cell.textView.tag = indexPath.row + 100
-        
-        // Add plus to item
-//        let plusView = UIImageView(frame : (CGRect(x: 15, y: 9, width: 10, height: 10)))
-//        let plus = UIImage(named: "plus")!.withRenderingMode(.alwaysOriginal)
-//        plusView.image = plus
-//        plusView.tag = 9999
-//        if cell.textView?.text == "" {
-//            cell.textView?.addSubview(plusView)
-//        }
         
         // Add left border
         cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
