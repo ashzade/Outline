@@ -106,9 +106,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             textView.text = ""
         } else {
             // Hide item + imageview
-            if let viewWithTag = self.view.viewWithTag(9999) {
-                viewWithTag.removeFromSuperview()
-            }
+//            if let viewWithTag = self.view.viewWithTag(9999) {
+//                viewWithTag.removeFromSuperview()
+//            }
         }
     }
     
@@ -210,7 +210,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
         
         // Add cell text indentation
-        cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 12,bottom: 5,right: 10)
+        cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 12,bottom: 5,right: 0)
         cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
         cell.textView.textColor = UIColor(red:0.27, green:0.29, blue:0.30, alpha:1.0)
 
@@ -222,13 +222,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         cell.textView.tag = indexPath.row + 100
         
         // Add plus to item
-        let plusView = UIImageView(frame : (CGRect(x: 15, y: 9, width: 10, height: 10)))
-        let plus = UIImage(named: "plus")!.withRenderingMode(.alwaysOriginal)
-        plusView.image = plus
-        plusView.tag = 9999
-        if cell.textView?.text == "" {
-            cell.textView?.addSubview(plusView)
-        }
+//        let plusView = UIImageView(frame : (CGRect(x: 15, y: 9, width: 10, height: 10)))
+//        let plus = UIImage(named: "plus")!.withRenderingMode(.alwaysOriginal)
+//        plusView.image = plus
+//        plusView.tag = 9999
+//        if cell.textView?.text == "" {
+//            cell.textView?.addSubview(plusView)
+//        }
         
         // Add left border
         cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)

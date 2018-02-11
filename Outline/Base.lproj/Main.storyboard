@@ -39,7 +39,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <mutableString key="content">Outline is a prewriting tool designed to help you get your thoughts out on "paper", and then structure them into a logical flow.  Writing is often not a linear process, but an organic, creative process where your mind will wander from one idea to the next. Instead of trying to order your thoughts and then writing, prewriting allows you to commit your thoughts to paper and organize them after.  Outline allows you to write, group, and reorder your thoughts. You can use it to create prioritized to-do lists, organize stories, or structure reports.  Do you have ideas or feedback?  Email outline@lemonlimedesigns.ca and let me know what's on your mind.</mutableString>
+                                        <string key="content">Outline is a prewriting tool designed to help you get your thoughts out on "paper", and then structure them into a logical flow.  Writing is often not a linear process, but an organic, creative process where your mind will wander from one idea to the next. Instead of trying to order your thoughts and then writing, prewriting allows you to commit your thoughts to paper and organize them after.  Outline allows you to write, group, and reorder your thoughts. You can use it to create prioritized to-do lists, organize stories, or structure reports.  Do you have ideas or feedback?  Email outline@lemonlimedesigns.ca and let me know what's on your mind.</string>
                                         <attributes>
                                             <font key="NSFont" size="16" name="GillSans-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" paragraphSpacing="40" tighteningFactorForTruncation="0.0"/>
@@ -159,19 +159,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="wx7-sZ-3Bg">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="wx7-sZ-3Bg">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Add a title" translatesAutoresizingMaskIntoConstraints="NO" id="83C-dR-wYf">
-                                    <rect key="frame" x="8" y="10" width="359" height="42"/>
+                                    <rect key="frame" x="8" y="10" width="359" height="44"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="24"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9e-dP-Dza" customClass="EdgeInsetLabel" customModule="Outline" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="52" width="359" height="28"/>
+                                    <rect key="frame" x="8" y="54" width="359" height="28"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="28" id="Bjk-6i-hAj"/>
                                     </constraints>
@@ -208,7 +208,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Zy-tMH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="20" y="0.0" width="355" height="44"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -219,7 +219,7 @@
                                         </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="8lJ-Zy-tMH" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" id="3AM-20-c0s"/>
+                                        <constraint firstItem="8lJ-Zy-tMH" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" constant="20" id="3AM-20-c0s"/>
                                         <constraint firstAttribute="bottom" secondItem="8lJ-Zy-tMH" secondAttribute="bottom" id="OFX-md-HQ0"/>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="top" secondItem="uew-KF-3v3" secondAttribute="top" id="gj4-M6-ofC"/>
                                         <constraint firstAttribute="trailing" secondItem="8lJ-Zy-tMH" secondAttribute="trailing" id="ppT-l9-lRi"/>
