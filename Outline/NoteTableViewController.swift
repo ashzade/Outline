@@ -412,6 +412,18 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.tableView.reloadData()
     }
     
+    func updateDate(dateVar: Date) {
+        // Setup Date formatter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let myString = formatter.string(from: dateVar)
+        let yourDate = formatter.date(from: myString)
+        formatter.dateFormat = "MMM dd, yyyy - h:mm a"
+        let myStringafd = formatter.string(from: yourDate!)
+        self.NoteDate.text = myStringafd
+    }
+    
     
     // Get Note
     func getNote() {
@@ -438,12 +450,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     
                     // Fetch Date
                     if data.value(forKey: "updateDate") != nil {
-                        // Convert Date format
-                        let myString = formatter.string(from: data.value(forKey: "updateDate") as! Date)
-                        let yourDate = formatter.date(from: myString)
-                        formatter.dateFormat = "MMM dd, yyyy - h:mm a"
-                        let myStringafd = formatter.string(from: yourDate!)
-                        self.NoteDate.text = myStringafd
+                        updateDate(dateVar: data.value(forKey: "updateDate") as! Date)
                     }
                     
                     // Fetch Groups
@@ -463,11 +470,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     }
                 } else if selectedID == nil {
                     // Set current datetime
-                    let myString = formatter.string(from: currentDate)
-                    let yourDate = formatter.date(from: myString)
-                    formatter.dateFormat = "MMM dd, yyyy - h:mm a"
-                    let myStringafd = formatter.string(from: yourDate!)
-                    self.NoteDate.text = myStringafd
+                    updateDate(dateVar: currentDate)
                 }
                 
             }
@@ -481,6 +484,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     func updateEntity(id: Any?, attribute: String, value: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
+        
         // If new note
         if id == nil {
             let entity =  NSEntityDescription.entity(forEntityName: "Notes", in:managedContext)
@@ -547,6 +551,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
+        
+        updateDate(dateVar: currentDate)
     }
     
     // Resize Images
