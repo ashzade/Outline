@@ -50,7 +50,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         placeholderLabel.isHidden = !self.NoteTitle.text.isEmpty
         
         // Add clock and border to date
-        let dateView = UIImageView(frame : (CGRect(x: 3, y: 4, width: 12, height: 12)))
+        let dateView = UIImageView(frame : (CGRect(x: 3, y: 3, width: 12, height: 12)))
         let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal)
         dateView.image = clock
         self.NoteDate.addSubview(dateView)
@@ -110,7 +110,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
         // Set focus to note title
-        for subView in tableView.tableHeaderView?.subviews as! [UIView] {
+        for subView in tableView.tableHeaderView?.subviews as [UIView]! {
             if let textView = subView as? UITextView {
                 if (textView.text == "" && note!.groupItems[0] == [""] && note!.groups == [""]) {
                     textView.becomeFirstResponder()
@@ -284,8 +284,24 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
 
     
     // Swipe row options
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+    // Add group
+    override func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let groupAction = UIContextualAction(style: .normal, title:  "+ Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            success(true)
+        })
+        groupAction.backgroundColor = .purple
+        
+        return UISwipeActionsConfiguration(actions: [groupAction])
+        
+    }
+    
+    // Delete item
+    override func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // delete item at indexPath
             self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
             
@@ -293,9 +309,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+            success(true)
+        })
+        deleteAction.backgroundColor = .red
         
-        return [delete]
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     // Enable row editing
@@ -308,7 +326,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func deleteGroup(_ sender: UIButton!) {
         
         // Remove textfield focus
-        for subView in sender.superview?.subviews as! [UIView] {
+        for subView in sender.superview?.subviews as [UIView]! {
             if let textField = subView as? UITextField {
                 textField.resignFirstResponder()
             }
@@ -331,7 +349,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let tag = sender.tag - 100
         
         // Remove textfield focus
-        for subView in sender.superview?.subviews as! [UIView] {
+        for subView in sender.superview?.subviews as [UIView]! {
             if let textField = subView as? UITextField {
                 textField.resignFirstResponder()
             }
@@ -364,7 +382,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let tag = sender.tag - 100
         
         // Remove textfield focus and set it
-        for subView in sender.superview?.subviews as! [UIView] {
+        for subView in sender.superview?.subviews as [UIView]! {
             if let textField = subView as? UITextField {
                 textField.resignFirstResponder()
             }
@@ -619,7 +637,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         textField.superview?.addSubview(upGroup)
         
         // Hide delete button
-        for subView in textField.superview?.subviews as! [UIView] {
+        for subView in textField.superview?.subviews as [UIView]! {
             if let dot = subView as? UIImageView {
                 dot.isHidden = true
             }
@@ -631,7 +649,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func textFieldLostFocus(_ textField: UITextField) {
         
         // Hide delete button
-        for subView in textField.superview?.subviews as! [UIView] {
+        for subView in textField.superview?.subviews as [UIView]! {
             if let btn = subView as? UIButton {
                 btn.isHidden = true
             }
