@@ -11,10 +11,14 @@ import CoreData
 import LongPressReorder
 
 // Get current timestamp
-let currentDate = Date()
+var currentDate = Date()
 
 // Initialize group tag
 var headerTag : Int = 0
+
+// Item focus
+var indexPathFocus = IndexPath()
+var nextIndexPath = NSIndexPath()
 
 class NoteTableViewController: UITableViewController, UITextViewDelegate {
     // Row reorder
@@ -29,6 +33,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Get timestamp
+        currentDate = Date()
         
         // Note Title - Tableview header view
         self.NoteTitle.tag = 1
@@ -112,6 +119,15 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 }
             }
         }
+        if (!indexPathFocus.isEmpty) {
+            let rows = tableView.numberOfRows(inSection: indexPathFocus.section) - 1
+            if indexPathFocus.row < rows {
+                nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
+                let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
+                textCell.textView.becomeFirstResponder()
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -242,6 +258,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 
                 // Which cell are we in?
                 let indexPath = tableView.indexPath(for: cell)!
+                indexPathFocus = indexPath
                 
                 // Check if there is already an empty cell at the end
                 let rows = tableView.numberOfRows(inSection: indexPath.section) - 1
@@ -254,17 +271,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     // Save Data
                     self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
                     
-                    // Reload the table to reflect the new item
-                    tableView.reloadData()
                 }
-                
-                // Set textview focus on new textview
-                if indexPath.row < rows {
-                    let nextIndexPath = NSIndexPath(row: indexPath.row + 1, section: indexPath.section)
-                    let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
-                    print(textCell)
-                    textCell.textView.becomeFirstResponder()
-                }
+                // Reload the table to reflect the new item
+                tableView.reloadData()
                 
             }
             
