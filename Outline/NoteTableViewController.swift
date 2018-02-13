@@ -139,6 +139,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
     }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        resignFirstResponder()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -297,7 +301,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView,
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let groupAction = UIContextualAction(style: .normal, title:  "+ Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let groupAction = UIContextualAction(style: .normal, title:  "New Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // Select cell
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
             
