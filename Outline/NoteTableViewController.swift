@@ -19,6 +19,7 @@ var headerTag : Int = 0
 // Item focus
 var indexPathFocus = IndexPath()
 var nextIndexPath = NSIndexPath()
+var enter = false
 
 class NoteTableViewController: UITableViewController, UITextViewDelegate {
     // Row reorder
@@ -127,7 +128,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             if indexPathFocus.row < rows {
                 nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
                 if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
-                    textCell.textView.becomeFirstResponder()
+                    if enter == true {
+                        textCell.textView.becomeFirstResponder()
+                        enter = false
+                    }
+                    
                 }
                 
             } else if indexPathFocus.row == rows {
@@ -140,6 +145,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
     }
     
+    // Dismiss keyboard if scrolling
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         resignFirstResponder()
     }
@@ -271,13 +277,17 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 
                 // Which cell are we in?
                 let indexPath = tableView.indexPath(for: cell)!
+                let currentRow = indexPath[1]
                 indexPathFocus = indexPath
+                enter = true
                 
                 // Check if there is already an empty cell at the end
                 let rows = tableView.numberOfRows(inSection: indexPath.section) - 1
+
                 let lastIndexPath = NSIndexPath(row:rows, section: indexPath.section)
                 let lastCell = tableView.cellForRow(at: lastIndexPath as IndexPath) as! ExpandingCell
-                if lastCell.textView.text != "" {
+                if (lastCell.textView.text != "" && currentRow == rows) {
+                    
                     // On enter add empty item at the end of the array
                     note!.groupItems[indexPath.section].insert("", at: note!.groupItems[indexPath.section].count)
                     
@@ -757,10 +767,6 @@ extension NoteTableViewController {
         note!.groupItems[sourceIndexPath.section].remove(at: sourceIndexPath.row)
         note!.groupItems[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
         
-//        if note!.groupItems[sourceIndexPath.section].isEmpty {
-//            note!.groupItems[sourceIndexPath.section].append("")
-//        }
-        
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
     
@@ -780,8 +786,9 @@ extension NoteTableViewController: UITextFieldDelegate {
             
             //If the group has items
             if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
-                textCell.textView.becomeFirstResponder()
+                print("enter1")
             } else {
+                print("enter2")
                 // Add empty item
                 note!.groupItems[textField.tag - 100].append("")
                 
