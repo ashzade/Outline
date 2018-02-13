@@ -119,10 +119,20 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 }
             }
         }
+        
+        // Set active item textview
         if (!indexPathFocus.isEmpty) {
             let rows = tableView.numberOfRows(inSection: indexPathFocus.section) - 1
+            // If user hit enter
             if indexPathFocus.row < rows {
                 nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
+                if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
+                    textCell.textView.becomeFirstResponder()
+                }
+                
+            } else if indexPathFocus.row == rows {
+                // If new group
+                nextIndexPath = NSIndexPath(row: indexPathFocus.row, section: indexPathFocus.section)
                 let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
                 textCell.textView.becomeFirstResponder()
             }
@@ -157,6 +167,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             let textViewIndexPath = table.indexPath(for: cell)
             let textViewSection = textViewIndexPath?.section
             let textViewRow = textViewIndexPath?.row
+            indexPathFocus = textViewIndexPath!
             
             // Save cell's textView to items array
             note!.groupItems[textViewSection!][textViewRow!] = textView.text
@@ -164,8 +175,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
-            tableView.beginUpdates()
-            tableView.endUpdates()
         }
         
     }
@@ -289,9 +298,25 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let groupAction = UIContextualAction(style: .normal, title:  "+ Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // Select cell
+            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
+            
+            // Set group title and add empty item
+            self.note!.groups.insert(cell.textView.text, at: indexPath.section + 1)
+            self.note!.groupItems.insert([""], at: indexPath.section + 1)
+            indexPathFocus = [indexPath.section + 1, 0] as IndexPath
+            
+            // delete item at indexPath
+            self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
+            
+            // Save Data
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+
+            tableView.reloadData()
             success(true)
         })
-        groupAction.backgroundColor = .purple
+        groupAction.backgroundColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
         
         return UISwipeActionsConfiguration(actions: [groupAction])
         
