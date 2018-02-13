@@ -147,6 +147,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Dismiss keyboard if scrolling
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        enter = false
         resignFirstResponder()
     }
 
