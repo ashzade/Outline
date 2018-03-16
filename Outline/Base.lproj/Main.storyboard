@@ -39,7 +39,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">Outline is a prewriting tool designed to help you get your thoughts out on "paper", and then structure them into a logical flow.  Writing is often not a linear process, but an organic, creative process where your mind will wander from one idea to the next. Instead of trying to order your thoughts and then writing, prewriting allows you to commit your thoughts to paper and organize them after.  Outline allows you to write, group, and reorder your thoughts. You can use it to create prioritized to-do lists, organize stories, or structure reports.  Do you have ideas or feedback?  Email outline@lemonlimedesigns.ca and let me know what's on your mind.</string>
+                                        <string key="content">Writing is often not a linear process, but an organic, creative process where your mind will wander from one idea to the next. Instead of trying to order your thoughts and then writing, prewriting allows you to commit your thoughts to paper and organize them after.  Outline allows you to write, group, and reorder your thoughts. You can use it to create prioritized to-do lists, organize stories, or structure reports. You can also share your Note as you work.  Swipe right to create a group from an item or swipe left to delete an item.  Tap an hold to move an item within a group or to a different group.</string>
                                         <attributes>
                                             <font key="NSFont" size="16" name="GillSans-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" paragraphSpacing="40" tighteningFactorForTruncation="0.0"/>
@@ -211,7 +211,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Zy-tMH">
-                                            <rect key="frame" x="20" y="0.0" width="355" height="44"/>
+                                            <rect key="frame" x="20" y="0.0" width="339" height="44"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -225,7 +225,7 @@
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" constant="20" id="3AM-20-c0s"/>
                                         <constraint firstAttribute="bottom" secondItem="8lJ-Zy-tMH" secondAttribute="bottom" id="OFX-md-HQ0"/>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="top" secondItem="uew-KF-3v3" secondAttribute="top" id="gj4-M6-ofC"/>
-                                        <constraint firstAttribute="trailing" secondItem="8lJ-Zy-tMH" secondAttribute="trailing" id="ppT-l9-lRi"/>
+                                        <constraint firstAttribute="trailing" secondItem="8lJ-Zy-tMH" secondAttribute="trailing" constant="16" id="ppT-l9-lRi"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="38" minY="0.0" maxX="15" maxY="0.0"/>
@@ -254,7 +254,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZFa-yM-zVz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="Back" backIndicatorTransitionMaskImage="Back" id="9rF-ay-5FS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="back" backIndicatorTransitionMaskImage="back" id="9rF-ay-5FS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -280,6 +280,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back" width="256" height="256"/>
+        <image name="back" width="40" height="32"/>
     </resources>
 </document>

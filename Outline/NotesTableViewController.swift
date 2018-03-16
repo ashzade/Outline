@@ -6,6 +6,7 @@
 //  Copyright © 2017 Ash Zade. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 import LongPressReorder
@@ -25,7 +26,7 @@ class NotesTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
-        // Add INfo Button
+        // Add Info Button
         let infoButton = UIButton()
         infoButton.setImage(#imageLiteral(resourceName: "info").withRenderingMode(.alwaysOriginal), for: .normal)
         infoButton.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
@@ -35,11 +36,20 @@ class NotesTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
         // Set Outline Logo Image
-        let imageView = UIImageView()
-        var title = UIImage(named: "title")
-        title = resizeImage(image: title!, newWidth: 90)
-        imageView.image = title
-        self.navigationItem.titleView = imageView
+//        let imageView = UIImageView()
+//        var title = UIImage(named: "title")
+//        title = resizeImage(image: title!, newWidth: 90)
+//        imageView.image = title
+//        self.navigationItem.titleView = imageView
+        
+        var titleView : UIImageView
+        // set the dimensions you want here
+        titleView = UIImageView(frame:CGRect(x:0, y:0, width:20, height:20))
+        // Set how do you want to maintain the aspect
+        titleView.contentMode = .scaleAspectFit
+        titleView.image = UIImage(named: "title")
+        self.navigationItem.titleView = titleView
+        
         
         // Remove Navigation Bar border
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -63,7 +73,6 @@ class NotesTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,6 +112,12 @@ class NotesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if notes.count == 0 {
+            self.tableView.setEmptyMessage("Create a new Note by clicking \n the '+' button below.")
+        } else {
+            self.tableView.restore()
+        }
+        
         return notes.count
     }
 
@@ -143,6 +158,7 @@ class NotesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         // Pass OjbectID to selectedID for next view
         selectedID = notes[indexPath.row][2]
         
@@ -257,3 +273,25 @@ class NotesTableViewController: UITableViewController {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
 }
+
+extension UITableView {
+    
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = UIColor.lightGray
+        messageLabel.numberOfLines = 2;
+        messageLabel.textAlignment = .center;
+        messageLabel.font = UIFont(name: "Gill Sans", size: 20)
+        messageLabel.sizeToFit()
+        
+        self.backgroundView = messageLabel;
+        self.separatorStyle = .none;
+    }
+    
+    func restore() {
+        self.backgroundView = nil
+    }
+}
+
+

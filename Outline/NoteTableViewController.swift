@@ -80,6 +80,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Used for cell resizing
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.keyboardDismissMode = .onDrag
         
         // Fetch Note Data
         getNote()
@@ -92,6 +93,20 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Reset group title focus
         headerTag = 0
         
+        //Looks for single or multiple taps.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        self.view.addGestureRecognizer(tap)
+        
+        
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func hideKeyBoard(sender: UITapGestureRecognizer? = nil){
+        view.endEditing(true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -144,12 +159,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
     }
-    
-    // Dismiss keyboard if scrolling
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        enter = false
-        resignFirstResponder()
-    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
