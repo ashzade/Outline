@@ -285,23 +285,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 // Which cell are we in?
                 let indexPath = tableView.indexPath(for: cell)!
                 let currentRow = indexPath[1]
+                let nextRow: Int = currentRow + 1
                 indexPathFocus = indexPath
                 enter = true
+                    
+                // On enter add empty item at the end of the array
+                note!.groupItems[indexPath.section].insert("", at: nextRow)
                 
-                // Check if there is already an empty cell at the end
-                let rows = tableView.numberOfRows(inSection: indexPath.section) - 1
-
-                let lastIndexPath = NSIndexPath(row:rows, section: indexPath.section)
-                let lastCell = tableView.cellForRow(at: lastIndexPath as IndexPath) as! ExpandingCell
-                if (lastCell.textView.text != "" && currentRow == rows) {
-                    
-                    // On enter add empty item at the end of the array
-                    note!.groupItems[indexPath.section].insert("", at: note!.groupItems[indexPath.section].count)
-                    
-                    // Save Data
-                    self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                    
-                }
+                // Save Data
+                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                
                 // Reload the table to reflect the new item
                 tableView.reloadData()
                 
