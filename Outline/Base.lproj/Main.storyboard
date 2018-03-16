@@ -183,7 +183,7 @@
                                     <nil key="highlightedColor"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
-                                            <real key="value" value="20"/>
+                                            <real key="value" value="24"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
                                             <real key="value" value="10"/>

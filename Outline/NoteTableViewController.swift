@@ -51,7 +51,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         placeholderLabel.isHidden = !self.NoteTitle.text.isEmpty
         
         // Add clock and border to date
-        let dateView = UIImageView(frame : (CGRect(x: 3, y: 3, width: 12, height: 12)))
+        let dateView = UIImageView(frame : (CGRect(x: 6, y: 3, width: 12, height: 12)))
         let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal)
         dateView.image = clock
         self.NoteDate.addSubview(dateView)
@@ -104,6 +104,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func hideKeyBoard(sender: UITapGestureRecognizer? = nil){
         view.endEditing(true)
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
