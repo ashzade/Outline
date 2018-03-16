@@ -793,9 +793,9 @@ extension NoteTableViewController: UITextFieldDelegate {
             
             //If the group has items
             if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
-                print("enter1")
+                textCell.textView.becomeFirstResponder()
             } else {
-                print("enter2")
+                
                 // Add empty item
                 note!.groupItems[textField.tag - 100].append("")
                 

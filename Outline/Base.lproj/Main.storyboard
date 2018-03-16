@@ -221,6 +221,7 @@
                                             </connections>
                                         </textView>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" constant="20" id="3AM-20-c0s"/>
                                         <constraint firstAttribute="bottom" secondItem="8lJ-Zy-tMH" secondAttribute="bottom" id="OFX-md-HQ0"/>
