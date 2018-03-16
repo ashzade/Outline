@@ -80,7 +80,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Used for cell resizing
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.keyboardDismissMode = .onDrag
         
         // Fetch Note Data
         getNote()
@@ -104,7 +103,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func hideKeyBoard(sender: UITapGestureRecognizer? = nil){
         view.endEditing(true)
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -147,12 +145,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     
                 }
                 
-            } else if indexPathFocus.row == rows {
-                // If new group
-                nextIndexPath = NSIndexPath(row: indexPathFocus.row, section: indexPathFocus.section)
-                let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
-//                textCell.textView.becomeFirstResponder()
-            }
+            } 
         }
         
     }
@@ -192,6 +185,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            
+            tableView.beginUpdates()
+            tableView.endUpdates()
             
         }
         

@@ -19,15 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="XUD-5D-FLX">
-                                <rect key="frame" x="67" y="220" width="240" height="227"/>
+                                <rect key="frame" x="67" y="225" width="240" height="216"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.32549019610000002" green="0.84739423759999999" blue="0.75731464459999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XUD-5D-FLX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="87q-n1-pSi"/>
-                            <constraint firstItem="XUD-5D-FLX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Kdv-1Y-TSp"/>
-                            <constraint firstItem="XUD-5D-FLX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="lHE-SZ-UQY"/>
-                            <constraint firstItem="XUD-5D-FLX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="mRh-WN-P2b"/>
+                            <constraint firstItem="XUD-5D-FLX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="L3x-cI-XYb"/>
+                            <constraint firstItem="XUD-5D-FLX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="O9n-40-3Yg"/>
+                            <constraint firstItem="XUD-5D-FLX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dcN-Ys-ZEb"/>
+                            <constraint firstItem="XUD-5D-FLX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="205" id="u4n-22-Fif"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
