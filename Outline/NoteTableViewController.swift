@@ -93,12 +93,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Reset group title focus
         headerTag = 0
         
-        //Looks for single or multiple taps.
+        //Hide keyboard if tap anywhere
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
         self.view.addGestureRecognizer(tap)
         
         
@@ -154,7 +150,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 // If new group
                 nextIndexPath = NSIndexPath(row: indexPathFocus.row, section: indexPathFocus.section)
                 let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as! ExpandingCell
-                textCell.textView.becomeFirstResponder()
+//                textCell.textView.becomeFirstResponder()
             }
         }
         

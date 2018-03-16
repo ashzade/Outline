@@ -59,8 +59,7 @@ class NotesTableViewController: UITableViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         // Add Back Button Image
-        var backButton = UIImage(named: "back")
-        backButton = resizeImage(image: backButton!, newWidth: 20)
+        let backButton = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorImage = backButton
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButton
         
