@@ -186,8 +186,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
+            let currentOffset = tableView.contentOffset
+            UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
             tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            tableView.setContentOffset(currentOffset, animated: false)
             
         }
         
@@ -768,6 +772,13 @@ extension NoteTableViewController {
         self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
     
     }
+    
+    override func startReorderingRow(atIndex indexPath: IndexPath) -> Bool {
+        // Dismiss keyboard
+        hideKeyBoard()
+        
+        return true
+    }
 }
 
 // Textfield return behaviour
@@ -802,3 +813,4 @@ extension NoteTableViewController: UITextFieldDelegate {
         return false
     } 
 }
+
