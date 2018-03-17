@@ -254,6 +254,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         return note!.groupItems[section].count
     }
     
+    
     // Declare the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
@@ -270,7 +271,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         cell.textView.delegate = self
         cell.textView.tag = indexPath.row + 100
         
-        // Add left border
+        // Add left and bottom border
         cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         return cell
@@ -794,6 +795,7 @@ extension NoteTableViewController {
         
         return true
     }
+    
 }
 
 // Textfield return behaviour
@@ -828,4 +830,3 @@ extension NoteTableViewController: UITextFieldDelegate {
         return false
     } 
 }
-
