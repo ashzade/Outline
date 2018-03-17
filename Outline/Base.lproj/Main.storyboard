@@ -199,6 +199,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             <connections>
                                                 <outlet property="delegate" destination="1NW-Cf-hDA" id="hTl-8H-6Ck"/>
                                                 <outlet property="pasteDelegate" destination="1NW-Cf-hDA" id="R97-X4-eTG"/>

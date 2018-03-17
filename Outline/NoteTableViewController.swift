@@ -306,7 +306,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 }
 
                 // Backspace empty item deletes item
-                if text == "" && range.length == 0 {
+                if text == "" && range.length == 0 && textView.text == "" {
                     // delete item at indexPath
                     self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
                     
