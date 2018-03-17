@@ -276,33 +276,48 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         return cell
     }
 
-    // Enter creates a new cell
+    // Enter and backspace action
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n" || text == "\r") {
-            if let cell = textView.superview?.superview as? UITableViewCell {
-                // Take focus of header
-                headerTag = 0
-                
-                // Which cell are we in?
-                let indexPath = tableView.indexPath(for: cell)!
-                let currentRow = indexPath[1]
-                let nextRow: Int = currentRow + 1
-                indexPathFocus = indexPath
-                enter = true
-                    
-                // On enter add empty item at the end of the array
-                note!.groupItems[indexPath.section].insert("", at: nextRow)
-                
-                // Save Data
-                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                
-                // Reload the table to reflect the new item
-                tableView.reloadData()
-                
-            }
+        
+        if let cell = textView.superview?.superview as? UITableViewCell {
+            // Take focus of header
+            headerTag = 0
             
-            return false
+            // Which cell are we in?
+            let indexPath = tableView.indexPath(for: cell)!
+                // Enter creates new item
+                if(text == "\n" || text == "\r") {
+                    
+                        let currentRow = indexPath[1]
+                        let nextRow: Int = currentRow + 1
+                        indexPathFocus = indexPath
+                        enter = true
+                    
+                        // On enter add empty item at the end of the array
+                        note!.groupItems[indexPath.section].insert("", at: nextRow)
+                    
+                        // Save Data
+                        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                    
+                        // Reload the table to reflect the new item
+                        tableView.reloadData()
+                    
+                    return false
+                }
+
+                // Backspace empty item deletes item
+                if text == "" && range.length == 0 {
+                    // delete item at indexPath
+                    self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
+                    
+                    // Save Data
+                    self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                    
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    
+                }
         }
+        
         return true
     }
 
