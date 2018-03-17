@@ -235,6 +235,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Add them to the header
         header.addSubview(groupTitle)
         header.addSubview(headerImageView)
+        header.backgroundColor = .white
         
         // Set group title focus after moving
         if headerTag != 0 {
