@@ -17,51 +17,35 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--InfoUI View Controler-->
         <scene sceneID="dAQ-Qa-xNa">
             <objects>
-                <viewController id="etQ-hW-TJw" sceneMemberID="viewController">
+                <viewController id="etQ-hW-TJw" customClass="InfoUIViewControler" customModule="Outline" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XAa-sw-J1c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why Outline?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TQ-Jf-yly">
-                                <rect key="frame" x="16" y="14" width="343" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="lkJ-op-KCM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="28"/>
-                                <color key="textColor" red="0.098039215690000001" green="0.52156862749999999" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D7P-Kr-y9r">
-                                <rect key="frame" x="16" y="74" width="343" height="509"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Writing is often not a linear process, but an organic, creative process where your mind will wander from one idea to the next. Instead of trying to order your thoughts and then writing, prewriting allows you to commit your thoughts to paper and organize them after.  Outline allows you to write, group, and reorder your thoughts. You can use it to create prioritized to-do lists, organize stories, or structure reports. You can also share your Note as you work.  Swipe right to create a group from an item or swipe left to delete an item.  Tap an hold to move an item within a group or to a different group.</string>
-                                        <attributes>
-                                            <font key="NSFont" size="16" name="GillSans-Light"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" paragraphSpacing="40" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QtP-Oj-V7m">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO" allowsPictureInPictureMediaPlayback="NO">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9TQ-Jf-yly" firstAttribute="trailing" secondItem="D7P-Kr-y9r" secondAttribute="trailing" id="AW2-xt-Yo0"/>
-                            <constraint firstItem="9TQ-Jf-yly" firstAttribute="leading" secondItem="XAa-sw-J1c" secondAttribute="leadingMargin" id="D0e-7y-WoO"/>
-                            <constraint firstItem="D7P-Kr-y9r" firstAttribute="top" secondItem="9TQ-Jf-yly" secondAttribute="bottom" constant="17" id="Vs3-yF-EQV"/>
-                            <constraint firstItem="9TQ-Jf-yly" firstAttribute="trailing" secondItem="XAa-sw-J1c" secondAttribute="trailingMargin" id="cZR-iU-0jM"/>
-                            <constraint firstAttribute="bottom" secondItem="D7P-Kr-y9r" secondAttribute="bottom" constant="20" symbolic="YES" id="hng-vm-hCd"/>
-                            <constraint firstItem="9TQ-Jf-yly" firstAttribute="leading" secondItem="D7P-Kr-y9r" secondAttribute="leading" id="qia-86-WB1"/>
-                            <constraint firstItem="9TQ-Jf-yly" firstAttribute="top" secondItem="Job-EK-jtJ" secondAttribute="top" constant="14" id="uto-Gh-bBc"/>
+                            <constraint firstAttribute="trailing" secondItem="QtP-Oj-V7m" secondAttribute="trailing" id="5dH-pS-o6M"/>
+                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="bottom" secondItem="Job-EK-jtJ" secondAttribute="bottom" id="Ghw-jR-x3e"/>
+                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="leading" secondItem="XAa-sw-J1c" secondAttribute="leading" id="JYN-ua-S8y"/>
+                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="top" secondItem="Job-EK-jtJ" secondAttribute="top" id="wSf-Rh-THd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Job-EK-jtJ"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="QtP-Oj-V7m" id="7Z5-1F-kPn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3r-6x-vgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
