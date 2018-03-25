@@ -370,7 +370,30 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         })
         deleteAction.backgroundColor = .red
         
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        // **Need to figure out how to save attributed text to coredata to make this work**
+        let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // Select cell
+            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
+            // Add checkmark
+            if cell.textView.text.contains("✓") {
+                cell.textView.text = cell.textView.text.replacingOccurrences(of: "✓", with: "", options: NSString.CompareOptions.literal, range:nil)
+
+            } else {
+                cell.textView.text =  "✓\(cell.textView.text!)"
+            }
+            
+
+            // Save cell's textView to items array
+            self.note!.groupItems[indexPath.section][indexPath.row] = cell.textView.text
+
+            // Save Data
+            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+
+            success(true)
+        })
+        doneAction.backgroundColor = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
+        
+        return UISwipeActionsConfiguration(actions: [doneAction, deleteAction])
     }
     
     // Enable row editing
