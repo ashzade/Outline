@@ -381,23 +381,32 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Remove group
     @objc func deleteGroup(_ sender: UIButton!) {
-        
-        // Remove textfield focus
-        for subView in sender.superview?.subviews as [UIView]! {
-            if let textField = subView as? UITextField {
-                textField.resignFirstResponder()
+        let alert = UIAlertController(title: "Remove Group", message: "Are you sure you want to delete this group and its items?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.destructive, handler: { action in
+            
+            // Remove textfield focus
+            for subView in sender.superview?.subviews as [UIView]! {
+                if let textField = subView as? UITextField {
+                    textField.resignFirstResponder()
+                }
             }
-        }
+            
+            // Remove group and its items
+            self.note!.groups.remove(at: sender.tag - 100)
+            self.note!.groupItems.remove(at: sender.tag - 100)
+            
+            // Save Data
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
+            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            
+            self.tableView.reloadData()
+
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
         
-        // Remove group and its items
-        note!.groups.remove(at: sender.tag - 100)
-        note!.groupItems.remove(at: sender.tag - 100)
-        
-        // Save Data
-        self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-        
-        tableView.reloadData()
     }
     
     // Move group down
