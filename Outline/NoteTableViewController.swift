@@ -262,11 +262,18 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Add cell text indentation
         cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 12,bottom: 5,right: 0)
-        cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
-        cell.textView.textColor = UIColor(red:0.27, green:0.29, blue:0.30, alpha:1.0)
 
         // Set value
         cell.textView?.text = note!.groupItems[indexPath.section][indexPath.row]
+        
+        // Check for checkmark
+        if cell.textView.text.contains("✓") {
+            cell.textView.textColor = UIColor(red:0.27, green:0.29, blue:0.30, alpha:0.5)
+            cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
+        } else {
+            cell.textView.textColor = UIColor(red:0.27, green:0.29, blue:0.30, alpha:1.0)
+            cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
+        }
         
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
@@ -354,7 +361,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
     }
     
-    // Delete item
+    // Delete / Mark as done item
     override func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
@@ -390,6 +397,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
 
             success(true)
+            self.tableView.reloadData()
         })
         doneAction.backgroundColor = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
         
