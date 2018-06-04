@@ -35,13 +35,6 @@ class NotesTableViewController: UITableViewController {
         infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
-        // Set Outline Logo Image
-//        let imageView = UIImageView()
-//        var title = UIImage(named: "title")
-//        title = resizeImage(image: title!, newWidth: 90)
-//        imageView.image = title
-//        self.navigationItem.titleView = imageView
-        
         var titleView : UIImageView
         // set the dimensions you want here
         titleView = UIImageView(frame:CGRect(x:0, y:0, width:20, height:20))
@@ -162,14 +155,14 @@ class NotesTableViewController: UITableViewController {
         selectedID = notes[indexPath.row][2]
         
         // HIDE ADD BUTTON SUBVIEW HERE
-        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+//        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
     }
     
     // Add Note Function
     @objc func addNote(_ sender: UIButton!) {
         selectedID = nil
         // HIDE ADD BUTTON SUBVIEW HERE
-        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+//        view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
         
         performSegue(withIdentifier: "editNote", sender: self)
     }
@@ -270,6 +263,12 @@ class NotesTableViewController: UITableViewController {
     // Table editing
     @objc func showEditing() {
         tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination
+        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        controller.navigationItem.leftItemsSupplementBackButton = true
     }
 }
 
