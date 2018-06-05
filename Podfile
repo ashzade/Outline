@@ -7,5 +7,6 @@ target 'Outline' do
 
   # Pods for Outline
     pod 'LongPressReorder', '~> 1.1'
+    pod "Floaty", "~> 4.0.0"
 
 end

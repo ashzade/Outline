@@ -118,7 +118,6 @@
 				D57D48A41FF2C95300F7336B /* Frameworks */,
 				D57D48A51FF2C95300F7336B /* Resources */,
 				A0190215A0F6927B8BCE25F5 /* [CP] Embed Pods Frameworks */,
-				A5DF88FA8B58DDDD2CD9FAD9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -184,30 +183,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Outline/Pods-Outline-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
 				"${BUILT_PRODUCTS_DIR}/LongPressReorder/LongPressReorder.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LongPressReorder.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outline/Pods-Outline-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A5DF88FA8B58DDDD2CD9FAD9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outline/Pods-Outline-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B4DF35CC4DE11E0B7D8322DB /* [CP] Check Pods Manifest.lock */ = {

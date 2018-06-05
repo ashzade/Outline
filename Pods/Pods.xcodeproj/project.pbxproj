@@ -7,47 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18AECCFBE1323B5FD32C30E93C9A5D16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		3AF7D9D8CC457357B29D1B086E6CBE53 /* Pods-Outline-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D59DCC84FE1A6B037B2A131484190B /* Pods-Outline-dummy.m */; };
-		42CC7596732DE8838933C3E3B083D7E2 /* LongPressReorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7450702358949F49DD6BD1E8C26C002 /* LongPressReorder.swift */; };
-		952BF2CC3D5AF92ECCA174FF0736E9CE /* LongPressReorder-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDA802558AB42FF4A23C0051EF2581 /* LongPressReorder-dummy.m */; };
-		98465C94F1AF4587BC2A9D21DBC7A89E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		9CF6A241C0ADDBD84D8768E68AFC27C5 /* Pods-Outline-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D091BEE4D9DF6D24A0F5F3DB1DBE1D30 /* Pods-Outline-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCFB939824FC226493F16CBC4FF8B126 /* LongPressReorder-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 679FE9A8FA5DEED4C42C8FDD8D05264C /* LongPressReorder-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A113A2FC5F91269AB55DF9FA683015F /* Floaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B61B8B6913D3FE9604C2940629946 /* Floaty.swift */; };
+		1982E7ED9231E948A558799362FEA8B3 /* Floaty-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A063BC7103E4B513E104B007ED31CA7E /* Floaty-dummy.m */; };
+		1ABCBCBFE139A69FB39E43BCCAD28D84 /* Pods-Outline-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A140F03CFC5646AA3BE27FC0D7AAF54F /* Pods-Outline-dummy.m */; };
+		31DEB9C293D974C0014F52E7853C3E0B /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FA2CE37D4A1AE11E02573751F1388 /* FloatyItem.swift */; };
+		42CC7596732DE8838933C3E3B083D7E2 /* LongPressReorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0CE57A25F6ED5893FD6E6A92BDED5 /* LongPressReorder.swift */; };
+		530356FC11C4F4A1F641A30F65C5684F /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AD4F4108407A5785C2AB086FD2FA0A /* FloatyWindow.swift */; };
+		7067387FF3974A5BA87F204F718C33F5 /* Floaty-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3474BB666947ED96E7302F67E2DED85F /* Floaty-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7230B92C3A9DCAD2413A97CCFF094EB1 /* Pods-Outline-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD22D7DF7EA923773AED7916823960B /* Pods-Outline-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E96697B51D3FD3DB5EB1BE3EF02B411 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3512D2B2A04FE60B169F04E7AFD47437 /* FloatyManager.swift */; };
+		9054A1CA64F47D0BEE3744D146CD26A2 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3282D3DC32A8804253D4A7867AF1C094 /* FloatyDelegate.swift */; };
+		952BF2CC3D5AF92ECCA174FF0736E9CE /* LongPressReorder-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 241B0269604587A89DC49DBF2DCB7B20 /* LongPressReorder-dummy.m */; };
+		A7F6DA30773004F95975715CAFC28E11 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		AAC88CDADEDBFD84164D1AC462230464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
+		AB59858361FA21D4F734EC82CB9E9C0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		D7E358F0E693E3620EB47CA6E8B95A6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		F5B4C3EE44C285ACF24E077895435175 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216F9453F832E80BA08514BAC3C10ED1 /* FloatyViewController.swift */; };
+		FCFB939824FC226493F16CBC4FF8B126 /* LongPressReorder-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2583F615742CE0E1A9AE6BE4CCB786BD /* LongPressReorder-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8983682BF93F1D0020A945B9C6E588BC /* PBXContainerItemProxy */ = {
+		264E21BC391458663E1A2947053CC2B0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E79017C1564520DD534505965CC6ADE3;
 			remoteInfo = LongPressReorder;
 		};
+		E56A8F36A15224E7AA70CF29EEDAF97E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C123A74CD9D6CDA27160800BA68B01A;
+			remoteInfo = Floaty;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		108CB5ABE7C5F77088CDC97B7265F741 /* LongPressReorder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-prefix.pch"; sourceTree = "<group>"; };
-		26B12510EF40F1678DF8798280EA64E4 /* Pods-Outline.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Outline.modulemap"; sourceTree = "<group>"; };
-		26D59DCC84FE1A6B037B2A131484190B /* Pods-Outline-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Outline-dummy.m"; sourceTree = "<group>"; };
-		5EA1EAC66CF731888ED31575A5079CF5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		66F935A097D481AA7B1E2ECE2E3368E5 /* Pods-Outline-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Outline-resources.sh"; sourceTree = "<group>"; };
-		679FE9A8FA5DEED4C42C8FDD8D05264C /* LongPressReorder-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-umbrella.h"; sourceTree = "<group>"; };
-		6E5FE038360D7E6254054859AB6AE806 /* Pods-Outline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Outline.debug.xcconfig"; sourceTree = "<group>"; };
-		77C42420DF5F62048F9019784B42B77B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AEDA802558AB42FF4A23C0051EF2581 /* LongPressReorder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LongPressReorder-dummy.m"; sourceTree = "<group>"; };
-		8B23E4B1C49272C34A55E0B83061DDED /* LongPressReorder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LongPressReorder.xcconfig; sourceTree = "<group>"; };
+		03CEDF4665DCFA78AA3863D6F88DE5CA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BD22D7DF7EA923773AED7916823960B /* Pods-Outline-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Outline-umbrella.h"; sourceTree = "<group>"; };
+		216F9453F832E80BA08514BAC3C10ED1 /* FloatyViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyViewController.swift; path = Sources/FloatyViewController.swift; sourceTree = "<group>"; };
+		241B0269604587A89DC49DBF2DCB7B20 /* LongPressReorder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LongPressReorder-dummy.m"; sourceTree = "<group>"; };
+		2583F615742CE0E1A9AE6BE4CCB786BD /* LongPressReorder-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-umbrella.h"; sourceTree = "<group>"; };
+		28E0CE57A25F6ED5893FD6E6A92BDED5 /* LongPressReorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LongPressReorder.swift; path = LongPressReorder/Classes/LongPressReorder.swift; sourceTree = "<group>"; };
+		2C44FB81F0F3886828656F57B530C360 /* Pods-Outline-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Outline-acknowledgements.plist"; sourceTree = "<group>"; };
+		3282D3DC32A8804253D4A7867AF1C094 /* FloatyDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyDelegate.swift; path = Sources/FloatyDelegate.swift; sourceTree = "<group>"; };
+		3335A8DA2D37E7267C1CB761B604A845 /* Floaty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Floaty.framework; path = Floaty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3474BB666947ED96E7302F67E2DED85F /* Floaty-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Floaty-umbrella.h"; sourceTree = "<group>"; };
+		3512D2B2A04FE60B169F04E7AFD47437 /* FloatyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyManager.swift; path = Sources/FloatyManager.swift; sourceTree = "<group>"; };
+		48AD4F4108407A5785C2AB086FD2FA0A /* FloatyWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyWindow.swift; path = Sources/FloatyWindow.swift; sourceTree = "<group>"; };
+		4F1FE23A9AB0C21D1347A46CC01D4DF2 /* Pods-Outline-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Outline-frameworks.sh"; sourceTree = "<group>"; };
+		5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Floaty.xcconfig; sourceTree = "<group>"; };
+		693405B98CCE827FA1440083C8471139 /* LongPressReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LongPressReorder.framework; path = LongPressReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69DA86A3A560DB5F48841F33A026B0F0 /* Floaty.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Floaty.modulemap; sourceTree = "<group>"; };
+		70BB81357E78F00797473C76C7107E00 /* Pods-Outline-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Outline-resources.sh"; sourceTree = "<group>"; };
+		7D5C41F8171575E1E998297EEB1F3139 /* Pods-Outline-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Outline-acknowledgements.markdown"; sourceTree = "<group>"; };
+		875A384244BBE8887FDDC1C13705F74E /* LongPressReorder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-prefix.pch"; sourceTree = "<group>"; };
+		908E902E026C5C22904CF9014A5604AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A6DBEB62B72BFD78E0C3AD25540A0D95 /* LongPressReorder.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = LongPressReorder.modulemap; sourceTree = "<group>"; };
-		AA71794AC212E2FB05623A8E5B731FDF /* Pods-Outline-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Outline-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AA95201A7A8E54F4D63CD2D1710B3C9C /* LongPressReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LongPressReorder.framework; path = LongPressReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B561CFADF5360DA781E3C694933AD2F1 /* Pods-Outline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Outline.release.xcconfig"; sourceTree = "<group>"; };
-		B7450702358949F49DD6BD1E8C26C002 /* LongPressReorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LongPressReorder.swift; path = LongPressReorder/Classes/LongPressReorder.swift; sourceTree = "<group>"; };
-		D091BEE4D9DF6D24A0F5F3DB1DBE1D30 /* Pods-Outline-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Outline-umbrella.h"; sourceTree = "<group>"; };
-		D3ADE93D5AAB50331612AC9458D7E779 /* Pods-Outline-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Outline-frameworks.sh"; sourceTree = "<group>"; };
-		EA8CB39992F0DD6CCD6135E1A71CFB39 /* Pods-Outline-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Outline-acknowledgements.plist"; sourceTree = "<group>"; };
-		F3C249C02DE0FB7F6A965FDFD4BCEE1B /* Pods_Outline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Outline.framework; path = "Pods-Outline.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99E6853A356178EEFA3B196AE037DECB /* Pods-Outline.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Outline.modulemap"; sourceTree = "<group>"; };
+		9A40AC4A66B77969954619C349D62319 /* LongPressReorder.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LongPressReorder.modulemap; sourceTree = "<group>"; };
+		9E8FA2CE37D4A1AE11E02573751F1388 /* FloatyItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyItem.swift; path = Sources/FloatyItem.swift; sourceTree = "<group>"; };
+		A063BC7103E4B513E104B007ED31CA7E /* Floaty-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Floaty-dummy.m"; sourceTree = "<group>"; };
+		A140F03CFC5646AA3BE27FC0D7AAF54F /* Pods-Outline-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Outline-dummy.m"; sourceTree = "<group>"; };
+		A35D05FCCCCAE32A21E61201FF6B7677 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4B94A2463ABCBFD36CCDCAF97F42DDD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CC48B3BF200E7BAD6B38458FC6398399 /* Pods-Outline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Outline.release.xcconfig"; sourceTree = "<group>"; };
+		CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LongPressReorder.xcconfig; sourceTree = "<group>"; };
+		D7A89A298960034E12CDC7BD0D77BFA9 /* Pods_Outline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Outline.framework; path = "Pods-Outline.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB6C9E19D455FE8FB30A2306612938A9 /* Pods-Outline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Outline.debug.xcconfig"; sourceTree = "<group>"; };
+		EDAF542DA35173CF05C01355A474DF30 /* Floaty-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Floaty-prefix.pch"; sourceTree = "<group>"; };
+		EF3B61B8B6913D3FE9604C2940629946 /* Floaty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Floaty.swift; path = Sources/Floaty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,111 +86,152 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18AECCFBE1323B5FD32C30E93C9A5D16 /* Foundation.framework in Frameworks */,
+				D7E358F0E693E3620EB47CA6E8B95A6B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		408F93AE75846B6037E9C2853AFF4024 /* Frameworks */ = {
+		7F0C563950AD2BB8B0613F160B3C4A37 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98465C94F1AF4587BC2A9D21DBC7A89E /* Foundation.framework in Frameworks */,
+				A7F6DA30773004F95975715CAFC28E11 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E91D449C74F3A7565170694D645F1052 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB59858361FA21D4F734EC82CB9E9C0A /* Foundation.framework in Frameworks */,
+				AAC88CDADEDBFD84164D1AC462230464 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		26ACA2DEC3B83854980784FE2CBD909D /* Products */ = {
+		10DEDCB394BAA0C7FEDEBE330207B074 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				AA95201A7A8E54F4D63CD2D1710B3C9C /* LongPressReorder.framework */,
-				F3C249C02DE0FB7F6A965FDFD4BCEE1B /* Pods_Outline.framework */,
+				908E902E026C5C22904CF9014A5604AD /* Foundation.framework */,
+				BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		1463FC00B75C31B0DCDB6AA7AA2D2EF9 /* LongPressReorder */ = {
+			isa = PBXGroup;
+			children = (
+				28E0CE57A25F6ED5893FD6E6A92BDED5 /* LongPressReorder.swift */,
+				7E10BA9C87264A09E2F68A1D240BC43D /* Support Files */,
+			);
+			name = LongPressReorder;
+			path = LongPressReorder;
+			sourceTree = "<group>";
+		};
+		39CAAD64924CF1F881270B0ACC64A3E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3335A8DA2D37E7267C1CB761B604A845 /* Floaty.framework */,
+				693405B98CCE827FA1440083C8471139 /* LongPressReorder.framework */,
+				D7A89A298960034E12CDC7BD0D77BFA9 /* Pods_Outline.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2C8D4BA6A5800DFBE8B39D259D5B68F9 /* Support Files */ = {
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5EA1EAC66CF731888ED31575A5079CF5 /* Info.plist */,
-				A6DBEB62B72BFD78E0C3AD25540A0D95 /* LongPressReorder.modulemap */,
-				8B23E4B1C49272C34A55E0B83061DDED /* LongPressReorder.xcconfig */,
-				8AEDA802558AB42FF4A23C0051EF2581 /* LongPressReorder-dummy.m */,
-				108CB5ABE7C5F77088CDC97B7265F741 /* LongPressReorder-prefix.pch */,
-				679FE9A8FA5DEED4C42C8FDD8D05264C /* LongPressReorder-umbrella.h */,
+				10DEDCB394BAA0C7FEDEBE330207B074 /* iOS */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/LongPressReorder";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3D18A08E1B5A0BDD752E0616824B3101 /* Pods */ = {
+		52F89B923310FEE06BE235C14454B16D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				92D660BAEDAA63169EFFD0EC38DFDCEA /* LongPressReorder */,
+				69DA86A3A560DB5F48841F33A026B0F0 /* Floaty.modulemap */,
+				5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */,
+				A063BC7103E4B513E104B007ED31CA7E /* Floaty-dummy.m */,
+				EDAF542DA35173CF05C01355A474DF30 /* Floaty-prefix.pch */,
+				3474BB666947ED96E7302F67E2DED85F /* Floaty-umbrella.h */,
+				A35D05FCCCCAE32A21E61201FF6B7677 /* Info.plist */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/Floaty";
+			sourceTree = "<group>";
+		};
+		75C383412FB94241B0B53C6CE58B77CE /* Pods-Outline */ = {
+			isa = PBXGroup;
+			children = (
+				B4B94A2463ABCBFD36CCDCAF97F42DDD /* Info.plist */,
+				99E6853A356178EEFA3B196AE037DECB /* Pods-Outline.modulemap */,
+				7D5C41F8171575E1E998297EEB1F3139 /* Pods-Outline-acknowledgements.markdown */,
+				2C44FB81F0F3886828656F57B530C360 /* Pods-Outline-acknowledgements.plist */,
+				A140F03CFC5646AA3BE27FC0D7AAF54F /* Pods-Outline-dummy.m */,
+				4F1FE23A9AB0C21D1347A46CC01D4DF2 /* Pods-Outline-frameworks.sh */,
+				70BB81357E78F00797473C76C7107E00 /* Pods-Outline-resources.sh */,
+				0BD22D7DF7EA923773AED7916823960B /* Pods-Outline-umbrella.h */,
+				EB6C9E19D455FE8FB30A2306612938A9 /* Pods-Outline.debug.xcconfig */,
+				CC48B3BF200E7BAD6B38458FC6398399 /* Pods-Outline.release.xcconfig */,
+			);
+			name = "Pods-Outline";
+			path = "Target Support Files/Pods-Outline";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				3D18A08E1B5A0BDD752E0616824B3101 /* Pods */,
-				26ACA2DEC3B83854980784FE2CBD909D /* Products */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				86C7339492F0AE244E8EAC5459CFE93F /* Pods */,
+				39CAAD64924CF1F881270B0ACC64A3E9 /* Products */,
 				FA6ED2BD2934B737C41188F034C23089 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		92D660BAEDAA63169EFFD0EC38DFDCEA /* LongPressReorder */ = {
+		7E10BA9C87264A09E2F68A1D240BC43D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B7450702358949F49DD6BD1E8C26C002 /* LongPressReorder.swift */,
-				2C8D4BA6A5800DFBE8B39D259D5B68F9 /* Support Files */,
+				03CEDF4665DCFA78AA3863D6F88DE5CA /* Info.plist */,
+				9A40AC4A66B77969954619C349D62319 /* LongPressReorder.modulemap */,
+				CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */,
+				241B0269604587A89DC49DBF2DCB7B20 /* LongPressReorder-dummy.m */,
+				875A384244BBE8887FDDC1C13705F74E /* LongPressReorder-prefix.pch */,
+				2583F615742CE0E1A9AE6BE4CCB786BD /* LongPressReorder-umbrella.h */,
 			);
-			name = LongPressReorder;
-			path = LongPressReorder;
+			name = "Support Files";
+			path = "../Target Support Files/LongPressReorder";
 			sourceTree = "<group>";
 		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+		86C7339492F0AE244E8EAC5459CFE93F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+				CC5169FF22F17835B39A30C942F4DAB8 /* Floaty */,
+				1463FC00B75C31B0DCDB6AA7AA2D2EF9 /* LongPressReorder */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+		CC5169FF22F17835B39A30C942F4DAB8 /* Floaty */ = {
 			isa = PBXGroup;
 			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+				EF3B61B8B6913D3FE9604C2940629946 /* Floaty.swift */,
+				3282D3DC32A8804253D4A7867AF1C094 /* FloatyDelegate.swift */,
+				9E8FA2CE37D4A1AE11E02573751F1388 /* FloatyItem.swift */,
+				3512D2B2A04FE60B169F04E7AFD47437 /* FloatyManager.swift */,
+				216F9453F832E80BA08514BAC3C10ED1 /* FloatyViewController.swift */,
+				48AD4F4108407A5785C2AB086FD2FA0A /* FloatyWindow.swift */,
+				52F89B923310FEE06BE235C14454B16D /* Support Files */,
 			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		E46A519EF9C09B4ECA9B510B3B4C3AC1 /* Pods-Outline */ = {
-			isa = PBXGroup;
-			children = (
-				77C42420DF5F62048F9019784B42B77B /* Info.plist */,
-				26B12510EF40F1678DF8798280EA64E4 /* Pods-Outline.modulemap */,
-				AA71794AC212E2FB05623A8E5B731FDF /* Pods-Outline-acknowledgements.markdown */,
-				EA8CB39992F0DD6CCD6135E1A71CFB39 /* Pods-Outline-acknowledgements.plist */,
-				26D59DCC84FE1A6B037B2A131484190B /* Pods-Outline-dummy.m */,
-				D3ADE93D5AAB50331612AC9458D7E779 /* Pods-Outline-frameworks.sh */,
-				66F935A097D481AA7B1E2ECE2E3368E5 /* Pods-Outline-resources.sh */,
-				D091BEE4D9DF6D24A0F5F3DB1DBE1D30 /* Pods-Outline-umbrella.h */,
-				6E5FE038360D7E6254054859AB6AE806 /* Pods-Outline.debug.xcconfig */,
-				B561CFADF5360DA781E3C694933AD2F1 /* Pods-Outline.release.xcconfig */,
-			);
-			name = "Pods-Outline";
-			path = "Target Support Files/Pods-Outline";
+			name = Floaty;
+			path = Floaty;
 			sourceTree = "<group>";
 		};
 		FA6ED2BD2934B737C41188F034C23089 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E46A519EF9C09B4ECA9B510B3B4C3AC1 /* Pods-Outline */,
+				75C383412FB94241B0B53C6CE58B77CE /* Pods-Outline */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -167,6 +239,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		7C33FE13166BBD462C963B7F8F9494F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7230B92C3A9DCAD2413A97CCFF094EB1 /* Pods-Outline-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8591CCD381EDF2EC34D978667C8D27A8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -175,33 +255,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9309D923763ED91617D0EE7A3F82449 /* Headers */ = {
+		DC4B55F79F7EDF7665C0699A20731DE3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CF6A241C0ADDBD84D8768E68AFC27C5 /* Pods-Outline-umbrella.h in Headers */,
+				7067387FF3974A5BA87F204F718C33F5 /* Floaty-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5CF5217EB2954C71143C2D13BB9EB98B /* Pods-Outline */ = {
+		2561E53CE9396A104B9AD4FEC9A8116F /* Pods-Outline */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8FDB98DE6B3FCE5EDD6FE8193DC70B94 /* Build configuration list for PBXNativeTarget "Pods-Outline" */;
+			buildConfigurationList = DB9DF1A736F55AEC542BC4448A697609 /* Build configuration list for PBXNativeTarget "Pods-Outline" */;
 			buildPhases = (
-				6C8A53F5E7B322B41A0648953D65AB08 /* Sources */,
-				408F93AE75846B6037E9C2853AFF4024 /* Frameworks */,
-				D9309D923763ED91617D0EE7A3F82449 /* Headers */,
+				BD2B2333B087887C9C5C66BD22E05339 /* Sources */,
+				7F0C563950AD2BB8B0613F160B3C4A37 /* Frameworks */,
+				7C33FE13166BBD462C963B7F8F9494F7 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				879A5E6FADC0735FF25C896D43242907 /* PBXTargetDependency */,
+				CC102D0E95096D49FFEF9F26D3B70F05 /* PBXTargetDependency */,
+				1BB1724AE22E9E346D698249F3865EF7 /* PBXTargetDependency */,
 			);
 			name = "Pods-Outline";
 			productName = "Pods-Outline";
-			productReference = F3C249C02DE0FB7F6A965FDFD4BCEE1B /* Pods_Outline.framework */;
+			productReference = D7A89A298960034E12CDC7BD0D77BFA9 /* Pods_Outline.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5C123A74CD9D6CDA27160800BA68B01A /* Floaty */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11DD83B99F71D3E302573ED38372EA3B /* Build configuration list for PBXNativeTarget "Floaty" */;
+			buildPhases = (
+				58D385880A221FD41E30877A347BC358 /* Sources */,
+				E91D449C74F3A7565170694D645F1052 /* Frameworks */,
+				DC4B55F79F7EDF7665C0699A20731DE3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Floaty;
+			productName = Floaty;
+			productReference = 3335A8DA2D37E7267C1CB761B604A845 /* Floaty.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E79017C1564520DD534505965CC6ADE3 /* LongPressReorder */ = {
@@ -218,7 +316,7 @@
 			);
 			name = LongPressReorder;
 			productName = LongPressReorder;
-			productReference = AA95201A7A8E54F4D63CD2D1710B3C9C /* LongPressReorder.framework */;
+			productReference = 693405B98CCE827FA1440083C8471139 /* LongPressReorder.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -227,8 +325,8 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -238,22 +336,29 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 26ACA2DEC3B83854980784FE2CBD909D /* Products */;
+			productRefGroup = 39CAAD64924CF1F881270B0ACC64A3E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				5C123A74CD9D6CDA27160800BA68B01A /* Floaty */,
 				E79017C1564520DD534505965CC6ADE3 /* LongPressReorder */,
-				5CF5217EB2954C71143C2D13BB9EB98B /* Pods-Outline */,
+				2561E53CE9396A104B9AD4FEC9A8116F /* Pods-Outline */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6C8A53F5E7B322B41A0648953D65AB08 /* Sources */ = {
+		58D385880A221FD41E30877A347BC358 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF7D9D8CC457357B29D1B086E6CBE53 /* Pods-Outline-dummy.m in Sources */,
+				1982E7ED9231E948A558799362FEA8B3 /* Floaty-dummy.m in Sources */,
+				0A113A2FC5F91269AB55DF9FA683015F /* Floaty.swift in Sources */,
+				9054A1CA64F47D0BEE3744D146CD26A2 /* FloatyDelegate.swift in Sources */,
+				31DEB9C293D974C0014F52E7853C3E0B /* FloatyItem.swift in Sources */,
+				8E96697B51D3FD3DB5EB1BE3EF02B411 /* FloatyManager.swift in Sources */,
+				F5B4C3EE44C285ACF24E077895435175 /* FloatyViewController.swift in Sources */,
+				530356FC11C4F4A1F641A30F65C5684F /* FloatyWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,82 +371,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BD2B2333B087887C9C5C66BD22E05339 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1ABCBCBFE139A69FB39E43BCCAD28D84 /* Pods-Outline-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		879A5E6FADC0735FF25C896D43242907 /* PBXTargetDependency */ = {
+		1BB1724AE22E9E346D698249F3865EF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LongPressReorder;
 			target = E79017C1564520DD534505965CC6ADE3 /* LongPressReorder */;
-			targetProxy = 8983682BF93F1D0020A945B9C6E588BC /* PBXContainerItemProxy */;
+			targetProxy = 264E21BC391458663E1A2947053CC2B0 /* PBXContainerItemProxy */;
+		};
+		CC102D0E95096D49FFEF9F26D3B70F05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Floaty;
+			target = 5C123A74CD9D6CDA27160800BA68B01A /* Floaty */;
+			targetProxy = E56A8F36A15224E7AA70CF29EEDAF97E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2F8FB80C03667E684209FD87CE40FCEE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B23E4B1C49272C34A55E0B83061DDED /* LongPressReorder.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LongPressReorder/LongPressReorder-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LongPressReorder/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LongPressReorder/LongPressReorder.modulemap";
-				PRODUCT_NAME = LongPressReorder;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		4E6A5564A1D4BC24192F2B7A4CF277E8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B23E4B1C49272C34A55E0B83061DDED /* LongPressReorder.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LongPressReorder/LongPressReorder-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LongPressReorder/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LongPressReorder/LongPressReorder.modulemap";
-				PRODUCT_NAME = LongPressReorder;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6F9224530522DD3C735EC96CF142642E /* Release */ = {
+		199D972A13F2B4C56847F7A89CCA83BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -351,10 +407,12 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -362,6 +420,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -370,95 +429,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		81CEF43CDF1FA29C19E7D055402E2E35 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E5FE038360D7E6254054859AB6AE806 /* Pods-Outline.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Outline/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Outline/Pods-Outline.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Outline;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B57951D085A1B98A97F8A1062A5E5C5B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -483,17 +454,17 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		CE2457FB60018D9E759838523DDC29CE /* Release */ = {
+		315892388F829FC63661822AB92B040F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B561CFADF5360DA781E3C694933AD2F1 /* Pods-Outline.release.xcconfig */;
+			baseConfigurationReference = CC48B3BF200E7BAD6B38458FC6398399 /* Pods-Outline.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -513,7 +484,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Outline;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -524,23 +495,246 @@
 			};
 			name = Release;
 		};
+		3E065ACD3D24D845A8EDCCDD11D09367 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Floaty/Floaty-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Floaty/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Floaty/Floaty.modulemap";
+				PRODUCT_MODULE_NAME = Floaty;
+				PRODUCT_NAME = Floaty;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		788F1CF34F7123CA602EC4536128FFF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LongPressReorder/LongPressReorder-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LongPressReorder/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LongPressReorder/LongPressReorder.modulemap";
+				PRODUCT_MODULE_NAME = LongPressReorder;
+				PRODUCT_NAME = LongPressReorder;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8C4CE77823DFF847A71FA17F3F79D84B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Floaty/Floaty-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Floaty/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Floaty/Floaty.modulemap";
+				PRODUCT_MODULE_NAME = Floaty;
+				PRODUCT_NAME = Floaty;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BAAEB8976DB63FE7E5A144AB11DC7991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LongPressReorder/LongPressReorder-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LongPressReorder/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LongPressReorder/LongPressReorder.modulemap";
+				PRODUCT_MODULE_NAME = LongPressReorder;
+				PRODUCT_NAME = LongPressReorder;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C9ADC68733E9FB7E6ABAA9395DA1715F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB6C9E19D455FE8FB30A2306612938A9 /* Pods-Outline.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Outline/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Outline/Pods-Outline.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FDB2FC4A1E5891381CD9D922145497F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		11DD83B99F71D3E302573ED38372EA3B /* Build configuration list for PBXNativeTarget "Floaty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B57951D085A1B98A97F8A1062A5E5C5B /* Debug */,
-				6F9224530522DD3C735EC96CF142642E /* Release */,
+				8C4CE77823DFF847A71FA17F3F79D84B /* Debug */,
+				3E065ACD3D24D845A8EDCCDD11D09367 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8FDB98DE6B3FCE5EDD6FE8193DC70B94 /* Build configuration list for PBXNativeTarget "Pods-Outline" */ = {
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				81CEF43CDF1FA29C19E7D055402E2E35 /* Debug */,
-				CE2457FB60018D9E759838523DDC29CE /* Release */,
+				199D972A13F2B4C56847F7A89CCA83BC /* Debug */,
+				FDB2FC4A1E5891381CD9D922145497F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -548,8 +742,17 @@
 		CCF865B2B35ACBC6565BC51673709266 /* Build configuration list for PBXNativeTarget "LongPressReorder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2F8FB80C03667E684209FD87CE40FCEE /* Debug */,
-				4E6A5564A1D4BC24192F2B7A4CF277E8 /* Release */,
+				BAAEB8976DB63FE7E5A144AB11DC7991 /* Debug */,
+				788F1CF34F7123CA602EC4536128FFF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB9DF1A736F55AEC542BC4448A697609 /* Build configuration list for PBXNativeTarget "Pods-Outline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9ADC68733E9FB7E6ABAA9395DA1715F /* Debug */,
+				315892388F829FC63661822AB92B040F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

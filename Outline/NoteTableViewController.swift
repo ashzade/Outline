@@ -185,6 +185,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
             
             let currentOffset = tableView.contentOffset
             UIView.setAnimationsEnabled(false)
@@ -586,6 +587,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 } else if selectedID == nil {
                     // Set current datetime
                     updateDate(dateVar: currentDate)
+                    
+                    if template == "week" {
+                        note?.groups = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                        note?.groupItems = [[""],[""],[""],[""],[""],[""],[""]]
+                    }
+                    
                 }
                 
             }

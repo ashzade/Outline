@@ -10,10 +10,12 @@ import Foundation
 import UIKit
 import CoreData
 import LongPressReorder
+import Floaty
 
 // Empty array of notes
 var notes =  [[Any]]()
 var selectedID : Any?
+var template = "blank"
 
 // Empty addButtonView container
 var addButtonView : UIView?
@@ -21,6 +23,8 @@ var addButtonView : UIView?
 class NotesTableViewController: UITableViewController {
 
     var reorderTableView: LongPressReorderTableView!
+    
+    let floaty = Floaty()
     
     override func viewDidLoad() {
         
@@ -35,13 +39,6 @@ class NotesTableViewController: UITableViewController {
         infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
-        // Set Outline Logo Image
-//        let imageView = UIImageView()
-//        var title = UIImage(named: "title")
-//        title = resizeImage(image: title!, newWidth: 90)
-//        imageView.image = title
-//        self.navigationItem.titleView = imageView
-        
         var titleView : UIImageView
         // set the dimensions you want here
         titleView = UIImageView(frame:CGRect(x:0, y:0, width:20, height:20))
@@ -49,7 +46,6 @@ class NotesTableViewController: UITableViewController {
         titleView.contentMode = .scaleAspectFit
         titleView.image = UIImage(named: "title")
         self.navigationItem.titleView = titleView
-        
         
         // Remove Navigation Bar border
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -86,15 +82,39 @@ class NotesTableViewController: UITableViewController {
             // Create addButton view wrapper
             addButtonView = UIView(frame: CGRect(x: view.frame.maxX - 100, y: view.frame.maxY - 100, width: 100, height: 100))
             
-            // Add Add Button
-            let addButton = UIButton(type: .system)
-            addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
-            addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
-            addButton.tag = 100
+//            // Add Add Button
+//            let addButton = UIButton(type: .system)
+//            addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
+//            addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+//            addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
+//            addButton.tag = 100
+//
+//            addButtonView?.addSubview(addButton)
+//            self.parent?.view.addSubview(addButtonView!)
             
-            addButtonView?.addSubview(addButton)
-            self.parent?.view.addSubview(addButtonView!)
+            
+            // Configure
+            floaty.tag = 100
+            floaty.buttonImage = UIImage(named: "add")
+            
+            // Creat items
+            floaty.addItem("Blank", icon: UIImage(named: "plus")!, handler: { item in
+                selectedID = nil
+                self.performSegue(withIdentifier: "editNote", sender: self)
+            })
+            floaty.addItem("My Day", icon: UIImage(named: "plus")!, handler: { item in
+                template = "day"
+                selectedID = nil
+                self.performSegue(withIdentifier: "editNote", sender: self)
+            })
+            floaty.addItem("My Week", icon: UIImage(named: "plus")!, handler: { item in
+                template = "week"
+                selectedID = nil
+                self.performSegue(withIdentifier: "editNote", sender: self)
+            })
+            
+            // Add to view
+            self.parent?.view.addSubview(floaty)
         }
         
     }
