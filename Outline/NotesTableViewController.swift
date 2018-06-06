@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 import LongPressReorder
 import Floaty
+import NightNight
 
 // Empty array of notes
 var notes =  [[Any]]()
@@ -29,6 +30,10 @@ class NotesTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        // Themes
+        self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        NightNight.theme = .night
         
         // Add Info Button
         let infoButton = UIButton()
@@ -99,17 +104,24 @@ class NotesTableViewController: UITableViewController {
             
             // Creat items
             floaty.addItem("Blank", icon: UIImage(named: "plus")!, handler: { item in
+                template = ""
                 selectedID = nil
+                // HIDE ADD BUTTON SUBVIEW HERE
+                self.parent?.view.viewWithTag(100)?.isHidden = true
                 self.performSegue(withIdentifier: "editNote", sender: self)
             })
             floaty.addItem("My Day", icon: UIImage(named: "plus")!, handler: { item in
                 template = "day"
                 selectedID = nil
+                // HIDE ADD BUTTON SUBVIEW HERE
+                self.parent?.view.viewWithTag(100)?.isHidden = true
                 self.performSegue(withIdentifier: "editNote", sender: self)
             })
             floaty.addItem("My Week", icon: UIImage(named: "plus")!, handler: { item in
                 template = "week"
                 selectedID = nil
+                // HIDE ADD BUTTON SUBVIEW HERE
+                self.parent?.view.viewWithTag(100)?.isHidden = true
                 self.performSegue(withIdentifier: "editNote", sender: self)
             })
             
@@ -154,10 +166,16 @@ class NotesTableViewController: UITableViewController {
         dateView.image = clock;
         cell.noteDate?.addSubview(dateView)
         
-        // Add border
+        // Themes
+        cell.noteTitle?.mixedTextColor = MixedColor(normal: 0x263238, night: 0xffffff)
+        cell.noteDate?.mixedTextColor = MixedColor(normal: 0x263238, night: 0xffffff)
         cell.noteDate?.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
     }
     
     // Swipe row options

@@ -7,34 +7,76 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A113A2FC5F91269AB55DF9FA683015F /* Floaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3B61B8B6913D3FE9604C2940629946 /* Floaty.swift */; };
-		1982E7ED9231E948A558799362FEA8B3 /* Floaty-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A063BC7103E4B513E104B007ED31CA7E /* Floaty-dummy.m */; };
-		1ABCBCBFE139A69FB39E43BCCAD28D84 /* Pods-Outline-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A140F03CFC5646AA3BE27FC0D7AAF54F /* Pods-Outline-dummy.m */; };
-		31DEB9C293D974C0014F52E7853C3E0B /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FA2CE37D4A1AE11E02573751F1388 /* FloatyItem.swift */; };
-		42CC7596732DE8838933C3E3B083D7E2 /* LongPressReorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0CE57A25F6ED5893FD6E6A92BDED5 /* LongPressReorder.swift */; };
-		530356FC11C4F4A1F641A30F65C5684F /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AD4F4108407A5785C2AB086FD2FA0A /* FloatyWindow.swift */; };
-		7067387FF3974A5BA87F204F718C33F5 /* Floaty-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3474BB666947ED96E7302F67E2DED85F /* Floaty-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7230B92C3A9DCAD2413A97CCFF094EB1 /* Pods-Outline-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD22D7DF7EA923773AED7916823960B /* Pods-Outline-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E96697B51D3FD3DB5EB1BE3EF02B411 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3512D2B2A04FE60B169F04E7AFD47437 /* FloatyManager.swift */; };
-		9054A1CA64F47D0BEE3744D146CD26A2 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3282D3DC32A8804253D4A7867AF1C094 /* FloatyDelegate.swift */; };
-		952BF2CC3D5AF92ECCA174FF0736E9CE /* LongPressReorder-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 241B0269604587A89DC49DBF2DCB7B20 /* LongPressReorder-dummy.m */; };
-		A7F6DA30773004F95975715CAFC28E11 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		06D7DEA8CD8B5D55602C8470F0052316 /* UINavigationBar+MixedTitleTextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3077B4BBA7B67C764B6F74CDA3C0 /* UINavigationBar+MixedTitleTextAttributes.swift */; };
+		0862D1C1978C7A79470444369F5F11CD /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F0A62E84FC7904F2681B7B071E3E1 /* UIColor+RGB.swift */; };
+		0A113A2FC5F91269AB55DF9FA683015F /* Floaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA2B8D8CB444F41D9018A4F2B5F60D /* Floaty.swift */; };
+		0C2CB6319BF5EC9B12ED559771AEEFE8 /* UIButton+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ECF48631E5CE2B5FFE269D077808CD /* UIButton+Mixed.swift */; };
+		18317B9C1F72525D1961FD98CDA01683 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E61BEBF4F37DA9AD2C254E1E9A978C /* NotificationManager.swift */; };
+		1982E7ED9231E948A558799362FEA8B3 /* Floaty-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 968FB2F4A24907372534FF09742E3058 /* Floaty-dummy.m */; };
+		19C49C347E940B3AF59E97105393C830 /* UIPageControl+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEBE99FBF8977B362BFA0F36710535C /* UIPageControl+Mixed.swift */; };
+		1C3EB37496B23695743C59D5AE3CBEDF /* UINavigationBar+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A5D7332C054799EFB70EDF1DC155F4 /* UINavigationBar+Mixed.swift */; };
+		20E79103ECB6A27998FE53A6215FF41B /* NSObject+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191FE6CDB76675E217CBA0A9CEF8AB96 /* NSObject+Mixed.swift */; };
+		28A0C80E3EFA17683E398874E303D863 /* Dictionary+AttributedStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB25AE1D5D338AFA0BB5E386131B6D2 /* Dictionary+AttributedStringKeys.swift */; };
+		2FFFEDC06893AD758F2A072C20DAFE7E /* UIView+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E829CAC5D5C501C93B3B3138B2A121 /* UIView+Mixed.swift */; };
+		31DEB9C293D974C0014F52E7853C3E0B /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634097F9C95B59CA04432B990E8C3AFA /* FloatyItem.swift */; };
+		3D1852B6E704FE0C53F9DC77698A7191 /* NSObject+Customize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B761821002D5960310460780207F43C1 /* NSObject+Customize.swift */; };
+		42CC7596732DE8838933C3E3B083D7E2 /* LongPressReorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE94217485CEA821985DDA6C4340A21B /* LongPressReorder.swift */; };
+		49EE7CC2951E2162E320E730DD72E172 /* UIBarButtonItem+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD4E880CE9669D270C190839E07E163 /* UIBarButtonItem+Mixed.swift */; };
+		4A45AD12698CA75F96F09F8D8E6F5F96 /* UIPopoverPresentationController+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49B3A0431A87AE3D0756142F56CEA7 /* UIPopoverPresentationController+Mixed.swift */; };
+		4EE79081FC4DD6CC2BE00D26108A1B1E /* UITextField+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9421D2FD805153484D3947EA70DA87C /* UITextField+Mixed.swift */; };
+		530356FC11C4F4A1F641A30F65C5684F /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AAE5DA28B9260C54AA0C24E0618EF7 /* FloatyWindow.swift */; };
+		6015F95284FC9C3D6B4E970D3A06277E /* NightNight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F036571007370D840699BBC612E0AB6 /* NightNight.swift */; };
+		6CEF9710E2451151EDEB9D8D4B6140AF /* NightNight-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 94752CB71EAD9155A2FA53765A216D05 /* NightNight-dummy.m */; };
+		6FF0EAE90787FD4A7F2474BF6C85E38D /* UIProgressView+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870FD268F21A12C8C91A48529A9C909 /* UIProgressView+Mixed.swift */; };
+		7067387FF3974A5BA87F204F718C33F5 /* Floaty-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B103A582000EE5ADB23743C9B1B39FCC /* Floaty-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72A9350DE83F7BFF4D0B08F0FD9CEC2C /* AttributeNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D038C22664A6F04166E0E85FE8618 /* AttributeNames.swift */; };
+		73E9D21F7AEDAD1B038BF75DFC566846 /* MixedResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320BFBACF90941388B7728BC4BD8022F /* MixedResource.swift */; };
+		75837445985EB2E3EEF2B17EA4C6BB4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		768AB805E28EC98698A527093805CA16 /* UILabel+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162712D04A91B63938BB8DE9B19AD4D /* UILabel+Mixed.swift */; };
+		7B28DEDB535B7001F61E880B1CA8C0D7 /* Pods-Outline-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A140F03CFC5646AA3BE27FC0D7AAF54F /* Pods-Outline-dummy.m */; };
+		8222E2310EC0B24C9993333A7A097C54 /* NNMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAA6541B4D4850B44C097644D91EDE7 /* NNMutableAttributedString.swift */; };
+		88DAE7FB136DB9F24049650AD1F29F7F /* UISlider+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A824347E3370A519003A0B0457263D02 /* UISlider+Mixed.swift */; };
+		8E96697B51D3FD3DB5EB1BE3EF02B411 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994215A8792132197766791E443D62D7 /* FloatyManager.swift */; };
+		8ED3E0C3D83D360A487666E7C3BBD9A7 /* UIImageView+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E0EED5BDB27747883375596D43487 /* UIImageView+Mixed.swift */; };
+		9054A1CA64F47D0BEE3744D146CD26A2 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85905EC0785BC3983E94ED5F2F6DC696 /* FloatyDelegate.swift */; };
+		952BF2CC3D5AF92ECCA174FF0736E9CE /* LongPressReorder-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FDB96703DB9E10FA6250BDC947A56D /* LongPressReorder-dummy.m */; };
+		96D31DE11637D89D881D36D4F6C87E5B /* UITabBar+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60333064070EE62CD80E903EB1CFD33E /* UITabBar+Mixed.swift */; };
+		A6A25431A7759C49C27D7DE333F2A805 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
 		AAC88CDADEDBFD84164D1AC462230464 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
 		AB59858361FA21D4F734EC82CB9E9C0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		AF9BCD15FFA8B29E071C52AF8D924499 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816CB0C6F3F95BF3061657B42D0D8894 /* Keys.swift */; };
+		B2CBDE6A942FF3A265B9DEE2A8DCB47C /* Pods-Outline-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD22D7DF7EA923773AED7916823960B /* Pods-Outline-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3D6DC6334A98D6396DDF6A2F70CDC49 /* CALayer+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF20B1417E48FEBA0DA3A9D3EC54D2C /* CALayer+Mixed.swift */; };
+		BDBAF9C2905DAF272CF9316CE92E0B86 /* UITextView+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97DC25C0543B46B399BB56EF656F9D7 /* UITextView+Mixed.swift */; };
+		BF45B13E9C672234BA594E61560F637B /* UIToolbar+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495173DBC945C1E5F2B96FFFCA4B0A16 /* UIToolbar+Mixed.swift */; };
+		C8EDF09E521F810AE3B057040F17EB61 /* NightNight-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 478CBE0EAB34B227075F9CC4A3A28619 /* NightNight-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7E358F0E693E3620EB47CA6E8B95A6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
-		F5B4C3EE44C285ACF24E077895435175 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216F9453F832E80BA08514BAC3C10ED1 /* FloatyViewController.swift */; };
-		FCFB939824FC226493F16CBC4FF8B126 /* LongPressReorder-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2583F615742CE0E1A9AE6BE4CCB786BD /* LongPressReorder-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DD0409CCF348CE5A9F65D35563F595B2 /* UINavigationBar+MixedBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615A620DEDBBA2CCB96CEE06B759F2B6 /* UINavigationBar+MixedBarStyle.swift */; };
+		EAE95220A3D039068F297F4C095D2FB5 /* UISearchBar+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E68657790B973672F5EDE972284F4 /* UISearchBar+Mixed.swift */; };
+		F298C93832F35DF41DF0A53A26AA2FEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		F35118AF0471109B5B01B9F9B5AB7470 /* UITableView+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32270B001CA70FA0AFD7984990688E /* UITableView+Mixed.swift */; };
+		F5B4C3EE44C285ACF24E077895435175 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA6E217FE14A3522C385AA7F5C6957D /* FloatyViewController.swift */; };
+		FBCAD0F861A175A43AE39095DE12E9A8 /* UIView+IBInspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CD8906020676FD75ADD7D0C65B5D1F /* UIView+IBInspectable.swift */; };
+		FCDB540C081E560FF60CA051E5759320 /* UISwitch+Mixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280C287B8BC23DF9519032814B9A0BE /* UISwitch+Mixed.swift */; };
+		FCFB939824FC226493F16CBC4FF8B126 /* LongPressReorder-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7772194EDF2C9238F7BB7A49C57C08C4 /* LongPressReorder-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		264E21BC391458663E1A2947053CC2B0 /* PBXContainerItemProxy */ = {
+		48ED47F64B7097B44A857CD075D65A9B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E79017C1564520DD534505965CC6ADE3;
 			remoteInfo = LongPressReorder;
 		};
-		E56A8F36A15224E7AA70CF29EEDAF97E /* PBXContainerItemProxy */ = {
+		7574BA6FB0567225F256DCAC8239D7FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D865914F0DEBD2EF2231CF88397F94E;
+			remoteInfo = NightNight;
+		};
+		9543A1282F71D4D51675D76E355C578C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -44,41 +86,79 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03CEDF4665DCFA78AA3863D6F88DE5CA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E829CAC5D5C501C93B3B3138B2A121 /* UIView+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+Mixed.swift"; path = "NightNight/Classes/UIKit/UIView+Mixed.swift"; sourceTree = "<group>"; };
+		0162712D04A91B63938BB8DE9B19AD4D /* UILabel+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILabel+Mixed.swift"; path = "NightNight/Classes/UIKit/UILabel+Mixed.swift"; sourceTree = "<group>"; };
+		04278C62F09F145BC69BF8926B1D4F48 /* NightNight.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NightNight.xcconfig; sourceTree = "<group>"; };
+		09CC9447E6BFD37F2DE7429F809AA171 /* Pods_Outline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Outline.framework; path = "Pods-Outline.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BD22D7DF7EA923773AED7916823960B /* Pods-Outline-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Outline-umbrella.h"; sourceTree = "<group>"; };
-		216F9453F832E80BA08514BAC3C10ED1 /* FloatyViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyViewController.swift; path = Sources/FloatyViewController.swift; sourceTree = "<group>"; };
-		241B0269604587A89DC49DBF2DCB7B20 /* LongPressReorder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LongPressReorder-dummy.m"; sourceTree = "<group>"; };
-		2583F615742CE0E1A9AE6BE4CCB786BD /* LongPressReorder-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-umbrella.h"; sourceTree = "<group>"; };
-		28E0CE57A25F6ED5893FD6E6A92BDED5 /* LongPressReorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LongPressReorder.swift; path = LongPressReorder/Classes/LongPressReorder.swift; sourceTree = "<group>"; };
+		11ECF48631E5CE2B5FFE269D077808CD /* UIButton+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIButton+Mixed.swift"; path = "NightNight/Classes/UIButton+Mixed.swift"; sourceTree = "<group>"; };
+		15A5D7332C054799EFB70EDF1DC155F4 /* UINavigationBar+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+Mixed.swift"; path = "NightNight/Classes/UIKit/UINavigationBar+Mixed.swift"; sourceTree = "<group>"; };
+		17C2642122D54D17FB9F3249CDE1F96D /* LongPressReorder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LongPressReorder.xcconfig; sourceTree = "<group>"; };
+		180F0A62E84FC7904F2681B7B071E3E1 /* UIColor+RGB.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIColor+RGB.swift"; path = "NightNight/Classes/UIColor+RGB.swift"; sourceTree = "<group>"; };
+		184F67E447F3786545F5D4A50B899783 /* Floaty.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Floaty.xcconfig; sourceTree = "<group>"; };
+		18E61BEBF4F37DA9AD2C254E1E9A978C /* NotificationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = NightNight/Classes/NotificationManager.swift; sourceTree = "<group>"; };
+		191FE6CDB76675E217CBA0A9CEF8AB96 /* NSObject+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+Mixed.swift"; path = "NightNight/Classes/NSObject+Mixed.swift"; sourceTree = "<group>"; };
+		1E8E68657790B973672F5EDE972284F4 /* UISearchBar+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UISearchBar+Mixed.swift"; path = "NightNight/Classes/UIKit/UISearchBar+Mixed.swift"; sourceTree = "<group>"; };
+		1FF20B1417E48FEBA0DA3A9D3EC54D2C /* CALayer+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CALayer+Mixed.swift"; path = "NightNight/Classes/CALayer+Mixed.swift"; sourceTree = "<group>"; };
+		241235F4501C26DF2265F17D7F63C344 /* NightNight.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NightNight.modulemap; sourceTree = "<group>"; };
+		245E5E25150951B7B743B652CC8E16E3 /* Floaty-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Floaty-prefix.pch"; sourceTree = "<group>"; };
+		265AC4536D0AEF82CC5E046E096387D0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2870FD268F21A12C8C91A48529A9C909 /* UIProgressView+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIProgressView+Mixed.swift"; path = "NightNight/Classes/UIKit/UIProgressView+Mixed.swift"; sourceTree = "<group>"; };
 		2C44FB81F0F3886828656F57B530C360 /* Pods-Outline-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Outline-acknowledgements.plist"; sourceTree = "<group>"; };
-		3282D3DC32A8804253D4A7867AF1C094 /* FloatyDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyDelegate.swift; path = Sources/FloatyDelegate.swift; sourceTree = "<group>"; };
-		3335A8DA2D37E7267C1CB761B604A845 /* Floaty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Floaty.framework; path = Floaty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3474BB666947ED96E7302F67E2DED85F /* Floaty-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Floaty-umbrella.h"; sourceTree = "<group>"; };
-		3512D2B2A04FE60B169F04E7AFD47437 /* FloatyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyManager.swift; path = Sources/FloatyManager.swift; sourceTree = "<group>"; };
-		48AD4F4108407A5785C2AB086FD2FA0A /* FloatyWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyWindow.swift; path = Sources/FloatyWindow.swift; sourceTree = "<group>"; };
+		320BFBACF90941388B7728BC4BD8022F /* MixedResource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MixedResource.swift; path = NightNight/Classes/MixedResource.swift; sourceTree = "<group>"; };
+		3A9D038C22664A6F04166E0E85FE8618 /* AttributeNames.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AttributeNames.swift; path = NightNight/Classes/AttributeNames.swift; sourceTree = "<group>"; };
+		3CEBE99FBF8977B362BFA0F36710535C /* UIPageControl+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPageControl+Mixed.swift"; path = "NightNight/Classes/UIKit/UIPageControl+Mixed.swift"; sourceTree = "<group>"; };
+		3ECA2B8D8CB444F41D9018A4F2B5F60D /* Floaty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Floaty.swift; path = Sources/Floaty.swift; sourceTree = "<group>"; };
+		449BECDDF8FB0EB8446D5D0ADC52FF8F /* LongPressReorder.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LongPressReorder.modulemap; sourceTree = "<group>"; };
+		478CBE0EAB34B227075F9CC4A3A28619 /* NightNight-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NightNight-umbrella.h"; sourceTree = "<group>"; };
+		484C3077B4BBA7B67C764B6F74CDA3C0 /* UINavigationBar+MixedTitleTextAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+MixedTitleTextAttributes.swift"; path = "NightNight/Classes/UINavigationBar+MixedTitleTextAttributes.swift"; sourceTree = "<group>"; };
+		495173DBC945C1E5F2B96FFFCA4B0A16 /* UIToolbar+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIToolbar+Mixed.swift"; path = "NightNight/Classes/UIKit/UIToolbar+Mixed.swift"; sourceTree = "<group>"; };
+		4BB25AE1D5D338AFA0BB5E386131B6D2 /* Dictionary+AttributedStringKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dictionary+AttributedStringKeys.swift"; path = "NightNight/Classes/Dictionary+AttributedStringKeys.swift"; sourceTree = "<group>"; };
 		4F1FE23A9AB0C21D1347A46CC01D4DF2 /* Pods-Outline-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Outline-frameworks.sh"; sourceTree = "<group>"; };
-		5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Floaty.xcconfig; sourceTree = "<group>"; };
-		693405B98CCE827FA1440083C8471139 /* LongPressReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LongPressReorder.framework; path = LongPressReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		69DA86A3A560DB5F48841F33A026B0F0 /* Floaty.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Floaty.modulemap; sourceTree = "<group>"; };
+		4F32270B001CA70FA0AFD7984990688E /* UITableView+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITableView+Mixed.swift"; path = "NightNight/Classes/UIKit/UITableView+Mixed.swift"; sourceTree = "<group>"; };
+		5D1A0BE7A079505A8FCFFC20C660445B /* LongPressReorder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-prefix.pch"; sourceTree = "<group>"; };
+		60333064070EE62CD80E903EB1CFD33E /* UITabBar+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITabBar+Mixed.swift"; path = "NightNight/Classes/UIKit/UITabBar+Mixed.swift"; sourceTree = "<group>"; };
+		615A620DEDBBA2CCB96CEE06B759F2B6 /* UINavigationBar+MixedBarStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+MixedBarStyle.swift"; path = "NightNight/Classes/UINavigationBar+MixedBarStyle.swift"; sourceTree = "<group>"; };
+		634097F9C95B59CA04432B990E8C3AFA /* FloatyItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyItem.swift; path = Sources/FloatyItem.swift; sourceTree = "<group>"; };
 		70BB81357E78F00797473C76C7107E00 /* Pods-Outline-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Outline-resources.sh"; sourceTree = "<group>"; };
+		7772194EDF2C9238F7BB7A49C57C08C4 /* LongPressReorder-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-umbrella.h"; sourceTree = "<group>"; };
 		7D5C41F8171575E1E998297EEB1F3139 /* Pods-Outline-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Outline-acknowledgements.markdown"; sourceTree = "<group>"; };
-		875A384244BBE8887FDDC1C13705F74E /* LongPressReorder-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LongPressReorder-prefix.pch"; sourceTree = "<group>"; };
+		7FA6E217FE14A3522C385AA7F5C6957D /* FloatyViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyViewController.swift; path = Sources/FloatyViewController.swift; sourceTree = "<group>"; };
+		816CB0C6F3F95BF3061657B42D0D8894 /* Keys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = NightNight/Classes/Keys.swift; sourceTree = "<group>"; };
+		85905EC0785BC3983E94ED5F2F6DC696 /* FloatyDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyDelegate.swift; path = Sources/FloatyDelegate.swift; sourceTree = "<group>"; };
+		8CAA6541B4D4850B44C097644D91EDE7 /* NNMutableAttributedString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NNMutableAttributedString.swift; path = NightNight/Classes/NNMutableAttributedString.swift; sourceTree = "<group>"; };
 		908E902E026C5C22904CF9014A5604AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94752CB71EAD9155A2FA53765A216D05 /* NightNight-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NightNight-dummy.m"; sourceTree = "<group>"; };
+		968FB2F4A24907372534FF09742E3058 /* Floaty-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Floaty-dummy.m"; sourceTree = "<group>"; };
+		98C9EFAD70A6BFCDD3BCE8E6254DD081 /* NightNight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NightNight.framework; path = NightNight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		994215A8792132197766791E443D62D7 /* FloatyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyManager.swift; path = Sources/FloatyManager.swift; sourceTree = "<group>"; };
 		99E6853A356178EEFA3B196AE037DECB /* Pods-Outline.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Outline.modulemap"; sourceTree = "<group>"; };
-		9A40AC4A66B77969954619C349D62319 /* LongPressReorder.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LongPressReorder.modulemap; sourceTree = "<group>"; };
-		9E8FA2CE37D4A1AE11E02573751F1388 /* FloatyItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyItem.swift; path = Sources/FloatyItem.swift; sourceTree = "<group>"; };
-		A063BC7103E4B513E104B007ED31CA7E /* Floaty-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Floaty-dummy.m"; sourceTree = "<group>"; };
+		9F036571007370D840699BBC612E0AB6 /* NightNight.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NightNight.swift; path = NightNight/Classes/NightNight.swift; sourceTree = "<group>"; };
 		A140F03CFC5646AA3BE27FC0D7AAF54F /* Pods-Outline-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Outline-dummy.m"; sourceTree = "<group>"; };
-		A35D05FCCCCAE32A21E61201FF6B7677 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A280C287B8BC23DF9519032814B9A0BE /* UISwitch+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UISwitch+Mixed.swift"; path = "NightNight/Classes/UIKit/UISwitch+Mixed.swift"; sourceTree = "<group>"; };
+		A5C6D30307EA36EE84A170FAB3CDA2A2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7CD8906020676FD75ADD7D0C65B5D1F /* UIView+IBInspectable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+IBInspectable.swift"; path = "NightNight/Classes/UIView+IBInspectable.swift"; sourceTree = "<group>"; };
+		A824347E3370A519003A0B0457263D02 /* UISlider+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UISlider+Mixed.swift"; path = "NightNight/Classes/UIKit/UISlider+Mixed.swift"; sourceTree = "<group>"; };
+		A97DC25C0543B46B399BB56EF656F9D7 /* UITextView+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextView+Mixed.swift"; path = "NightNight/Classes/UIKit/UITextView+Mixed.swift"; sourceTree = "<group>"; };
+		AE94217485CEA821985DDA6C4340A21B /* LongPressReorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LongPressReorder.swift; path = LongPressReorder/Classes/LongPressReorder.swift; sourceTree = "<group>"; };
+		B103A582000EE5ADB23743C9B1B39FCC /* Floaty-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Floaty-umbrella.h"; sourceTree = "<group>"; };
 		B4B94A2463ABCBFD36CCDCAF97F42DDD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B761821002D5960310460780207F43C1 /* NSObject+Customize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+Customize.swift"; path = "NightNight/Classes/NSObject+Customize.swift"; sourceTree = "<group>"; };
+		B7FDB96703DB9E10FA6250BDC947A56D /* LongPressReorder-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LongPressReorder-dummy.m"; sourceTree = "<group>"; };
+		B9E66EA9D11ED7CBE74C73FCA41E95C2 /* Floaty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Floaty.framework; path = Floaty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		BF49B3A0431A87AE3D0756142F56CEA7 /* UIPopoverPresentationController+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPopoverPresentationController+Mixed.swift"; path = "NightNight/Classes/UIKit/UIPopoverPresentationController+Mixed.swift"; sourceTree = "<group>"; };
+		C1B8A74600098C8B05F8A19A47E41913 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7F63B933CFDD3273C98F617B4232476 /* Floaty.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Floaty.modulemap; sourceTree = "<group>"; };
+		C9421D2FD805153484D3947EA70DA87C /* UITextField+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITextField+Mixed.swift"; path = "NightNight/Classes/UIKit/UITextField+Mixed.swift"; sourceTree = "<group>"; };
+		CB7B08B2D5DA5075110530044FC2C701 /* NightNight-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NightNight-prefix.pch"; sourceTree = "<group>"; };
 		CC48B3BF200E7BAD6B38458FC6398399 /* Pods-Outline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Outline.release.xcconfig"; sourceTree = "<group>"; };
-		CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LongPressReorder.xcconfig; sourceTree = "<group>"; };
-		D7A89A298960034E12CDC7BD0D77BFA9 /* Pods_Outline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Outline.framework; path = "Pods-Outline.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0AAE5DA28B9260C54AA0C24E0618EF7 /* FloatyWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FloatyWindow.swift; path = Sources/FloatyWindow.swift; sourceTree = "<group>"; };
+		DFD4E880CE9669D270C190839E07E163 /* UIBarButtonItem+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIBarButtonItem+Mixed.swift"; path = "NightNight/Classes/UIKit/UIBarButtonItem+Mixed.swift"; sourceTree = "<group>"; };
+		E0C57BA3646A6B26E9193AC17BFF1E1A /* LongPressReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LongPressReorder.framework; path = LongPressReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6C9E19D455FE8FB30A2306612938A9 /* Pods-Outline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Outline.debug.xcconfig"; sourceTree = "<group>"; };
-		EDAF542DA35173CF05C01355A474DF30 /* Floaty-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Floaty-prefix.pch"; sourceTree = "<group>"; };
-		EF3B61B8B6913D3FE9604C2940629946 /* Floaty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Floaty.swift; path = Sources/Floaty.swift; sourceTree = "<group>"; };
+		FC0E0EED5BDB27747883375596D43487 /* UIImageView+Mixed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+Mixed.swift"; path = "NightNight/Classes/UIImageView+Mixed.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,11 +170,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7F0C563950AD2BB8B0613F160B3C4A37 /* Frameworks */ = {
+		CF2B44D7F84F925BAA5B287468C5FE9C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F6DA30773004F95975715CAFC28E11 /* Foundation.framework in Frameworks */,
+				F298C93832F35DF41DF0A53A26AA2FEF /* Foundation.framework in Frameworks */,
+				A6A25431A7759C49C27D7DE333F2A805 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0BABDE0CB5940674B632C4C2ED5A98D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75837445985EB2E3EEF2B17EA4C6BB4F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +199,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05B52CB857AA23BBEA64A391129826AC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C1B8A74600098C8B05F8A19A47E41913 /* Info.plist */,
+				449BECDDF8FB0EB8446D5D0ADC52FF8F /* LongPressReorder.modulemap */,
+				17C2642122D54D17FB9F3249CDE1F96D /* LongPressReorder.xcconfig */,
+				B7FDB96703DB9E10FA6250BDC947A56D /* LongPressReorder-dummy.m */,
+				5D1A0BE7A079505A8FCFFC20C660445B /* LongPressReorder-prefix.pch */,
+				7772194EDF2C9238F7BB7A49C57C08C4 /* LongPressReorder-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/LongPressReorder";
+			sourceTree = "<group>";
+		};
 		10DEDCB394BAA0C7FEDEBE330207B074 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,24 +222,33 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		1463FC00B75C31B0DCDB6AA7AA2D2EF9 /* LongPressReorder */ = {
+		1C23F07C9AA8371CEC001C38F1AAF552 /* Floaty */ = {
 			isa = PBXGroup;
 			children = (
-				28E0CE57A25F6ED5893FD6E6A92BDED5 /* LongPressReorder.swift */,
-				7E10BA9C87264A09E2F68A1D240BC43D /* Support Files */,
+				3ECA2B8D8CB444F41D9018A4F2B5F60D /* Floaty.swift */,
+				85905EC0785BC3983E94ED5F2F6DC696 /* FloatyDelegate.swift */,
+				634097F9C95B59CA04432B990E8C3AFA /* FloatyItem.swift */,
+				994215A8792132197766791E443D62D7 /* FloatyManager.swift */,
+				7FA6E217FE14A3522C385AA7F5C6957D /* FloatyViewController.swift */,
+				D0AAE5DA28B9260C54AA0C24E0618EF7 /* FloatyWindow.swift */,
+				CD81BB1757515F7A1AB5AB7B3F8A0ABD /* Support Files */,
 			);
-			name = LongPressReorder;
-			path = LongPressReorder;
+			name = Floaty;
+			path = Floaty;
 			sourceTree = "<group>";
 		};
-		39CAAD64924CF1F881270B0ACC64A3E9 /* Products */ = {
+		274CB57917D46CB53F3165E4209DD200 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3335A8DA2D37E7267C1CB761B604A845 /* Floaty.framework */,
-				693405B98CCE827FA1440083C8471139 /* LongPressReorder.framework */,
-				D7A89A298960034E12CDC7BD0D77BFA9 /* Pods_Outline.framework */,
+				A5C6D30307EA36EE84A170FAB3CDA2A2 /* Info.plist */,
+				241235F4501C26DF2265F17D7F63C344 /* NightNight.modulemap */,
+				04278C62F09F145BC69BF8926B1D4F48 /* NightNight.xcconfig */,
+				94752CB71EAD9155A2FA53765A216D05 /* NightNight-dummy.m */,
+				CB7B08B2D5DA5075110530044FC2C701 /* NightNight-prefix.pch */,
+				478CBE0EAB34B227075F9CC4A3A28619 /* NightNight-umbrella.h */,
 			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/NightNight";
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
@@ -145,20 +257,6 @@
 				10DEDCB394BAA0C7FEDEBE330207B074 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		52F89B923310FEE06BE235C14454B16D /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				69DA86A3A560DB5F48841F33A026B0F0 /* Floaty.modulemap */,
-				5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */,
-				A063BC7103E4B513E104B007ED31CA7E /* Floaty-dummy.m */,
-				EDAF542DA35173CF05C01355A474DF30 /* Floaty-prefix.pch */,
-				3474BB666947ED96E7302F67E2DED85F /* Floaty-umbrella.h */,
-				A35D05FCCCCAE32A21E61201FF6B7677 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Floaty";
 			sourceTree = "<group>";
 		};
 		75C383412FB94241B0B53C6CE58B77CE /* Pods-Outline */ = {
@@ -179,53 +277,90 @@
 			path = "Target Support Files/Pods-Outline";
 			sourceTree = "<group>";
 		};
+		775E957BF887FE339B89DB62D0C7BF85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B9E66EA9D11ED7CBE74C73FCA41E95C2 /* Floaty.framework */,
+				E0C57BA3646A6B26E9193AC17BFF1E1A /* LongPressReorder.framework */,
+				98C9EFAD70A6BFCDD3BCE8E6254DD081 /* NightNight.framework */,
+				09CC9447E6BFD37F2DE7429F809AA171 /* Pods_Outline.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				86C7339492F0AE244E8EAC5459CFE93F /* Pods */,
-				39CAAD64924CF1F881270B0ACC64A3E9 /* Products */,
+				D98F86EE7F8054688BBD0D445F28AFD8 /* Pods */,
+				775E957BF887FE339B89DB62D0C7BF85 /* Products */,
 				FA6ED2BD2934B737C41188F034C23089 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7E10BA9C87264A09E2F68A1D240BC43D /* Support Files */ = {
+		CD81BB1757515F7A1AB5AB7B3F8A0ABD /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				03CEDF4665DCFA78AA3863D6F88DE5CA /* Info.plist */,
-				9A40AC4A66B77969954619C349D62319 /* LongPressReorder.modulemap */,
-				CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */,
-				241B0269604587A89DC49DBF2DCB7B20 /* LongPressReorder-dummy.m */,
-				875A384244BBE8887FDDC1C13705F74E /* LongPressReorder-prefix.pch */,
-				2583F615742CE0E1A9AE6BE4CCB786BD /* LongPressReorder-umbrella.h */,
+				C7F63B933CFDD3273C98F617B4232476 /* Floaty.modulemap */,
+				184F67E447F3786545F5D4A50B899783 /* Floaty.xcconfig */,
+				968FB2F4A24907372534FF09742E3058 /* Floaty-dummy.m */,
+				245E5E25150951B7B743B652CC8E16E3 /* Floaty-prefix.pch */,
+				B103A582000EE5ADB23743C9B1B39FCC /* Floaty-umbrella.h */,
+				265AC4536D0AEF82CC5E046E096387D0 /* Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/LongPressReorder";
+			path = "../Target Support Files/Floaty";
 			sourceTree = "<group>";
 		};
-		86C7339492F0AE244E8EAC5459CFE93F /* Pods */ = {
+		D0F53E66E9A9A1F4FF8B53409EF7C9D7 /* NightNight */ = {
 			isa = PBXGroup;
 			children = (
-				CC5169FF22F17835B39A30C942F4DAB8 /* Floaty */,
-				1463FC00B75C31B0DCDB6AA7AA2D2EF9 /* LongPressReorder */,
+				3A9D038C22664A6F04166E0E85FE8618 /* AttributeNames.swift */,
+				1FF20B1417E48FEBA0DA3A9D3EC54D2C /* CALayer+Mixed.swift */,
+				4BB25AE1D5D338AFA0BB5E386131B6D2 /* Dictionary+AttributedStringKeys.swift */,
+				816CB0C6F3F95BF3061657B42D0D8894 /* Keys.swift */,
+				320BFBACF90941388B7728BC4BD8022F /* MixedResource.swift */,
+				9F036571007370D840699BBC612E0AB6 /* NightNight.swift */,
+				8CAA6541B4D4850B44C097644D91EDE7 /* NNMutableAttributedString.swift */,
+				18E61BEBF4F37DA9AD2C254E1E9A978C /* NotificationManager.swift */,
+				B761821002D5960310460780207F43C1 /* NSObject+Customize.swift */,
+				191FE6CDB76675E217CBA0A9CEF8AB96 /* NSObject+Mixed.swift */,
+				DFD4E880CE9669D270C190839E07E163 /* UIBarButtonItem+Mixed.swift */,
+				11ECF48631E5CE2B5FFE269D077808CD /* UIButton+Mixed.swift */,
+				180F0A62E84FC7904F2681B7B071E3E1 /* UIColor+RGB.swift */,
+				FC0E0EED5BDB27747883375596D43487 /* UIImageView+Mixed.swift */,
+				0162712D04A91B63938BB8DE9B19AD4D /* UILabel+Mixed.swift */,
+				15A5D7332C054799EFB70EDF1DC155F4 /* UINavigationBar+Mixed.swift */,
+				615A620DEDBBA2CCB96CEE06B759F2B6 /* UINavigationBar+MixedBarStyle.swift */,
+				484C3077B4BBA7B67C764B6F74CDA3C0 /* UINavigationBar+MixedTitleTextAttributes.swift */,
+				3CEBE99FBF8977B362BFA0F36710535C /* UIPageControl+Mixed.swift */,
+				BF49B3A0431A87AE3D0756142F56CEA7 /* UIPopoverPresentationController+Mixed.swift */,
+				2870FD268F21A12C8C91A48529A9C909 /* UIProgressView+Mixed.swift */,
+				1E8E68657790B973672F5EDE972284F4 /* UISearchBar+Mixed.swift */,
+				A824347E3370A519003A0B0457263D02 /* UISlider+Mixed.swift */,
+				A280C287B8BC23DF9519032814B9A0BE /* UISwitch+Mixed.swift */,
+				60333064070EE62CD80E903EB1CFD33E /* UITabBar+Mixed.swift */,
+				4F32270B001CA70FA0AFD7984990688E /* UITableView+Mixed.swift */,
+				C9421D2FD805153484D3947EA70DA87C /* UITextField+Mixed.swift */,
+				A97DC25C0543B46B399BB56EF656F9D7 /* UITextView+Mixed.swift */,
+				495173DBC945C1E5F2B96FFFCA4B0A16 /* UIToolbar+Mixed.swift */,
+				A7CD8906020676FD75ADD7D0C65B5D1F /* UIView+IBInspectable.swift */,
+				00E829CAC5D5C501C93B3B3138B2A121 /* UIView+Mixed.swift */,
+				274CB57917D46CB53F3165E4209DD200 /* Support Files */,
+			);
+			name = NightNight;
+			path = NightNight;
+			sourceTree = "<group>";
+		};
+		D98F86EE7F8054688BBD0D445F28AFD8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C23F07C9AA8371CEC001C38F1AAF552 /* Floaty */,
+				FAF2CAEB5CC368D381892332EDDAE8ED /* LongPressReorder */,
+				D0F53E66E9A9A1F4FF8B53409EF7C9D7 /* NightNight */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		CC5169FF22F17835B39A30C942F4DAB8 /* Floaty */ = {
-			isa = PBXGroup;
-			children = (
-				EF3B61B8B6913D3FE9604C2940629946 /* Floaty.swift */,
-				3282D3DC32A8804253D4A7867AF1C094 /* FloatyDelegate.swift */,
-				9E8FA2CE37D4A1AE11E02573751F1388 /* FloatyItem.swift */,
-				3512D2B2A04FE60B169F04E7AFD47437 /* FloatyManager.swift */,
-				216F9453F832E80BA08514BAC3C10ED1 /* FloatyViewController.swift */,
-				48AD4F4108407A5785C2AB086FD2FA0A /* FloatyWindow.swift */,
-				52F89B923310FEE06BE235C14454B16D /* Support Files */,
-			);
-			name = Floaty;
-			path = Floaty;
 			sourceTree = "<group>";
 		};
 		FA6ED2BD2934B737C41188F034C23089 /* Targets Support Files */ = {
@@ -236,22 +371,40 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		FAF2CAEB5CC368D381892332EDDAE8ED /* LongPressReorder */ = {
+			isa = PBXGroup;
+			children = (
+				AE94217485CEA821985DDA6C4340A21B /* LongPressReorder.swift */,
+				05B52CB857AA23BBEA64A391129826AC /* Support Files */,
+			);
+			name = LongPressReorder;
+			path = LongPressReorder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7C33FE13166BBD462C963B7F8F9494F7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7230B92C3A9DCAD2413A97CCFF094EB1 /* Pods-Outline-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8591CCD381EDF2EC34D978667C8D27A8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FCFB939824FC226493F16CBC4FF8B126 /* LongPressReorder-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		917E89EB7CF20718C9992B12228D69DA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8EDF09E521F810AE3B057040F17EB61 /* NightNight-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFDF931E8A2F74FC8A764A7B1708EF81 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2CBDE6A942FF3A265B9DEE2A8DCB47C /* Pods-Outline-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,23 +419,41 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2561E53CE9396A104B9AD4FEC9A8116F /* Pods-Outline */ = {
+		2D865914F0DEBD2EF2231CF88397F94E /* NightNight */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DB9DF1A736F55AEC542BC4448A697609 /* Build configuration list for PBXNativeTarget "Pods-Outline" */;
+			buildConfigurationList = CD3F4B17AD74B646A048560555C990AE /* Build configuration list for PBXNativeTarget "NightNight" */;
 			buildPhases = (
-				BD2B2333B087887C9C5C66BD22E05339 /* Sources */,
-				7F0C563950AD2BB8B0613F160B3C4A37 /* Frameworks */,
-				7C33FE13166BBD462C963B7F8F9494F7 /* Headers */,
+				D5DFBF1E2CB4342DD8F1BDDD786896F6 /* Sources */,
+				CF2B44D7F84F925BAA5B287468C5FE9C /* Frameworks */,
+				917E89EB7CF20718C9992B12228D69DA /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CC102D0E95096D49FFEF9F26D3B70F05 /* PBXTargetDependency */,
-				1BB1724AE22E9E346D698249F3865EF7 /* PBXTargetDependency */,
+			);
+			name = NightNight;
+			productName = NightNight;
+			productReference = 98C9EFAD70A6BFCDD3BCE8E6254DD081 /* NightNight.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		310243353C7583874CE8575CE21DDEA3 /* Pods-Outline */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D92B547CA06923BEC03939716D2368A0 /* Build configuration list for PBXNativeTarget "Pods-Outline" */;
+			buildPhases = (
+				5D2D71706812557A4B853B484356870A /* Sources */,
+				E0BABDE0CB5940674B632C4C2ED5A98D /* Frameworks */,
+				BFDF931E8A2F74FC8A764A7B1708EF81 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				78AE35E705B68A8597B7D6D32B603788 /* PBXTargetDependency */,
+				528C3F41F937A2C5BC8C11CA26CE89DC /* PBXTargetDependency */,
+				2D06657CFF7BA3851C43B5D52E4D694B /* PBXTargetDependency */,
 			);
 			name = "Pods-Outline";
 			productName = "Pods-Outline";
-			productReference = D7A89A298960034E12CDC7BD0D77BFA9 /* Pods_Outline.framework */;
+			productReference = 09CC9447E6BFD37F2DE7429F809AA171 /* Pods_Outline.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		5C123A74CD9D6CDA27160800BA68B01A /* Floaty */ = {
@@ -299,7 +470,7 @@
 			);
 			name = Floaty;
 			productName = Floaty;
-			productReference = 3335A8DA2D37E7267C1CB761B604A845 /* Floaty.framework */;
+			productReference = B9E66EA9D11ED7CBE74C73FCA41E95C2 /* Floaty.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E79017C1564520DD534505965CC6ADE3 /* LongPressReorder */ = {
@@ -316,7 +487,7 @@
 			);
 			name = LongPressReorder;
 			productName = LongPressReorder;
-			productReference = 693405B98CCE827FA1440083C8471139 /* LongPressReorder.framework */;
+			productReference = E0C57BA3646A6B26E9193AC17BFF1E1A /* LongPressReorder.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -336,13 +507,14 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 39CAAD64924CF1F881270B0ACC64A3E9 /* Products */;
+			productRefGroup = 775E957BF887FE339B89DB62D0C7BF85 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				5C123A74CD9D6CDA27160800BA68B01A /* Floaty */,
 				E79017C1564520DD534505965CC6ADE3 /* LongPressReorder */,
-				2561E53CE9396A104B9AD4FEC9A8116F /* Pods-Outline */,
+				2D865914F0DEBD2EF2231CF88397F94E /* NightNight */,
+				310243353C7583874CE8575CE21DDEA3 /* Pods-Outline */,
 			);
 		};
 /* End PBXProject section */
@@ -362,6 +534,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5D2D71706812557A4B853B484356870A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B28DEDB535B7001F61E880B1CA8C0D7 /* Pods-Outline-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6A3273BD51A7CC6D4CD67BB305ACEDF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,28 +551,65 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BD2B2333B087887C9C5C66BD22E05339 /* Sources */ = {
+		D5DFBF1E2CB4342DD8F1BDDD786896F6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ABCBCBFE139A69FB39E43BCCAD28D84 /* Pods-Outline-dummy.m in Sources */,
+				72A9350DE83F7BFF4D0B08F0FD9CEC2C /* AttributeNames.swift in Sources */,
+				B3D6DC6334A98D6396DDF6A2F70CDC49 /* CALayer+Mixed.swift in Sources */,
+				28A0C80E3EFA17683E398874E303D863 /* Dictionary+AttributedStringKeys.swift in Sources */,
+				AF9BCD15FFA8B29E071C52AF8D924499 /* Keys.swift in Sources */,
+				73E9D21F7AEDAD1B038BF75DFC566846 /* MixedResource.swift in Sources */,
+				6CEF9710E2451151EDEB9D8D4B6140AF /* NightNight-dummy.m in Sources */,
+				6015F95284FC9C3D6B4E970D3A06277E /* NightNight.swift in Sources */,
+				8222E2310EC0B24C9993333A7A097C54 /* NNMutableAttributedString.swift in Sources */,
+				18317B9C1F72525D1961FD98CDA01683 /* NotificationManager.swift in Sources */,
+				3D1852B6E704FE0C53F9DC77698A7191 /* NSObject+Customize.swift in Sources */,
+				20E79103ECB6A27998FE53A6215FF41B /* NSObject+Mixed.swift in Sources */,
+				49EE7CC2951E2162E320E730DD72E172 /* UIBarButtonItem+Mixed.swift in Sources */,
+				0C2CB6319BF5EC9B12ED559771AEEFE8 /* UIButton+Mixed.swift in Sources */,
+				0862D1C1978C7A79470444369F5F11CD /* UIColor+RGB.swift in Sources */,
+				8ED3E0C3D83D360A487666E7C3BBD9A7 /* UIImageView+Mixed.swift in Sources */,
+				768AB805E28EC98698A527093805CA16 /* UILabel+Mixed.swift in Sources */,
+				1C3EB37496B23695743C59D5AE3CBEDF /* UINavigationBar+Mixed.swift in Sources */,
+				DD0409CCF348CE5A9F65D35563F595B2 /* UINavigationBar+MixedBarStyle.swift in Sources */,
+				06D7DEA8CD8B5D55602C8470F0052316 /* UINavigationBar+MixedTitleTextAttributes.swift in Sources */,
+				19C49C347E940B3AF59E97105393C830 /* UIPageControl+Mixed.swift in Sources */,
+				4A45AD12698CA75F96F09F8D8E6F5F96 /* UIPopoverPresentationController+Mixed.swift in Sources */,
+				6FF0EAE90787FD4A7F2474BF6C85E38D /* UIProgressView+Mixed.swift in Sources */,
+				EAE95220A3D039068F297F4C095D2FB5 /* UISearchBar+Mixed.swift in Sources */,
+				88DAE7FB136DB9F24049650AD1F29F7F /* UISlider+Mixed.swift in Sources */,
+				FCDB540C081E560FF60CA051E5759320 /* UISwitch+Mixed.swift in Sources */,
+				96D31DE11637D89D881D36D4F6C87E5B /* UITabBar+Mixed.swift in Sources */,
+				F35118AF0471109B5B01B9F9B5AB7470 /* UITableView+Mixed.swift in Sources */,
+				4EE79081FC4DD6CC2BE00D26108A1B1E /* UITextField+Mixed.swift in Sources */,
+				BDBAF9C2905DAF272CF9316CE92E0B86 /* UITextView+Mixed.swift in Sources */,
+				BF45B13E9C672234BA594E61560F637B /* UIToolbar+Mixed.swift in Sources */,
+				FBCAD0F861A175A43AE39095DE12E9A8 /* UIView+IBInspectable.swift in Sources */,
+				2FFFEDC06893AD758F2A072C20DAFE7E /* UIView+Mixed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1BB1724AE22E9E346D698249F3865EF7 /* PBXTargetDependency */ = {
+		2D06657CFF7BA3851C43B5D52E4D694B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NightNight;
+			target = 2D865914F0DEBD2EF2231CF88397F94E /* NightNight */;
+			targetProxy = 7574BA6FB0567225F256DCAC8239D7FA /* PBXContainerItemProxy */;
+		};
+		528C3F41F937A2C5BC8C11CA26CE89DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LongPressReorder;
 			target = E79017C1564520DD534505965CC6ADE3 /* LongPressReorder */;
-			targetProxy = 264E21BC391458663E1A2947053CC2B0 /* PBXContainerItemProxy */;
+			targetProxy = 48ED47F64B7097B44A857CD075D65A9B /* PBXContainerItemProxy */;
 		};
-		CC102D0E95096D49FFEF9F26D3B70F05 /* PBXTargetDependency */ = {
+		78AE35E705B68A8597B7D6D32B603788 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Floaty;
 			target = 5C123A74CD9D6CDA27160800BA68B01A /* Floaty */;
-			targetProxy = E56A8F36A15224E7AA70CF29EEDAF97E /* PBXContainerItemProxy */;
+			targetProxy = 9543A1282F71D4D51675D76E355C578C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -460,7 +677,205 @@
 			};
 			name = Debug;
 		};
-		315892388F829FC63661822AB92B040F /* Release */ = {
+		2F33DD07D5E03837EF952309ACD67418 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04278C62F09F145BC69BF8926B1D4F48 /* NightNight.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NightNight/NightNight-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NightNight/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NightNight/NightNight.modulemap";
+				PRODUCT_MODULE_NAME = NightNight;
+				PRODUCT_NAME = NightNight;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3E065ACD3D24D845A8EDCCDD11D09367 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184F67E447F3786545F5D4A50B899783 /* Floaty.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Floaty/Floaty-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Floaty/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Floaty/Floaty.modulemap";
+				PRODUCT_MODULE_NAME = Floaty;
+				PRODUCT_NAME = Floaty;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		66F6BC2BB1BB2973639FBAE24B3B8010 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04278C62F09F145BC69BF8926B1D4F48 /* NightNight.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NightNight/NightNight-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NightNight/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NightNight/NightNight.modulemap";
+				PRODUCT_MODULE_NAME = NightNight;
+				PRODUCT_NAME = NightNight;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6FF9F5D2225C4B79D757D0B404B1D8CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB6C9E19D455FE8FB30A2306612938A9 /* Pods-Outline.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Outline/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Outline/Pods-Outline.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		788F1CF34F7123CA602EC4536128FFF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17C2642122D54D17FB9F3249CDE1F96D /* LongPressReorder.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LongPressReorder/LongPressReorder-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LongPressReorder/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LongPressReorder/LongPressReorder.modulemap";
+				PRODUCT_MODULE_NAME = LongPressReorder;
+				PRODUCT_NAME = LongPressReorder;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8C4CE77823DFF847A71FA17F3F79D84B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184F67E447F3786545F5D4A50B899783 /* Floaty.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Floaty/Floaty-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Floaty/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Floaty/Floaty.modulemap";
+				PRODUCT_MODULE_NAME = Floaty;
+				PRODUCT_NAME = Floaty;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BA36EB94E86FC7FAC6C954CD86C304F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC48B3BF200E7BAD6B38458FC6398399 /* Pods-Outline.release.xcconfig */;
 			buildSettings = {
@@ -495,107 +910,9 @@
 			};
 			name = Release;
 		};
-		3E065ACD3D24D845A8EDCCDD11D09367 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Floaty/Floaty-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Floaty/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Floaty/Floaty.modulemap";
-				PRODUCT_MODULE_NAME = Floaty;
-				PRODUCT_NAME = Floaty;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		788F1CF34F7123CA602EC4536128FFF6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LongPressReorder/LongPressReorder-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LongPressReorder/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LongPressReorder/LongPressReorder.modulemap";
-				PRODUCT_MODULE_NAME = LongPressReorder;
-				PRODUCT_NAME = LongPressReorder;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8C4CE77823DFF847A71FA17F3F79D84B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5500E2D00372D5C87981C60ECC571763 /* Floaty.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Floaty/Floaty-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Floaty/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Floaty/Floaty.modulemap";
-				PRODUCT_MODULE_NAME = Floaty;
-				PRODUCT_NAME = Floaty;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		BAAEB8976DB63FE7E5A144AB11DC7991 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD80863B73362D4524795CCEB894775 /* LongPressReorder.xcconfig */;
+			baseConfigurationReference = 17C2642122D54D17FB9F3249CDE1F96D /* LongPressReorder.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -619,41 +936,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C9ADC68733E9FB7E6ABAA9395DA1715F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB6C9E19D455FE8FB30A2306612938A9 /* Pods-Outline.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Outline/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Outline/Pods-Outline.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -748,11 +1030,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DB9DF1A736F55AEC542BC4448A697609 /* Build configuration list for PBXNativeTarget "Pods-Outline" */ = {
+		CD3F4B17AD74B646A048560555C990AE /* Build configuration list for PBXNativeTarget "NightNight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C9ADC68733E9FB7E6ABAA9395DA1715F /* Debug */,
-				315892388F829FC63661822AB92B040F /* Release */,
+				2F33DD07D5E03837EF952309ACD67418 /* Debug */,
+				66F6BC2BB1BB2973639FBAE24B3B8010 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D92B547CA06923BEC03939716D2368A0 /* Build configuration list for PBXNativeTarget "Pods-Outline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FF9F5D2225C4B79D757D0B404B1D8CE /* Debug */,
+				BA36EB94E86FC7FAC6C954CD86C304F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

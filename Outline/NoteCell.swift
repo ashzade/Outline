@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NightNight
 
 class NoteCell: UITableViewCell {
 
@@ -16,7 +17,6 @@ class NoteCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
     }
 }
 

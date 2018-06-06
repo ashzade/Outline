@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import LongPressReorder
+import NightNight
 
 // Get current timestamp
 var currentDate = Date()
@@ -35,12 +36,17 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Themes
+        self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        NightNight.theme = .night
+        
         // Get timestamp
         currentDate = Date()
         
         // Note Title - Tableview header view
         self.NoteTitle.tag = 1
         self.NoteTitle.delegate = self
+        self.NoteTitle.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         placeholderLabel = UILabel()
         placeholderLabel.text = "Add a title"
         placeholderLabel.font = UIFont(name: "Gill Sans", size: 24)
@@ -111,6 +117,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
             var headerFrame = headerView.frame
+            headerView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
             
             //Comparison necessary to avoid infinite loop
             if height != headerFrame.size.height {
@@ -165,7 +172,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Set note object and title
             self.note!.noteTitle = textView.text!
-            textView.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
             
             // Save to core data
             self.updateEntity(id: selectedID, attribute: "title", value: self.note!.noteTitle)
@@ -211,6 +217,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Group title style
         let frame = CGRect(x: 16, y: 12, width: 10, height: 10)
         let headerImageView = UIImageView(frame: frame)
+        headerImageView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         headerImageView.contentMode = .scaleAspectFit
         var image: UIImage = UIImage(named: "dot")!.withRenderingMode(.alwaysOriginal)
         image = resizeImage(image: image, newWidth: 12)!
@@ -226,7 +233,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         groupTitle.returnKeyType = UIReturnKeyType.done
         groupTitle.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         groupTitle.adjustsFontSizeToFitWidth = true
-        groupTitle.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        groupTitle.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         groupTitle.tag = 100+section
         groupTitle.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         groupTitle.addTarget(self, action: #selector(textFieldInFocus(_:)), for: .editingDidBegin)
@@ -236,7 +243,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Add them to the header
         header.addSubview(groupTitle)
         header.addSubview(headerImageView)
-        header.backgroundColor = .white
+        header.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
         // Set group title focus after moving
         if headerTag != 0 {
@@ -269,10 +276,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Check for checkmark
         if cell.textView.text.contains("✓") {
-            cell.textView.textColor = UIColor(red:0.27, green:0.29, blue:0.30, alpha:0.5)
+            cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
             cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
         } else {
-            cell.textView.textColor = UIColor(red:0.27, green:0.29, blue:0.30, alpha:1.0)
+            cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
             cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
         }
         
@@ -282,8 +289,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Add left and bottom border
         cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
+        cell.textView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        cell.contentView.viewWithTag(0)?.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
     }
 
     // Enter and backspace action
@@ -538,6 +551,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         formatter.dateFormat = "MMM dd, yyyy - h:mm a"
         let myStringafd = formatter.string(from: yourDate!)
         self.NoteDate.text = myStringafd
+        self.NoteDate.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
     }
     
     
@@ -561,7 +575,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     // Fetch Title
                     if data.value(forKey: "title") != nil {
                         self.NoteTitle.text = data.value(forKey: "title") as? String
-                        self.NoteTitle.textColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
+                        self.NoteTitle.mixedTextColor = MixedColor(normal: UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0), night: UIColor(red:0.45, green:0.89, blue:0.97, alpha:1.0))
                     }
                     
                     // Fetch Date
