@@ -606,8 +606,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     updateDate(dateVar: currentDate)
                     
                     if template.isEmpty == false {
-                        note?.groups = template[0] as! [String]
-                        note?.groupItems = template[1] as! [[String]]
+                        self.NoteTitle.text = template[0] as! String
+                        note?.groups = template[1] as! [String]
+                        note?.groupItems = template[2] as! [[String]]
                     }
                     
                 }

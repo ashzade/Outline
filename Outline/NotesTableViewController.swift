@@ -115,13 +115,13 @@ class NotesTableViewController: UITableViewController {
                 self.performSegue(withIdentifier: "editNote", sender: self)
             })
             
-            for (index, templateItem) in templates.enumerated() {
+            for templateItem in templates {
                 
                 let floatyTitle = templateItem[0] as! String
                 
                 floaty.addItem(floatyTitle, icon: UIImage(named: "plus")!, handler: { item in
                     selectedID = nil
-                    template = [templateItem[1], templateItem[2]]
+                    template = [floatyTitle, templateItem[1], templateItem[2]]
                     // HIDE ADD BUTTON SUBVIEW HERE
                     self.parent?.view.viewWithTag(100)?.isHidden = true
                     self.performSegue(withIdentifier: "editNote", sender: self)
