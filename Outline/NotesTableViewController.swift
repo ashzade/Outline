@@ -16,7 +16,8 @@ import NightNight
 // Empty array of notes
 var notes =  [[Any]]()
 var selectedID : Any?
-var template = "blank"
+var template = [Any]()
+var templates = [[Any]]()
 
 // Empty addButtonView container
 var addButtonView : UIView?
@@ -79,6 +80,7 @@ class NotesTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         getNotes()
+        getTemplates()
         tableView.reloadData()
         
         // If Add button already exists just show it
@@ -106,26 +108,25 @@ class NotesTableViewController: UITableViewController {
             
             // Creat items
             floaty.addItem("Blank", icon: UIImage(named: "plus")!, handler: { item in
-                template = ""
                 selectedID = nil
+                template = []
                 // HIDE ADD BUTTON SUBVIEW HERE
                 self.parent?.view.viewWithTag(100)?.isHidden = true
                 self.performSegue(withIdentifier: "editNote", sender: self)
             })
-            floaty.addItem("My Day", icon: UIImage(named: "plus")!, handler: { item in
-                template = "day"
-                selectedID = nil
-                // HIDE ADD BUTTON SUBVIEW HERE
-                self.parent?.view.viewWithTag(100)?.isHidden = true
-                self.performSegue(withIdentifier: "editNote", sender: self)
-            })
-            floaty.addItem("My Week", icon: UIImage(named: "plus")!, handler: { item in
-                template = "week"
-                selectedID = nil
-                // HIDE ADD BUTTON SUBVIEW HERE
-                self.parent?.view.viewWithTag(100)?.isHidden = true
-                self.performSegue(withIdentifier: "editNote", sender: self)
-            })
+            
+            for (index, templateItem) in templates.enumerated() {
+                
+                let floatyTitle = templateItem[0] as! String
+                
+                floaty.addItem(floatyTitle, icon: UIImage(named: "plus")!, handler: { item in
+                    selectedID = nil
+                    template = [templateItem[1], templateItem[2]]
+                    // HIDE ADD BUTTON SUBVIEW HERE
+                    self.parent?.view.viewWithTag(100)?.isHidden = true
+                    self.performSegue(withIdentifier: "editNote", sender: self)
+                })
+            }
             
             // Add to view
             self.parent?.view.addSubview(floaty)
@@ -227,7 +228,7 @@ class NotesTableViewController: UITableViewController {
         performSegue(withIdentifier: "showInfo", sender: self)
     }
     
-    // Fet templates
+    // Fetch templates
     func getTemplates() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -242,7 +243,27 @@ class NotesTableViewController: UITableViewController {
             let results = try context.fetch(request)
             // Validate reuslts
             for data in results as! [NSManagedObject] {
-                print(data)
+                // Fetch Template Names
+                if data.value(forKey: "title") != nil {
+                    let templateTitle = data.value(forKey: "title") as! String
+                    if templateTitle != "" {
+                        
+                        // Fetch Groups
+                        let groupData = data.value(forKey: "groups") as! NSData
+                        let unarchiveGroup = NSKeyedUnarchiver.unarchiveObject(with: groupData as Data)
+                        let arrayGroup = unarchiveGroup as AnyObject! as! [String]
+                        var groups = arrayGroup
+                        
+                        // Fetch Group Items
+                        let groupItemData = data.value(forKey: "groupItems") as! NSData
+                        let unarchiveGroupItem = NSKeyedUnarchiver.unarchiveObject(with: groupItemData as Data)
+                        let arrayGroupItem = unarchiveGroupItem as AnyObject! as! [[String]]
+                        var groupItems = arrayGroupItem
+                        
+                        templates.append([templateTitle, groups, groupItems ])
+                    }
+                }
+                    
             }
             
         } catch let error as NSError {

@@ -605,9 +605,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     // Set current datetime
                     updateDate(dateVar: currentDate)
                     
-                    if template == "week" {
-                        note?.groups = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                        note?.groupItems = [[""],[""],[""],[""],[""],[""],[""]]
+                    if template.isEmpty == false {
+                        note?.groups = template[0] as! [String]
+                        note?.groupItems = template[1] as! [[String]]
                     }
                     
                 }
@@ -616,6 +616,30 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+    
+    // Create template
+    func createTemplate() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity =  NSEntityDescription.entity(forEntityName: "Templates", in:managedContext)
+        let templateEntity = NSManagedObject(entity: entity!,insertInto: managedContext)
+
+        templateEntity.setValue(self.NoteTitle.text, forKey: "title")
+
+        let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
+        templateEntity.setValue(groupData, forKey: "groups")
+
+        let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
+        templateEntity.setValue(groupItemData, forKey: "groupItems")
+
+        do {
+            try managedContext.save()
+
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
         }
     }
     
@@ -800,7 +824,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // set up activity view controller
         let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "add")) { sharedItems in
-            print ("create template")
+            self.createTemplate()
         }
         
         
