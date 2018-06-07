@@ -227,6 +227,29 @@ class NotesTableViewController: UITableViewController {
         performSegue(withIdentifier: "showInfo", sender: self)
     }
     
+    // Fet templates
+    func getTemplates() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Templates")
+        let sort = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescriptors = [sort]
+        request.returnsObjectsAsFaults = false
+        request.sortDescriptors = sortDescriptors
+        
+        // Get results
+        do {
+            let results = try context.fetch(request)
+            // Validate reuslts
+            for data in results as! [NSManagedObject] {
+                print(data)
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+    
     // Fetch all notes
     func getNotes() {
         notes.removeAll()

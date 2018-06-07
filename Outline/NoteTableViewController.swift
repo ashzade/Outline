@@ -799,8 +799,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         text?.append("\n [Shared from the Outline App]")
         
         // set up activity view controller
+        let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "add")) { sharedItems in
+            print ("create template")
+        }
+        
+        
         let textToShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: [createTemplate])
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // present the view controller
@@ -894,4 +899,48 @@ extension NoteTableViewController: UITextFieldDelegate {
         
         return false
     } 
+}
+
+class TemplateActivity: UIActivity {
+    
+    var _activityTitle: String
+    var _activityImage: UIImage?
+    var activityItems = [Any]()
+    var action: ([Any]) -> Void
+    
+    init(title: String, image: UIImage?, performAction: @escaping ([Any]) -> Void) {
+        _activityTitle = title
+        _activityImage = image
+        action = performAction
+        super.init()
+    }
+    
+    override var activityTitle: String? {
+        return _activityTitle
+    }
+    
+    override var activityImage: UIImage? {
+        return _activityImage
+    }
+    
+    override var activityType: UIActivityType? {
+        return UIActivityType(rawValue: "com.ashzade.outline.addtemplate")
+    }
+    
+    override class var activityCategory: UIActivityCategory {
+        return .action
+    }
+    
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+        return true
+    }
+    
+    override func prepare(withActivityItems activityItems: [Any]) {
+        self.activityItems = activityItems
+    }
+    
+    override func perform() {
+        action(activityItems)
+        activityDidFinish(true)
+    }
 }
