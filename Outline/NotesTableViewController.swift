@@ -33,7 +33,9 @@ class NotesTableViewController: UITableViewController {
         
         // Themes
         self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        NightNight.theme = .night
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap.numberOfTapsRequired = 2
+        self.navigationController?.navigationBar.addGestureRecognizer(tap)
         
         // Add Info Button
         let infoButton = UIButton()
@@ -130,6 +132,10 @@ class NotesTableViewController: UITableViewController {
         }
         
     }
+    
+    @objc func doubleTapped() {
+        NightNight.toggleNightTheme()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -167,8 +173,8 @@ class NotesTableViewController: UITableViewController {
         cell.noteDate?.addSubview(dateView)
         
         // Themes
-        cell.noteTitle?.mixedTextColor = MixedColor(normal: 0x263238, night: 0xffffff)
-        cell.noteDate?.mixedTextColor = MixedColor(normal: 0x263238, night: 0xffffff)
+        cell.noteTitle?.mixedTextColor = MixedColor(normal: 0x5e5e5e, night: 0xffffff)
+        cell.noteDate?.mixedTextColor = MixedColor(normal: 0x4b4b4b, night: 0xeaeaea)
         cell.noteDate?.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         return cell

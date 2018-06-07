@@ -38,7 +38,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Themes
         self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        NightNight.theme = .night
         
         // Get timestamp
         currentDate = Date()
@@ -296,7 +295,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        cell.contentView.viewWithTag(0)?.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        for subview in cell.contentView.subviews {
+            if subview.tag == 0 {
+               subview.mixedBackgroundColor = MixedColor(normal: 0xefefef, night: 0x4b4b4b)
+            }
+        }
     }
 
     // Enter and backspace action
