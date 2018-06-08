@@ -150,20 +150,23 @@ class NotesTableViewController: UITableViewController {
     @objc func floatyLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.began {
             
-            func removeTemplateItem(alert: UIAlertAction!) {
-                let floatyItem = sender.view as! FloatyItem
-                
-                for (index,item) in self.floaty.items.enumerated() {
-                    if item == floatyItem && index != 0 {
+            let floatyItem = sender.view as! FloatyItem
+            
+            for (index,item) in self.floaty.items.enumerated() {
+                if item == floatyItem && index != 0 {
+                    func removeTemplateItem(alert: UIAlertAction!) {
                         self.floaty.removeItem(item: item)
+
                     }
+                    
+                    let alert = UIAlertController(title: "Remove Template", message: "Do you want to delete this template?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Remove", style: .default, handler: removeTemplateItem))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
             
-            let alert = UIAlertController(title: "Remove Template", message: "Do you want to delete this template?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Remove", style: .default, handler: removeTemplateItem))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            
             
         }
     }
