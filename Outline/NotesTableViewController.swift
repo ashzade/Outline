@@ -156,6 +156,7 @@ class NotesTableViewController: UITableViewController {
                 if item == floatyItem && index != 0 {
                     func removeTemplateItem(alert: UIAlertAction!) {
                         self.floaty.removeItem(item: item)
+                        removeTemplateData(templateTitle: item.title!)
 
                     }
                     
@@ -299,6 +300,38 @@ class NotesTableViewController: UITableViewController {
                     }
                 }
                     
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+    
+    func removeTemplateData(templateTitle: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Templates")
+        let sort = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescriptors = [sort]
+        request.returnsObjectsAsFaults = false
+        request.sortDescriptors = sortDescriptors
+        
+        // Get results
+        do {
+            let results = try context.fetch(request)
+            // Validate reuslts
+            for data in results as! [NSManagedObject] {
+                if data.value(forKey: "title") != nil {
+                    if (templateTitle == data.value(forKey: "title") as! String) {
+                        context.delete(data)
+                        do {
+                            try context.save() // <- remember to put this :)
+                        } catch {
+                            // Do something... fatalerror
+                        }
+                    }
+                }
+                
             }
             
         } catch let error as NSError {
