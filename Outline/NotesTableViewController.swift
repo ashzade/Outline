@@ -126,10 +126,18 @@ class NotesTableViewController: UITableViewController {
                     self.parent?.view.viewWithTag(100)?.isHidden = true
                     self.performSegue(withIdentifier: "editNote", sender: self)
                 })
+                
+                
             }
             
             // Add to view
             self.parent?.view.addSubview(floaty)
+            
+            for item in floaty.items {
+                let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.floatyLongPress(sender:)))
+                item.addGestureRecognizer(recognizer)
+            }
+            
         }
         
     }
@@ -137,6 +145,29 @@ class NotesTableViewController: UITableViewController {
     @objc func doubleTapped() {
         NightNight.toggleNightTheme()
     }
+    
+    // Floaty long press
+    @objc func floatyLongPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.began {
+            
+            func removeTemplateItem(alert: UIAlertAction!) {
+                let floatyItem = sender.view as! FloatyItem
+                
+                for (index,item) in self.floaty.items.enumerated() {
+                    if item == floatyItem && index != 0 {
+                        self.floaty.removeItem(item: item)
+                    }
+                }
+            }
+            
+            let alert = UIAlertController(title: "Remove Template", message: "Do you want to delete this template?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Remove", style: .default, handler: removeTemplateItem))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -209,6 +240,7 @@ class NotesTableViewController: UITableViewController {
         // HIDE ADD BUTTON SUBVIEW HERE
         view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
     }
+    
     
     // Add Note Function
     @objc func addNote(_ sender: UIButton!) {
