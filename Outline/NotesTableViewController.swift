@@ -55,6 +55,10 @@ class NotesTableViewController: UITableViewController {
         titleView.image = UIImage(named: "title")
         self.navigationItem.titleView = titleView
         
+        // Configure
+        floaty.buttonImage = UIImage(named: "add")
+        floaty.tag = 200
+        
         // Remove Navigation Bar border
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -83,30 +87,36 @@ class NotesTableViewController: UITableViewController {
         getTemplates()
         tableView.reloadData()
         
-        // If Add button already exists just show it
-        if ((addButtonView) != nil) {
-            self.parent?.view.viewWithTag(100)?.isHidden = false
+        // Add button logic
+        if templates.isEmpty {
+            
+            // If Add button already exists just show it
+            if ((addButtonView) != nil) {
+                self.parent?.view.viewWithTag(100)?.isHidden = false
+                
+            } else {
+            
+                // Create addButton view wrapper
+                addButtonView = UIView(frame: CGRect(x: view.frame.maxX - 100, y: view.frame.maxY - 100, width: 100, height: 100))
+                
+                // Add Add Button
+                let addButton = UIButton(type: .system)
+                addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
+                addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+                addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
+                addButton.tag = 100
+                
+                addButtonView?.addSubview(addButton)
+                self.parent?.view.addSubview(addButtonView!)
+            }
             
         } else {
-            // Create addButton view wrapper
-            addButtonView = UIView(frame: CGRect(x: view.frame.maxX - 100, y: view.frame.maxY - 100, width: 100, height: 100))
+            self.parent?.view.viewWithTag(200)?.isHidden = false
             
-//            // Add Add Button
-//            let addButton = UIButton(type: .system)
-//            addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
-//            addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//            addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
-//            addButton.tag = 100
-//
-//            addButtonView?.addSubview(addButton)
-//            self.parent?.view.addSubview(addButtonView!)
+            // Reset items
+            floaty.items.removeAll()
             
-            
-            // Configure
-            floaty.tag = 100
-            floaty.buttonImage = UIImage(named: "add")
-            
-            // Creat items
+            // Create items
             floaty.addItem("Blank", icon: UIImage(named: "plus")!, handler: { item in
                 selectedID = nil
                 template = []
@@ -123,25 +133,25 @@ class NotesTableViewController: UITableViewController {
                     selectedID = nil
                     template = [floatyTitle, templateItem[1], templateItem[2]]
                     // HIDE ADD BUTTON SUBVIEW HERE
-                    self.parent?.view.viewWithTag(100)?.isHidden = true
+                    self.parent?.view.viewWithTag(200)?.isHidden = true
                     self.performSegue(withIdentifier: "editNote", sender: self)
                 })
                 
-                
             }
-            
-            // Add to view
-            self.parent?.view.addSubview(floaty)
             
             for item in floaty.items {
-                let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.floatyLongPress(sender:)))
+                let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.floatyLongPress))
                 item.addGestureRecognizer(recognizer)
             }
-            
+        
+
+            // Add to view
+            self.parent?.view.addSubview(floaty)
         }
         
     }
     
+    // Toggle dark mode
     @objc func doubleTapped() {
         NightNight.toggleNightTheme()
     }
@@ -166,8 +176,6 @@ class NotesTableViewController: UITableViewController {
                     self.present(alert, animated: true, completion: nil)
                 }
             }
-            
-            
             
         }
     }
@@ -243,6 +251,7 @@ class NotesTableViewController: UITableViewController {
         
         // HIDE ADD BUTTON SUBVIEW HERE
         view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+        view.superview?.superview?.superview?.viewWithTag(200)?.isHidden = true
     }
     
     
@@ -251,6 +260,7 @@ class NotesTableViewController: UITableViewController {
         selectedID = nil
         // HIDE ADD BUTTON SUBVIEW HERE
         view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+        view.superview?.superview?.superview?.viewWithTag(200)?.isHidden = true
         
         performSegue(withIdentifier: "editNote", sender: self)
     }
@@ -260,12 +270,14 @@ class NotesTableViewController: UITableViewController {
 
         // HIDE ADD BUTTON SUBVIEW HERE
         view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
+        view.superview?.superview?.superview?.viewWithTag(200)?.isHidden = true
         
         performSegue(withIdentifier: "showInfo", sender: self)
     }
     
     // Fetch templates
     func getTemplates() {
+        templates.removeAll()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Templates")
