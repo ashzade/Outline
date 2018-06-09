@@ -74,7 +74,6 @@ class NotesTableViewController: UITableViewController {
         // Reorder cells
         reorderTableView = LongPressReorderTableView(tableView)
         reorderTableView.delegate = self
-        reorderTableView.enableLongPressReorder()
         
         // Used for cell resizing
         self.tableView.estimatedRowHeight = 88.0
@@ -244,6 +243,7 @@ class NotesTableViewController: UITableViewController {
         return [delete]
     }
     
+    // Load note
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Pass OjbectID to selectedID for next view
@@ -319,6 +319,7 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
+    // Delete template
     func removeTemplateData(templateTitle: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -441,6 +442,7 @@ class NotesTableViewController: UITableViewController {
     }
 }
 
+// Null state
 extension UITableView {
     
     func setEmptyMessage(_ message: String) {
