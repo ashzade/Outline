@@ -166,11 +166,10 @@ class NotesTableViewController: UITableViewController {
                     func removeTemplateItem(alert: UIAlertAction!) {
                         self.floaty.removeItem(item: item)
                         removeTemplateData(templateTitle: item.title!)
-
                     }
                     
                     let alert = UIAlertController(title: "Remove Template", message: "Do you want to delete this template?", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Remove", style: .default, handler: removeTemplateItem))
+                    alert.addAction(UIAlertAction(title: "Remove", style: .destructive, handler: removeTemplateItem))
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -258,6 +257,7 @@ class NotesTableViewController: UITableViewController {
     // Add Note Function
     @objc func addNote(_ sender: UIButton!) {
         selectedID = nil
+        template = []
         // HIDE ADD BUTTON SUBVIEW HERE
         view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
         view.superview?.superview?.superview?.viewWithTag(200)?.isHidden = true

@@ -638,6 +638,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
 
         do {
             try managedContext.save()
+            let alert = UIAlertController(title: "Template created!", message: "Tap the Add button on the homescreen to select it.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            }))
+            self.present(alert, animated: true, completion: nil)
 
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
