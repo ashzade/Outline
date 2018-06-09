@@ -824,7 +824,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         text?.append("\n [Shared from the Outline App]")
         
         // set up activity view controller
-        let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "add")) { sharedItems in
+        let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "plus")) { sharedItems in
             self.createTemplate()
         }
         
