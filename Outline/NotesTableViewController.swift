@@ -121,7 +121,7 @@ class NotesTableViewController: UITableViewController {
                 selectedID = nil
                 template = []
                 // HIDE ADD BUTTON SUBVIEW HERE
-                self.parent?.view.viewWithTag(100)?.isHidden = true
+                self.parent?.view.viewWithTag(200)?.isHidden = true
                 self.performSegue(withIdentifier: "editNote", sender: self)
             })
             
