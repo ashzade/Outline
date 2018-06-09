@@ -96,6 +96,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         self.view.addGestureRecognizer(tap)
         
+        
     }
     
     //Calls this function when the tap is recognized.
