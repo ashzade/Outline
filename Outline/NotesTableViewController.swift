@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import CoreData
+import CloudKit
+import CloudCore
 import LongPressReorder
 import Floaty
 import NightNight
@@ -22,10 +24,12 @@ var templates = [[Any]]()
 // Empty addButtonView container
 var addButtonView : UIView?
 
-class NotesTableViewController: UITableViewController {
+class NotesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+    // Initialize tableReorder
     var reorderTableView: LongPressReorderTableView!
     
+    //Initialize flaoting button
     let floaty = Floaty()
     
     override func viewDidLoad() {
@@ -354,7 +358,12 @@ class NotesTableViewController: UITableViewController {
     
     // Fetch all notes
     func getNotes() {
+        // Reset page
         notes.removeAll()
+        
+        
+        
+        // Core Date
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")

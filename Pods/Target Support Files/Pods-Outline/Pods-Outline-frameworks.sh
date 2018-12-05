@@ -143,11 +143,13 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/CloudCore/CloudCore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LongPressReorder/LongPressReorder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NightNight/NightNight.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/CloudCore/CloudCore.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LongPressReorder/LongPressReorder.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NightNight/NightNight.framework"

@@ -1,24 +1,28 @@
 PODS:
+  - CloudCore (2.0.1)
   - Floaty (4.0.1)
-  - LongPressReorder (1.1.0)
+  - LongPressReorder (1.2.1)
   - NightNight (0.5.0)
 
 DEPENDENCIES:
+  - CloudCore (~> 2.0)
   - Floaty (~> 4.0.0)
   - LongPressReorder (~> 1.1)
   - NightNight
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CloudCore
     - Floaty
     - LongPressReorder
     - NightNight
 
 SPEC CHECKSUMS:
+  CloudCore: 1d0eff6948afeb6964004b28819d77b3fbaf88be
   Floaty: 82854e1a5ef4fa208281ebd4da2f3d1e51ba67a6
-  LongPressReorder: 1f652eb6572dbd37fb3e10d0af459ac76351b84d
+  LongPressReorder: 71b132d61786d45a1241dd0ff356a2bec1deff63
   NightNight: 2a5550fdd9cf424b75ebaab022c26aaba35304c8
 
-PODFILE CHECKSUM: 0711e08c88889699f06e5e6ac31ae656d3122d59
+PODFILE CHECKSUM: cf855b011230c2e248060035be25b1977a987c4a
 
 COCOAPODS: 1.5.3

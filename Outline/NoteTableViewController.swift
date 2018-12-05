@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 import LongPressReorder
 import NightNight
 
@@ -23,6 +24,7 @@ var nextIndexPath = NSIndexPath()
 var enter = false
 
 class NoteTableViewController: UITableViewController, UITextViewDelegate {
+    
     // Row reorder
     var reorderTableView: LongPressReorderTableView!
     
@@ -311,37 +313,37 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Which cell are we in?
             let indexPath = tableView.indexPath(for: cell)!
-                // Enter creates new item
-                if(text == "\n" || text == "\r") {
-                    
-                        let currentRow = indexPath[1]
-                        let nextRow: Int = currentRow + 1
-                        indexPathFocus = indexPath
-                        enter = true
-                    
-                        // On enter add empty item at the end of the array
-                        note!.groupItems[indexPath.section].insert("", at: nextRow)
-                    
-                        // Save Data
-                        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                    
-                        // Reload the table to reflect the new item
-                        tableView.reloadData()
-                    
-                    return false
-                }
-
-                // Backspace empty item deletes item
-                if text == "" && range.length == 0 && textView.text == "" {
-                    // delete item at indexPath
-                    self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
-                    
+            // Enter creates new item
+            if(text == "\n" || text == "\r") {
+                
+                    let currentRow = indexPath[1]
+                    let nextRow: Int = currentRow + 1
+                    indexPathFocus = indexPath
+                    enter = true
+                
+                    // On enter add empty item at the end of the array
+                    note!.groupItems[indexPath.section].insert("", at: nextRow)
+                
                     // Save Data
                     self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                    
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    
-                }
+                
+                    // Reload the table to reflect the new item
+                    tableView.reloadData()
+                
+                return false
+            }
+
+            // Backspace empty item deletes item
+            if text == "" && range.length == 0 && textView.text == "" {
+                // delete item at indexPath
+                self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
+                
+                // Save Data
+                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+            }
         }
         
         return true
@@ -652,6 +654,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     func updateEntity(id: Any?, attribute: String, value: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.persistentContainer.viewContext
+
         
         // If new note
         if id == nil {
@@ -672,22 +675,27 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             noteEntity.setValue(currentDate, forKey: "updateDate")
             do {
                 try managedContext.save()
+                
                 // If this is a new entity, set it as the ID so it updates from now on
                 if selectedID == nil {
                     selectedID = noteEntity.objectID
                 }
+                
             } catch let error as NSError  {
                 print("Could not save \(error), \(error.userInfo)")
             }
+            
         } else {
             // Retrieve data
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
             request.returnsObjectsAsFaults = false
             
+            
             do {
                 let results = try managedContext.fetch(request)
                 for data in results as! [NSManagedObject] {
                     if selectedID != nil && data.objectID == selectedID as! NSManagedObjectID {
+                        
                         // Loop through attribute types
                         switch attribute {
                         case "updateDate":
@@ -704,7 +712,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                             return
                         }
                         data.setValue(currentDate, forKey: "updateDate")
-                    }
+                    } 
                     
                 }
                 
@@ -722,6 +730,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         updateDate(dateVar: currentDate)
     }
+    
     
     // Resize Images
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
@@ -973,3 +982,4 @@ class TemplateActivity: UIActivity {
         activityDidFinish(true)
     }
 }
+

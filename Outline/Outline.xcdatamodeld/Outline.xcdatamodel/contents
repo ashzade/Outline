@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F45c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C52a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Notes" representedClassName="Notes" syncable="YES" codeGenerationType="class">
         <attribute name="groupItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="groups" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="recordData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Templates" representedClassName="Templates" syncable="YES" codeGenerationType="class">
         <attribute name="groupItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="groups" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="recordData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Notes" positionX="-36" positionY="9" width="128" height="105"/>
-        <element name="Templates" positionX="-36" positionY="36" width="128" height="90"/>
+        <element name="Notes" positionX="-36" positionY="9" width="128" height="135"/>
+        <element name="Templates" positionX="-36" positionY="36" width="128" height="120"/>
     </elements>
 </model>

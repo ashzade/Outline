@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/LongPressReorder.svg?style=flat)](http://cocoapods.org/pods/LongPressReorder)
 [![Platform](https://img.shields.io/cocoapods/p/LongPressReorder.svg?style=flat)](http://cocoapods.org/pods/LongPressReorder)
 
-LongPressReorder adresses a common use case when working with tables on an iOS device: the posibility to reorder table rows using a long press gesture, similar to drag and drop gesture. Lightweight and easy to use, LongPressReorder works with any view controller that manages an UITableView. Tables with one or multiple sections are supported.
+LongPressReorder adresses a common use case when working with tables on an iOS device: the posibility to reorder table rows using a long press gesture, similar to drag and drop gesture. Lightweight and easy to use, LongPressReorder works with any view controller that manages an UITableView. Autoscroll and tables with one or multiple sections are supported.
 
 This Swift module is based on the well-known article posted on raywenderlich.com: 
 
@@ -18,6 +18,10 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 **UITableViewController with fixed first cell**
 
 ![LongPressReorder](/Screenshots/LongPressReorder.gif)
+
+**UITableViewController with multiple sections**
+
+![LongPressReorderMultiple](/Screenshots/LongPressReorderMultiple.gif)
 
 ## Usage
 
@@ -49,7 +53,10 @@ The only thing left now is to enable it with
 reorderTableView.enableLongPressReorder()
 ```
 
-That was all. All the cells inside the UITableView can now be reordered using the long press gesture.
+That was all. All the cells inside the UITableView can now be reordered using the long press gesture. To disable reordering of cells, simply call
+```swift
+reorderTableView.disableLongPressReorder()
+```
 
 You may want to also disable the table's Selection on the cell for a better visual effect.
 
@@ -104,7 +111,12 @@ extension SpecificViewController {
 
 ### Customization
 
-After pressing on the desired cell, it will pop out of the table and will be ready to be dragged around. This pop out effect can be customized using 4 different scales for the selected cell: none, small, medium and big (default is medium).
+When there are more cells in the table that the ones that can be displayed on the device screen at a certain moment, autoscroll can be used when reordering the cells. Autoscroll is turned off by default.
+```swift
+reorderTableView = LongPressReorderTableView(elementsTableView, scrollBehaviour: .early)
+```
+
+After pressing on the desired cell, the cell will pop out of the table and will be ready to be dragged around. This pop out effect can be customized using 4 different scales for the selected cell: none, small, medium and big (default is medium).
 ```swift
 reorderTableView = LongPressReorderTableView(elementsTableView, selectedRowScale: SelectedRowScale.small)
 ```
@@ -112,9 +124,9 @@ reorderTableView = LongPressReorderTableView(elementsTableView, selectedRowScale
 
 ## Requirements
 
-- Swift 3
+- Swift 4.1
 - iOS 9.0 +
-- XCode 8.0+
+- XCode 9.4+
 
 ## Installation
 
@@ -128,7 +140,7 @@ pod "LongPressReorder"
 or
 
 ```ruby
-pod 'LongPressReorder', '~> 1.1.0'
+pod 'LongPressReorder', '~> 1.2.0'
 ```
 
 ### Manually
