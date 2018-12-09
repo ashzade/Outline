@@ -34,3 +34,23 @@ public class Note {
     }
 }
 
+class Item {
+    var value: String
+    var children: [Item] = []
+    weak var parent: Item?
+    
+    init(value: String) {
+        self.value = value
+    }
+    
+    func add(child: Item) {
+        children.append(child)
+        child.parent = self
+    }
+}
+
+struct DisplayGroup {
+    var indentationLevel: Int
+    var item: Item?
+    var hasChildren: Bool
+}

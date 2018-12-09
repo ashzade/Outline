@@ -30,6 +30,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Create new note object
     var note = Note(noteTitle: "", groupItems: [[""]], groups: [""], date: currentDate)
+    
+    var noteArray = [
+        DisplayGroup(
+            indentationLevel: 1,
+            item: Item(value: ""),
+            hasChildren: false)
+    ]
 
     @IBOutlet weak var NoteTitle: UITextView!
     var placeholderLabel : UILabel!
@@ -102,7 +109,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         //Hide keyboard if tap anywhere
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         self.view.addGestureRecognizer(tap)
-        
         
     }
     
@@ -190,6 +196,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save cell's textView to items array
             note!.groupItems[textViewSection!][textViewRow!] = textView.text
             
+            noteArray[textViewRow!].item?.value = textView.text
+            
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
@@ -270,26 +278,36 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
         
         // Add cell text indentation
+        var indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20)
+        for constraint in cell.contentView.constraints {
+            if constraint.identifier == "cellIndent" {
+                constraint.constant = indent
+            }
+        }
+        self.tableView.layoutIfNeeded()
+        
         cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 12,bottom: 5,right: 0)
 
         // Set value
-        cell.textView?.text = note!.groupItems[indexPath.section][indexPath.row]
+//        cell.textView?.text = note!.groupItems[indexPath.section][indexPath.row]
+        cell.textView?.text = noteArray[indexPath.row].item?.value
+
         
         // Check for checkmark
-        if cell.textView.text.contains("✓") {
-            cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
-            cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
-        } else {
-            cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-            cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
-        }
+//        if cell.textView.text.contains("✓") {
+//            cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
+//            cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
+//        } else {
+//            cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+//            cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
+//        }
         
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
         cell.textView.tag = indexPath.row + 100
         
         // Add left and bottom border
-        cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
+        cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.70, green:0.70, blue:0.70, alpha:1.0), thickness: 0.5)
         cell.textView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
         return cell
@@ -324,6 +342,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     // On enter add empty item at the end of the array
                     note!.groupItems[indexPath.section].insert("", at: nextRow)
                 
+                noteArray.append(
+                    DisplayGroup(
+                        indentationLevel: 1,
+                        item: Item(value: ""),
+                        hasChildren: false)
+                )
+                
                     // Save Data
                     self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
                 
@@ -355,28 +380,71 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView,
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let groupAction = UIContextualAction(style: .normal, title:  "New Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+//        let groupAction = UIContextualAction(style: .normal, title:  "New Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+//            // Select cell
+//            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
+//
+//            // Set group title and add empty item
+//            self.note!.groups.insert(cell.textView.text, at: indexPath.section + 1)
+//            self.note!.groupItems.insert([""], at: indexPath.section + 1)
+//            indexPathFocus = [indexPath.section + 1, 0] as IndexPath
+//
+//            // delete item at indexPath
+//            self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
+//
+//            // Save Data
+//            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//
+//            tableView.reloadData()
+//            success(true)
+//        })
+       
+        
+//        groupAction.backgroundColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
+        
+        let indentAction = UIContextualAction(style: .normal, title:  "Indent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // Select cell
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
             
-            // Set group title and add empty item
-            self.note!.groups.insert(cell.textView.text, at: indexPath.section + 1)
-            self.note!.groupItems.insert([""], at: indexPath.section + 1)
-            indexPathFocus = [indexPath.section + 1, 0] as IndexPath
-            
-            // delete item at indexPath
-            self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
-            
-            // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            // Only allow up 2 5 indents
+            if (self.noteArray[indexPath.row].indentationLevel < 5) {
+                
+                // Indent
+                self.noteArray[indexPath.row].indentationLevel += 1
+                
+                // Create parent relationship
+                if (indexPath.row-1 >= 0) {
+                    // Traverse backwards till you hit the first item with less indentation
+                    for i in (0...indexPath.row-1).reversed() {
+                        if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
+                            // Make the item you hit the parent
+                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
+                            self.noteArray[i].hasChildren = true
+                            print( self.noteArray[indexPath.row].item?.parent?.value)
+                            break
+                        }
+                        
+                    }
+                }
+                
+                // Move any children
+                for i in (indexPath.row+1...self.noteArray.count-1) {
+                    if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
+                        self.noteArray[i].indentationLevel += 1
+                    }
+                }
 
+            }
+            
+            
             tableView.reloadData()
             success(true)
         })
-        groupAction.backgroundColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
         
-        return UISwipeActionsConfiguration(actions: [groupAction])
+        
+        
+        return UISwipeActionsConfiguration(actions: [indentAction])
         
     }
     
@@ -384,6 +452,44 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        let outdentAction = UIContextualAction(style: .normal, title:  "Outdent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // Select cell
+            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
+            
+            // Only allow outdent if there is an indent
+            if (self.noteArray[indexPath.row].indentationLevel > 0) {
+                // Outdent
+                self.noteArray[indexPath.row].indentationLevel -= 1
+                
+                
+                // Adjust parent relationship
+                if (indexPath.row-1 >= 0) {
+                    // Traverse backwards till you hit the first item with less indentation
+                    for i in (0...indexPath.row-1).reversed() {
+                        if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
+                            // Make the item you hit the parent
+                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
+                            self.noteArray[i].hasChildren = true
+                            break
+                        } else {
+                            self.noteArray[indexPath.row].item?.parent = nil
+                        }
+                        
+                    }
+                }
+                
+                // Move any children
+                for i in (indexPath.row+1...self.noteArray.count-1) {
+                    if self.noteArray[i].item?.parent?.value == self.noteArray[indexPath.row].item?.value {
+                        self.noteArray[i].indentationLevel -= 1
+                    }
+                }
+            }
+            
+            tableView.reloadData()
+            success(true)
+        })
+        
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // delete item at indexPath
             self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
@@ -420,7 +526,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         })
         doneAction.backgroundColor = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
         
-        return UISwipeActionsConfiguration(actions: [doneAction, deleteAction])
+        return UISwipeActionsConfiguration(actions: [doneAction, deleteAction, outdentAction])
     }
     
     // Enable row editing
