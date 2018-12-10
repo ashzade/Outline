@@ -71,16 +71,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.NoteDate.addSubview(dateView)
         self.NoteDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
-        // Add Group - Tableview footer view
-        let addGroupButtonView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
-        let addGroupButton = UIButton(type: .system)
-        addGroupButton.setImage(#imageLiteral(resourceName: "addGroup").withRenderingMode(.alwaysOriginal), for: .normal)
-        addGroupButton.frame = CGRect(x: 4, y: 7, width: 32, height: 32)
-        addGroupButton.imageView?.contentMode = .scaleAspectFit
-        addGroupButton.addTarget(self, action: #selector(AddGroup), for: .touchUpInside)
-        addGroupButtonView.addSubview(addGroupButton)
-        tableView.tableFooterView = addGroupButtonView
-        
         // Add Share Button
         let shareButton = UIButton()
         shareButton.setImage(#imageLiteral(resourceName: "share").withRenderingMode(.alwaysOriginal), for: .normal)
@@ -193,14 +183,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             let textViewRow = textViewIndexPath?.row
             indexPathFocus = textViewIndexPath!
             
-            // Save cell's textView to items array
-            note!.groupItems[textViewSection!][textViewRow!] = textView.text
-            
+            // Save cell ctext
             noteArray[textViewRow!].item?.value = textView.text
             
             // Save Data
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
             
             let currentOffset = tableView.contentOffset
             UIView.setAnimationsEnabled(false)
@@ -219,57 +207,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     }
     
     
-    // Group header view
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        
-        // Group title style
-        let frame = CGRect(x: 16, y: 12, width: 10, height: 10)
-        let headerImageView = UIImageView(frame: frame)
-        headerImageView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        headerImageView.contentMode = .scaleAspectFit
-        var image: UIImage = UIImage(named: "dot")!.withRenderingMode(.alwaysOriginal)
-        image = resizeImage(image: image, newWidth: 12)!
-        headerImageView.image = image
-    
-        // Group title text
-        let groupTitle =  UITextField(frame: CGRect(x: 36, y: 0, width: tableView.frame.width - 115, height: 36))
-        groupTitle.text = note!.groups[section]
-        groupTitle.placeholder = "Add a group title"
-        groupTitle.font = UIFont(name: "Gill Sans", size: 20)
-        groupTitle.autocorrectionType = UITextAutocorrectionType.yes
-        groupTitle.keyboardType = UIKeyboardType.default
-        groupTitle.returnKeyType = UIReturnKeyType.done
-        groupTitle.contentVerticalAlignment = UIControlContentVerticalAlignment.center
-        groupTitle.adjustsFontSizeToFitWidth = true
-        groupTitle.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-        groupTitle.tag = 100+section
-        groupTitle.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        groupTitle.addTarget(self, action: #selector(textFieldInFocus(_:)), for: .editingDidBegin)
-        groupTitle.addTarget(self, action: #selector(textFieldLostFocus(_:)), for: .editingDidEnd)
-        groupTitle.delegate = self
-
-        // Add them to the header
-        header.addSubview(groupTitle)
-        header.addSubview(headerImageView)
-        header.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        
-        // Set group title focus after moving
-        if headerTag != 0 {
-            groupTitle.viewWithTag(headerTag)?.becomeFirstResponder()
-        }
-        
-        return header
-    }
-    
     // Create groups
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return note!.groups.count
+        return 1
     }
     
     // Create rows per group
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return note!.groupItems[section].count
+        return noteArray.count
     }
     
     
@@ -278,7 +223,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
         
         // Add cell text indentation
-        var indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20)
+        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20)
         for constraint in cell.contentView.constraints {
             if constraint.identifier == "cellIndent" {
                 constraint.constant = indent
@@ -289,18 +234,17 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 12,bottom: 5,right: 0)
 
         // Set value
-//        cell.textView?.text = note!.groupItems[indexPath.section][indexPath.row]
         cell.textView?.text = noteArray[indexPath.row].item?.value
 
         
         // Check for checkmark
-//        if cell.textView.text.contains("✓") {
-//            cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
-//            cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
-//        } else {
-//            cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-//            cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
-//        }
+        if cell.textView.text.contains("✓") {
+            cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
+            cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
+        } else {
+            cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+            cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
+        }
         
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
@@ -334,26 +278,22 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Enter creates new item
             if(text == "\n" || text == "\r") {
                 
-                    let currentRow = indexPath[1]
-                    let nextRow: Int = currentRow + 1
-                    indexPathFocus = indexPath
-                    enter = true
-                
-                    // On enter add empty item at the end of the array
-                    note!.groupItems[indexPath.section].insert("", at: nextRow)
+                indexPathFocus = indexPath
+                enter = true
+                let indent = noteArray[indexPath.row].indentationLevel
                 
                 noteArray.append(
                     DisplayGroup(
-                        indentationLevel: 1,
+                        indentationLevel: indent,
                         item: Item(value: ""),
                         hasChildren: false)
                 )
                 
-                    // Save Data
-                    self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                
-                    // Reload the table to reflect the new item
-                    tableView.reloadData()
+                // Save Data
+//                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            
+                // Reload the table to reflect the new item
+                tableView.reloadData()
                 
                 return false
             }
@@ -361,10 +301,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Backspace empty item deletes item
             if text == "" && range.length == 0 && textView.text == "" {
                 // delete item at indexPath
-                self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
+                self.noteArray.remove(at: indexPath.row)
                 
                 // Save Data
-                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
                 
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
@@ -375,33 +315,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     }
 
     
-    // Swipe row options
-    // Add group
+    // Swipe right options: Indent
     override func tableView(_ tableView: UITableView,
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-//        let groupAction = UIContextualAction(style: .normal, title:  "New Group", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-//            // Select cell
-//            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
-//
-//            // Set group title and add empty item
-//            self.note!.groups.insert(cell.textView.text, at: indexPath.section + 1)
-//            self.note!.groupItems.insert([""], at: indexPath.section + 1)
-//            indexPathFocus = [indexPath.section + 1, 0] as IndexPath
-//
-//            // delete item at indexPath
-//            self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
-//
-//            // Save Data
-//            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-//
-//            tableView.reloadData()
-//            success(true)
-//        })
-       
-        
-//        groupAction.backgroundColor = UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0)
         
         let indentAction = UIContextualAction(style: .normal, title:  "Indent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // Select cell
@@ -421,7 +338,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                             // Make the item you hit the parent
                             self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
                             self.noteArray[i].hasChildren = true
-                            print( self.noteArray[indexPath.row].item?.parent?.value)
+
                             break
                         }
                         
@@ -429,14 +346,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 }
                 
                 // Move any children
-                for i in (indexPath.row+1...self.noteArray.count-1) {
-                    if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
-                        self.noteArray[i].indentationLevel += 1
+                if (indexPath.row+1 < self.noteArray.count-1) {
+                    for i in (indexPath.row+1...self.noteArray.count-1) {
+                        if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
+                            self.noteArray[i].indentationLevel += 1
+                        }
                     }
                 }
+                
 
             }
-            
             
             tableView.reloadData()
             success(true)
@@ -448,7 +367,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
     }
     
-    // Delete / Mark as done item
+    // Swipe left options: Outdent, Mark as Done, Delete
     override func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
@@ -479,11 +398,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 }
                 
                 // Move any children
-                for i in (indexPath.row+1...self.noteArray.count-1) {
-                    if self.noteArray[i].item?.parent?.value == self.noteArray[indexPath.row].item?.value {
-                        self.noteArray[i].indentationLevel -= 1
+                if (indexPath.row+1 < self.noteArray.count-1) {
+                    for i in (indexPath.row+1...self.noteArray.count-1) {
+                        if self.noteArray[i].item?.parent?.value == self.noteArray[indexPath.row].item?.value {
+                            self.noteArray[i].indentationLevel -= 1
+                        }
                     }
                 }
+                
             }
             
             tableView.reloadData()
@@ -491,13 +413,24 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         })
         
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            // delete item at indexPath
-            self.note!.groupItems[indexPath.section].remove(at: indexPath.row)
+        
+            // Delete children first
+            for i in (indexPath.row...self.noteArray.count - 1) {
+                if self.noteArray[i].item?.parent?.value == self.noteArray[indexPath.row].item?.value {
+                    self.noteArray.remove(at: i)
+                    tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
+                }
+            }
+
+            // Delete item in that row
+            self.noteArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
             
             // Save Data
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        
             success(true)
         })
         deleteAction.backgroundColor = .red
@@ -516,10 +449,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
 
             // Save cell's textView to items array
-            self.note!.groupItems[indexPath.section][indexPath.row] = cell.textView.text
+            self.noteArray[indexPath.row].item?.value = cell.textView.text
 
             // Save Data
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
 
             success(true)
             self.tableView.reloadData()
