@@ -238,10 +238,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
 
         
         // Check for checkmark
-        if cell.textView.text.contains("✓") {
+        if cell.accessoryType == .checkmark {
             cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
             cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
-        } else {
+        } else if cell.accessoryType == .none {
             cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
             cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
         }
@@ -324,38 +324,53 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Select cell
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
             
-            // Only allow up 2 5 indents
-            if (self.noteArray[indexPath.row].indentationLevel < 5) {
                 
-                // Indent
-                self.noteArray[indexPath.row].indentationLevel += 1
-                
-                // Create parent relationship
-                if (indexPath.row-1 >= 0) {
-                    // Traverse backwards till you hit the first item with less indentation
-                    for i in (0...indexPath.row-1).reversed() {
-                        if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
-                            // Make the item you hit the parent
-                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
-                            self.noteArray[i].hasChildren = true
+            // Indent
+            self.noteArray[indexPath.row].indentationLevel += 1
+            
+            // Create parent relationship
+            if (indexPath.row-1 >= 0) {
+                // Traverse backwards till you hit the first item with less indentation
+                for i in (0...indexPath.row-1).reversed() {
+                    if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
+                        // Make the item you hit the parent
+                        self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
+                        self.noteArray[i].hasChildren = true
 
-                            break
+                        break
+                    }
+                    
+                }
+            }
+            
+            // Move any children
+            var count = 0
+            if (indexPath.row < self.noteArray.count-1) {
+                
+                for i in (indexPath.row...self.noteArray.count-1) {
+                    if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
+                        // Found children
+                        self.noteArray[i].indentationLevel += 1
+                        count += 1
+                        
+                        // Check next level
+                        print("i \(i)")
+                        print(i+count)
+                        print("count \(count)")
+                        if (i+count <= self.noteArray.count-1) {
+                            while (i+count <= self.noteArray.count-1) {
+                                if (self.noteArray[i+1].item?.parent === self.noteArray[i].item) {
+                                    self.noteArray[i+1].indentationLevel += 1
+                                    count += 1
+                                }
+                            }
                         }
                         
                     }
+                    
                 }
-                
-                // Move any children
-                if (indexPath.row+1 < self.noteArray.count-1) {
-                    for i in (indexPath.row+1...self.noteArray.count-1) {
-                        if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
-                            self.noteArray[i].indentationLevel += 1
-                        }
-                    }
-                }
-                
-
             }
+            
             
             tableView.reloadData()
             success(true)
@@ -415,7 +430,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
         
             // Delete children first
-            for i in (indexPath.row...self.noteArray.count - 1) {
+            for i in stride(from: self.noteArray.count - 1, through: indexPath.row, by: -1) {
                 if self.noteArray[i].item?.parent?.value == self.noteArray[indexPath.row].item?.value {
                     self.noteArray.remove(at: i)
                     tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
@@ -425,6 +440,20 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Delete item in that row
             self.noteArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // Add empty item note is empty
+            if (self.noteArray.count == 0) {
+                self.noteArray.append(
+                    DisplayGroup(
+                        indentationLevel: 1,
+                        item: Item(value: ""),
+                        hasChildren: false)
+                )
+                // Reload table to see the empty item
+                tableView.reloadData()
+            }
+            
+            
             
             
             // Save Data
@@ -439,14 +468,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // Select cell
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
-            // Add checkmark
-            if cell.textView.text.contains("✓") {
-                cell.textView.text = cell.textView.text.replacingOccurrences(of: "✓", with: "", options: NSString.CompareOptions.literal, range:nil)
-
-            } else {
-                cell.textView.text =  "✓\(cell.textView.text!)"
-            }
             
+            
+            // Add checkmark
+            if (cell.accessoryType == .checkmark) {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .checkmark
+            }
 
             // Save cell's textView to items array
             self.noteArray[indexPath.row].item?.value = cell.textView.text
@@ -926,13 +955,23 @@ extension CALayer {
 extension NoteTableViewController {
     
     override func positionChanged(currentIndex sourceIndexPath: IndexPath, newIndex destinationIndexPath: IndexPath) {
-            
-        let movedObject = note!.groupItems[sourceIndexPath.section][sourceIndexPath.row]
-        note!.groupItems[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-        note!.groupItems[destinationIndexPath.section].insert(movedObject, at: destinationIndexPath.row)
+        
+        let movedObject = noteArray[sourceIndexPath.row]
+        noteArray.remove(at: sourceIndexPath.row)
+        noteArray.insert(movedObject, at: destinationIndexPath.row)
+        
+        // Move children
+        for i in (0...noteArray.count-1) {
+            if (noteArray[i].item?.parent === noteArray[destinationIndexPath.row].item) {
+                let movedChild = noteArray[i]
+                noteArray.remove(at: i)
+                noteArray.insert(movedChild, at: destinationIndexPath.row)
+            }
+        }
+        tableView.reloadData()
         
         // Save Data
-        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
     
     }
     
