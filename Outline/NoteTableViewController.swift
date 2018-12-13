@@ -35,7 +35,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         DisplayGroup(
             indentationLevel: 1,
             item: Item(value: ""),
-            hasChildren: false)
+            hasChildren: false,
+            done: false)
     ]
 
     @IBOutlet weak var NoteTitle: UITextView!
@@ -99,6 +100,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         //Hide keyboard if tap anywhere
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         self.view.addGestureRecognizer(tap)
+        
         
     }
     
@@ -188,7 +190,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Save Data
 //            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-//            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
             let currentOffset = tableView.contentOffset
             UIView.setAnimationsEnabled(false)
@@ -238,10 +240,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
 
         
         // Check for checkmark
-        if cell.accessoryType == .checkmark {
+        if (self.noteArray[indexPath.row].done == true) {
+            cell.accessoryType = .checkmark
             cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
             cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
-        } else if cell.accessoryType == .none {
+        } else {
+            cell.accessoryType = .none
             cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
             cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
         }
@@ -286,11 +290,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     DisplayGroup(
                         indentationLevel: indent,
                         item: Item(value: ""),
-                        hasChildren: false)
+                        hasChildren: false,
+                        done: false)
                 )
                 
                 // Save Data
-//                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                self.updateEntity(id: selectedID, attribute: "group", value: self.noteArray)
             
                 // Reload the table to reflect the new item
                 tableView.reloadData()
@@ -304,7 +309,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 self.noteArray.remove(at: indexPath.row)
                 
                 // Save Data
-//                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+                self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
                 
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
@@ -423,7 +428,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 
             }
             
-            tableView.reloadData()
+            // Save Data
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+            
+//            tableView.reloadData()
             success(true)
         })
         
@@ -447,41 +455,33 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     DisplayGroup(
                         indentationLevel: 1,
                         item: Item(value: ""),
-                        hasChildren: false)
+                        hasChildren: false,
+                        done: false)
                 )
                 // Reload table to see the empty item
                 tableView.reloadData()
             }
-            
-            
-            
-            
+        
             // Save Data
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
         
             success(true)
         })
         deleteAction.backgroundColor = .red
         
-        // **Need to figure out how to save attributed text to coredata to make this work**
+        // Mark item as done
         let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            // Select cell
-            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
             
-            
-            // Add checkmark
-            if (cell.accessoryType == .checkmark) {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .checkmark
+            // Toggle done value
+            if (self.noteArray[indexPath.row].done == false) {
+                self.noteArray[indexPath.row].done = true
+            } else if (self.noteArray[indexPath.row].done == true ) {
+                self.noteArray[indexPath.row].done = false
             }
 
-            // Save cell's textView to items array
-            self.noteArray[indexPath.row].item?.value = cell.textView.text
-
             // Save Data
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
 
             success(true)
             self.tableView.reloadData()
@@ -514,8 +514,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             self.note!.groupItems.remove(at: sender.tag - 100)
             
             // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
             self.tableView.reloadData()
 
@@ -549,8 +549,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             note!.groupItems.insert(items, at: tag + 1)
             
             // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
             headerTag = sender.tag + 1
             
@@ -583,7 +583,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             
             headerTag = sender.tag - 1
             
@@ -660,8 +660,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     if data.value(forKey: "groups") != nil {
                         let groupData = data.value(forKey: "groups") as! NSData
                         let unarchiveObject = NSKeyedUnarchiver.unarchiveObject(with: groupData as Data)
-                        let arrayObject = unarchiveObject as AnyObject! as! [String]
-                        note?.groups = arrayObject
+                        let arrayObject = unarchiveObject as AnyObject! as! [DisplayGroup]
+                        noteArray = arrayObject
                         
                     }
                     // Fetch Group Items
@@ -732,10 +732,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             case "title":
                 noteEntity.setValue(value, forKey: "title")
             case "groups":
-                let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
+                let groupData = NSKeyedArchiver.archivedData(withRootObject: value)
                 noteEntity.setValue(groupData, forKey: "groups")
             case "groupItems":
-                let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
+                let groupItemData = NSKeyedArchiver.archivedData(withRootObject: value)
                 noteEntity.setValue(groupItemData, forKey: "groupItems")
             default:
                 return
@@ -771,10 +771,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         case "title":
                             data.setValue(value, forKey: "title")
                         case "groups":
-                            let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
+                            let groupData = NSKeyedArchiver.archivedData(withRootObject: value)
                             data.setValue(groupData, forKey: "groups")
                         case "groupItems":
-                            let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
+                            let groupItemData = NSKeyedArchiver.archivedData(withRootObject: value)
                             data.setValue(groupItemData, forKey: "groupItems")
                         default:
                             return
@@ -822,7 +822,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             self.note!.groups[textField.tag - 100] = textField.text!
             
             // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
+//            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
         }
         
