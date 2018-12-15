@@ -30,11 +30,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     var reorderTableView: LongPressReorderTableView!
     
     // Create new note object
-    var note = Note(noteTitle: "", groupItems: [[""]], groups: [""], date: currentDate)
+    var note = Note(noteTitle: "", date: currentDate)
     
     var noteArray = [
         DisplayGroup(
-            indentationLevel: 1,
+            indentationLevel: 0,
             item: Item(value: ""),
             hasChildren: false,
             done: false)
@@ -126,7 +126,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Set focus to note title
         for subView in tableView.tableHeaderView?.subviews as [UIView]! {
             if let textView = subView as? UITextView {
-                if (textView.text == "" && note!.groupItems[0] == [""] && note!.groups == [""]) {
+                if (textView.text == "" && self.noteArray.count == 0) {
                     textView.becomeFirstResponder()
                 } else {
                     placeholderLabel.isHidden = !textView.text.isEmpty
@@ -186,7 +186,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             noteArray[textViewRow!].item?.value = textView.text
             
             // Save Data
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
             let currentOffset = tableView.contentOffset
@@ -199,12 +198,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
     }
-
-    // Add group titles
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return note!.groups[section]
-    }
-    
     
     // Create groups
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -222,15 +215,40 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
         
         // Add cell text indentation
-        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20)
+        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20 + 15)
         for constraint in cell.contentView.constraints {
             if constraint.identifier == "cellIndent" {
                 constraint.constant = indent
             }
         }
+        
         self.tableView.layoutIfNeeded()
         
-        cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 12,bottom: 5,right: 0)
+        cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 15,bottom: 5,right: 0)
+        
+        // Add dot if parent
+        let frame = CGRect(x: 0, y: 10, width: 10, height: 10)
+        let dot = UIImageView(frame: frame)
+        dot.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        dot.contentMode = .scaleAspectFit
+        var image: UIImage = UIImage(named: "dot")!.withRenderingMode(.alwaysOriginal)
+        image = resizeImage(image: image, newWidth: 12)!
+        dot.image = image
+        dot.tag = 123
+        
+        if (noteArray[indexPath.row].hasChildren) {
+            cell.textView.addSubview(dot)
+        } else {
+            cell.textView.viewWithTag(123)?.isHidden = true
+        }
+        
+        // Add border if item has parent
+        if (noteArray[indexPath.row].item?.parent != nil) {
+            cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.70, green:0.70, blue:0.70, alpha:1.0), thickness: 0.5)
+            }
+        } else {
+            print("no parents")
+        }
 
         // Set value
         cell.textView?.text = noteArray[indexPath.row].item?.value
@@ -240,19 +258,17 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         if (self.noteArray[indexPath.row].done == true) {
             cell.accessoryType = .checkmark
             cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
-            cell.textView.font = UIFont(name: "GillSans-LightItalic", size: 16)
+            cell.textView.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.ultraLight)
         } else {
             cell.accessoryType = .none
             cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-            cell.textView.font = UIFont(name: "GillSans-Light", size: 16)
+            cell.textView.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.light)
         }
         
         // Tag each cell and go to next one automatically
         cell.textView.delegate = self
         cell.textView.tag = indexPath.row + 100
         
-        // Add left and bottom border
-        cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.70, green:0.70, blue:0.70, alpha:1.0), thickness: 0.5)
         cell.textView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
         return cell
@@ -344,6 +360,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             if (indexPath.row-1 >= 0) {
                 // Traverse backwards till you hit the first item with less indentation
                 for i in (0...indexPath.row-1).reversed() {
+                   
                     if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
                         // Make the item you hit the parent
                         self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
@@ -351,6 +368,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
 
                         break
                     }
+                    
+                    
                     
                 }
             }
@@ -402,6 +421,18 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Only allow outdent if there is an indent
             if (self.noteArray[indexPath.row].indentationLevel > 0) {
+                
+                // Remove hasChildren from parent
+                for (ind, element) in self.noteArray.enumerated() {
+                    if (self.noteArray[indexPath.row].item?.parent === self.noteArray[ind].item) {
+                        self.noteArray[ind].hasChildren = false
+                        self.tableView.beginUpdates()
+                        self.tableView.reloadRows(at: [IndexPath(item: ind, section: indexPath.section)], with: UITableViewRowAnimation.fade)
+                        self.tableView.endUpdates()
+                    }
+                    print(self.noteArray[ind].hasChildren)
+                }
+                
                 // Outdent
                 self.noteArray[indexPath.row].indentationLevel -= 1
                 
@@ -410,17 +441,28 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 if (indexPath.row-1 >= 0) {
                     // Traverse backwards till you hit the first item with less indentation
                     for i in (0...indexPath.row-1).reversed() {
-                        if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
-                            // Make the item you hit the parent
-                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
-                            self.noteArray[i].hasChildren = true
-                            break
-                        } else {
-                            self.noteArray[indexPath.row].item?.parent = nil
-                        }
+//                        if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
+//                            // Check if parent has any other children
+////                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
+////                            self.noteArray[i].hasChildren = true
+//                            break
+//                        } else {
+//                            self.noteArray[indexPath.row].item?.parent = nil
+//                        }
+                        
                         
                     }
                 }
+                
+                // Find parents
+//                if let child = self.noteArray.first(where: {$0.item?.parent === self.noteArray[indexPath.row].item}) {
+//                    print("parent found: \(self.noteArray[indexPath.row].item?.value)")
+//                    print("child \(child.item?.value)")
+//                } else {
+//                    print("I'm not a parent")
+//                }
+                
+                
                 
                 // Move any children
                 if (indexPath.row+1 < self.noteArray.count-1) {
@@ -501,124 +543,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         return true
     }
     
-    
-    // Remove group
-    @objc func deleteGroup(_ sender: UIButton!) {
-        let alert = UIAlertController(title: "Remove Group", message: "Are you sure you want to delete this group and its items?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.destructive, handler: { action in
-            
-            // Remove textfield focus
-            for subView in sender.superview?.subviews as [UIView]! {
-                if let textField = subView as? UITextField {
-                    textField.resignFirstResponder()
-                }
-            }
-            
-            // Remove group and its items
-            self.note!.groups.remove(at: sender.tag - 100)
-            self.note!.groupItems.remove(at: sender.tag - 100)
-            
-            // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-            
-            self.tableView.reloadData()
-
-            
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
-    // Move group down
-    @objc func moveGroupDown(_ sender: UIButton!) {
-        
-        let tag = sender.tag - 100
-        
-        // Remove textfield focus
-        for subView in sender.superview?.subviews as [UIView]! {
-            if let textField = subView as? UITextField {
-                textField.resignFirstResponder()
-            }
-        }
-
-        if note!.groups.indices.contains(tag + 1) {
-            // Move group title
-            let group = note!.groups.remove(at: tag)
-            note!.groups.insert(group, at: tag + 1)
-            
-            // Move group items
-            let items = note!.groupItems.remove(at: tag)
-            note!.groupItems.insert(items, at: tag + 1)
-            
-            // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-            
-            headerTag = sender.tag + 1
-            
-            // Reload the table
-            tableView.reloadData()
-            
-        }
-    }
-    
-    // Move group up
-    @objc func moveGroupUp(_ sender: UIButton!) {
-        
-        let tag = sender.tag - 100
-        
-        // Remove textfield focus and set it
-        for subView in sender.superview?.subviews as [UIView]! {
-            if let textField = subView as? UITextField {
-                textField.resignFirstResponder()
-            }
-        }
-        
-        if note!.groups.indices.contains(tag - 1) {
-            // Move group title
-            let group = note!.groups.remove(at: tag)
-            note!.groups.insert(group, at: tag - 1)
-            
-            // Move group items
-            let items = note!.groupItems.remove(at: tag)
-            note!.groupItems.insert(items, at: tag - 1)
-            
-            // Save Data
-            self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-//            self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-            
-            headerTag = sender.tag - 1
-            
-            // Reload the table
-            tableView.reloadData()
-            
-        }
-    }
-    
-    // Add group button
-    @objc func AddGroup(_ sender: UIButton!) {
-        addNewGroup()
-    }
-    
-    // Add group alert
-    func addNewGroup() {
-        
-        self.note!.groups.append("")
-        self.note!.groupItems.append([""])
-        
-        // Save Data
-        self.updateEntity(id: selectedID, attribute: "groups", value: self.note!.groups)
-        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-        
-        // Set textfield focus
-        headerTag = self.note!.groups.count + 99
-        
-        self.tableView.reloadData()
-    }
-    
     func updateDate(dateVar: Date) {
         // Setup Date formatter
         let formatter = DateFormatter()
@@ -677,8 +601,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     
                     if template.isEmpty == false {
                         self.NoteTitle.text = template[0] as! String
-                        note?.groups = template[1] as! [String]
-                        note?.groupItems = template[2] as! [[String]]
+//                        note?.groups = template[1] as! [String]
+//                        note?.groupItems = template[2] as! [[String]]
                     }
                     
                 }
@@ -691,32 +615,32 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     }
     
     // Create template
-    func createTemplate() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let entity =  NSEntityDescription.entity(forEntityName: "Templates", in:managedContext)
-        let templateEntity = NSManagedObject(entity: entity!,insertInto: managedContext)
-
-        templateEntity.setValue(self.NoteTitle.text, forKey: "title")
-
-        let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
-        templateEntity.setValue(groupData, forKey: "groups")
-
-        let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
-        templateEntity.setValue(groupItemData, forKey: "groupItems")
-
-        do {
-            try managedContext.save()
-            let alert = UIAlertController(title: "Template created!", message: "Tap the Add button on the homescreen to select it.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            }))
-            self.present(alert, animated: true, completion: nil)
-
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-    }
+//    func createTemplate() {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let managedContext = appDelegate.persistentContainer.viewContext
+//
+//        let entity =  NSEntityDescription.entity(forEntityName: "Templates", in:managedContext)
+//        let templateEntity = NSManagedObject(entity: entity!,insertInto: managedContext)
+//
+//        templateEntity.setValue(self.NoteTitle.text, forKey: "title")
+//
+//        let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
+//        templateEntity.setValue(groupData, forKey: "groups")
+//
+//        let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
+//        templateEntity.setValue(groupItemData, forKey: "groupItems")
+//
+//        do {
+//            try managedContext.save()
+//            let alert = UIAlertController(title: "Template created!", message: "Tap the Add button on the homescreen to select it.", preferredStyle: UIAlertControllerStyle.alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//
+//        } catch let error as NSError  {
+//            print("Could not save \(error), \(error.userInfo)")
+//        }
+//    }
     
     // Update Note
     func updateEntity(id: Any?, attribute: String, value: Any) {
@@ -814,108 +738,36 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         return newImage
     }
     
-    // Update note title & group titles
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        
-        // Group Titles
-        if textField.tag > 1 {
-            self.note!.groups[textField.tag - 100] = textField.text!
-            
-            // Save Data
-//            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
-            
-        }
-        
-    }
-    
-    // Group titles in focus
-    @objc func textFieldInFocus(_ textField: UITextField) {
-        
-        // Group delete button
-        let deleteButton = UIButton()
-        deleteButton.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysOriginal), for: .normal)
-        deleteButton.frame = CGRect(x: -1, y: -1, width: 38, height: 38)
-        deleteButton.imageView?.contentMode = .scaleAspectFit
-        deleteButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-        deleteButton.tag = textField.tag
-        deleteButton.addTarget(self, action: #selector(deleteGroup), for: .touchUpInside)
-        
-        // Group down button
-        let downGroup = UIButton()
-        downGroup.setImage(#imageLiteral(resourceName: "downArrow").withRenderingMode(.alwaysOriginal), for: .normal)
-        downGroup.frame = CGRect(x: view.frame.maxX - 96, y: -6, width: 36, height: 36)
-        downGroup.imageView?.contentMode = .scaleAspectFit
-        downGroup.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-        downGroup.tag = textField.tag
-        downGroup.addTarget(self, action: #selector(moveGroupDown), for: .touchUpInside)
-        
-        // Group up button
-        let upGroup = UIButton()
-        upGroup.setImage(#imageLiteral(resourceName: "upArrow").withRenderingMode(.alwaysOriginal), for: .normal)
-        upGroup.frame = CGRect(x: view.frame.maxX - 48, y: -6, width: 36, height: 36)
-        upGroup.imageView?.contentMode = .scaleAspectFit
-        upGroup.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-        upGroup.tag = textField.tag
-        upGroup.addTarget(self, action: #selector(moveGroupUp), for: .touchUpInside)
-        
-        // Show buttons
-        textField.superview?.addSubview(deleteButton)
-        textField.superview?.addSubview(downGroup)
-        textField.superview?.addSubview(upGroup)
-        
-        // Hide delete button
-        for subView in textField.superview?.subviews as [UIView]! {
-            if let dot = subView as? UIImageView {
-                dot.isHidden = true
-            }
-        }
-
-    }
-    
-    // Group titles lost focus
-    @objc func textFieldLostFocus(_ textField: UITextField) {
-        
-        // Hide delete button
-        for subView in textField.superview?.subviews as [UIView]! {
-            if let btn = subView as? UIButton {
-                btn.isHidden = true
-            }
-            if let dot = subView as? UIImageView {
-                dot.isHidden = false
-            }
-        }
-        
-    }
     
     // Share note function
     @objc func shareNote(_ sender: UIButton!) {
         
-        // text to share
-        var text = self.NoteTitle.text
-        text?.append("\n")
-        
-        for (index, group) in self.note!.groups.enumerated() {
-            text?.append("\n *\(group)*")
-            for items in self.note!.groupItems[index] {
-                text?.append("\n - \(items)")
-            }
-            text?.append("\n")
-        }
-        
-        text?.append("\n [Shared from the Outline App]")
-        
-        // set up activity view controller
-        let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "plus")) { sharedItems in
-            self.createTemplate()
-        }
-        
-        
-        let textToShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: [createTemplate])
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
+//        // text to share
+//        var text = self.NoteTitle.text
+//        text?.append("\n")
+//
+//        for (index, group) in self.note!.groups.enumerated() {
+//            text?.append("\n *\(group)*")
+//            for items in self.note!.groupItems[index] {
+//                text?.append("\n - \(items)")
+//            }
+//            text?.append("\n")
+//        }
+//
+//        text?.append("\n [Shared from the Outline App]")
+//
+//        // set up activity view controller
+//        let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "plus")) { sharedItems in
+//            self.createTemplate()
+//        }
+//
+//
+//        let textToShare = [ text ]
+//        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: [createTemplate])
+//        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+//
+//        // present the view controller
+//        self.present(activityViewController, animated: true, completion: nil)
     }
     
 }
@@ -945,6 +797,7 @@ extension CALayer {
         }
         
         border.backgroundColor = color.cgColor;
+        self.name = "border"
         
         self.addSublayer(border)
     }
@@ -985,38 +838,6 @@ extension NoteTableViewController {
     
 }
 
-// Textfield return behaviour
-extension NoteTableViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
-        // Group titles
-        if textField.tag > 1 {
-            
-            // Set first item in group as focus
-            let nextIndexPath = NSIndexPath(row: 0, section: textField.tag - 100)
-            
-            //If the group has items
-            if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
-                textCell.textView.becomeFirstResponder()
-            } else {
-                
-                // Add empty item
-                note!.groupItems[textField.tag - 100].append("")
-                
-                // Save Data
-                self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
-                tableView.reloadData()
-            }
-            
-            
-        } else if textField.tag == 1 {
-            textField.resignFirstResponder()
-        }
-        
-        return false
-    } 
-}
 
 class TemplateActivity: UIActivity {
     

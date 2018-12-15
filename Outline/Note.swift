@@ -14,39 +14,20 @@ public class Note {
 
     // Properties
     var noteTitle: String
-    var groupItems = [[String]]()
-    var groups = [String]()
     var updatedDate = Date()
 
-    init?(noteTitle: String, groupItems: [[String]], groups: [String], date: Date) {
-
-        if groups.isEmpty || groupItems.isEmpty {
-            return nil
-        }
-
+    init?(noteTitle: String, date: Date) {
         self.noteTitle = noteTitle
-        self.groupItems = groupItems
-        self.groups = groups
         self.updatedDate = date
-    }
-    
-    func addGroup(groupName: String) {
-        groups.append(groupName)
     }
 }
 
 class Item: NSObject, NSCoding {
     var value: String
-    var children: [Item] = []
     weak var parent: Item?
     
     init(value: String) {
         self.value = value
-    }
-    
-    func add(child: Item) {
-        children.append(child)
-        child.parent = self
     }
     
     required convenience init(coder aDecoder: NSCoder) {
