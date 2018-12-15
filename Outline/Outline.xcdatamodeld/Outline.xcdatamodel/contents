@@ -3,20 +3,31 @@
     <entity name="Notes" representedClassName="Notes" syncable="YES" codeGenerationType="class">
         <attribute name="groupItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="groups" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="privateRecordData" optional="YES" attributeType="Binary" preserveAfterDeletion="YES" syncable="YES"/>
+        <attribute name="publicRecordData" optional="YES" attributeType="Binary" preserveAfterDeletion="YES" syncable="YES"/>
         <attribute name="recordData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <userInfo>
+            <entry key="CloudCoreScopes" value="private"/>
+        </userInfo>
     </entity>
     <entity name="Templates" representedClassName="Templates" syncable="YES" codeGenerationType="class">
         <attribute name="groupItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="groups" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="CloudCoreScopes" value="private"/>
+        </userInfo>
     </entity>
     <elements>
-        <element name="Notes" positionX="-36" positionY="9" width="128" height="135"/>
-        <element name="Templates" positionX="-36" positionY="36" width="128" height="120"/>
+        <element name="Notes" positionX="-36" positionY="9" width="128" height="195"/>
+        <element name="Templates" positionX="-36" positionY="36" width="128" height="135"/>
     </elements>
 </model>

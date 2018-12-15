@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CloudKit
+import CloudCore
 import LongPressReorder
 import NightNight
 
@@ -58,18 +59,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.NoteTitle.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         placeholderLabel = UILabel()
         placeholderLabel.text = "Add a title"
-        placeholderLabel.font = UIFont(name: "Gill Sans", size: 24)
         placeholderLabel.sizeToFit()
         self.NoteTitle.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (self.NoteTitle.font?.pointSize)! / 2)
         placeholderLabel.textColor = UIColor.lightGray
         placeholderLabel.isHidden = !self.NoteTitle.text.isEmpty
         
-        // Add clock and border to date
-        let dateView = UIImageView(frame : (CGRect(x: 6, y: 3, width: 12, height: 12)))
-        let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal)
-        dateView.image = clock
-        self.NoteDate.addSubview(dateView)
+        // Add border to date
         self.NoteDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         // Add Share Button
@@ -81,6 +77,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         shareButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareButton)
+
 
         // Used for cell resizing
         tableView.estimatedRowHeight = 44
@@ -269,6 +266,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             }
         }
     }
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            self.noteArray.remove(at: indexPath.row)
+            // Delete the row from the TableView
+            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 1)], with: .fade)
+        }
+    }
 
     // Enter and backspace action
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -359,9 +366,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         count += 1
                         
                         // Check next level
-                        print("i \(i)")
-                        print(i+count)
-                        print("count \(count)")
                         if (i+count <= self.noteArray.count-1) {
                             while (i+count <= self.noteArray.count-1) {
                                 if (self.noteArray[i+1].item?.parent === self.noteArray[i].item) {
@@ -375,7 +379,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     
                 }
             }
-            
+            // Save Data
+            self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
             tableView.reloadData()
             success(true)
@@ -431,7 +436,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
-//            tableView.reloadData()
+            tableView.reloadData()
             success(true)
         })
         
@@ -488,7 +493,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         })
         doneAction.backgroundColor = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
         
-        return UISwipeActionsConfiguration(actions: [doneAction, deleteAction, outdentAction])
+        return UISwipeActionsConfiguration(actions: [outdentAction, doneAction, deleteAction ])
     }
     
     // Enable row editing
@@ -624,6 +629,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         formatter.dateFormat = "MMM dd, yyyy - h:mm a"
         let myStringafd = formatter.string(from: yourDate!)
         self.NoteDate.text = myStringafd
+        self.NoteDate.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.light)
         self.NoteDate.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
     }
     
@@ -640,6 +646,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Setup Date formatter
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         
         do {
             let results = try context.fetch(request)
@@ -663,13 +670,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         let arrayObject = unarchiveObject as AnyObject! as! [DisplayGroup]
                         noteArray = arrayObject
                         
-                    }
-                    // Fetch Group Items
-                    if data.value(forKey: "groupItems") != nil {
-                        let groupItemData = data.value(forKey: "groupItems") as! NSData
-                        let unarchiveObject = NSKeyedUnarchiver.unarchiveObject(with: groupItemData as Data)
-                        let arrayObject = unarchiveObject as AnyObject! as! [[String]]
-                        note?.groupItems = arrayObject
                     }
                 } else if selectedID == nil {
                     // Set current datetime
@@ -971,7 +971,7 @@ extension NoteTableViewController {
         tableView.reloadData()
         
         // Save Data
-//        self.updateEntity(id: selectedID, attribute: "groupItems", value: self.note!.groupItems)
+        self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
     
     }
     
@@ -981,6 +981,7 @@ extension NoteTableViewController {
         
         return true
     }
+    
     
 }
 

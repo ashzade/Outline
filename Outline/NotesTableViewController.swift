@@ -32,6 +32,8 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     //Initialize flaoting button
     let floaty = Floaty()
     
+    let context = persistentContainer.viewContext
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -82,6 +84,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         // Used for cell resizing
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
+    
 
     }
     
@@ -212,12 +215,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         cell.noteTitle?.text = notes[indexPath.row][0] as? String
         cell.noteDate?.text = notes[indexPath.row][1] as? String
         
-        // Add clock icon
-        let dateView = UIImageView(frame : (CGRect(x: 0, y: 7, width: 12, height: 12)));
-        let clock = UIImage(named: "clock")!.withRenderingMode(.alwaysOriginal);
-        dateView.image = clock;
-        cell.noteDate?.addSubview(dateView)
-        
         // Themes
         cell.noteTitle?.mixedTextColor = MixedColor(normal: 0x5e5e5e, night: 0xffffff)
         cell.noteDate?.mixedTextColor = MixedColor(normal: 0x4b4b4b, night: 0xeaeaea)
@@ -290,6 +287,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         request.returnsObjectsAsFaults = false
         request.sortDescriptors = sortDescriptors
         
+        
         // Get results
         do {
             let results = try context.fetch(request)
@@ -360,8 +358,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     func getNotes() {
         // Reset page
         notes.removeAll()
-        
-        
+
         
         // Core Date
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -390,6 +387,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
                     
                     // Add title and date to notesarray
                     notes.append([data.value(forKey: "title") as! String, myStringafd, data.objectID])
+
                 } else if data.value(forKey: "title") != nil {
                     notes.append([data.value(forKey: "title") as! String, "no date", data.objectID])
                 } else {
@@ -449,6 +447,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     @objc func showEditing() {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
+    
 }
 
 // Null state

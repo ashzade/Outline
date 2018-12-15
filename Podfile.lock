@@ -5,7 +5,7 @@ PODS:
   - NightNight (0.5.0)
 
 DEPENDENCIES:
-  - CloudCore (~> 2.0)
+  - CloudCore
   - Floaty (~> 4.0.0)
   - LongPressReorder (~> 1.1)
   - NightNight
@@ -23,6 +23,6 @@ SPEC CHECKSUMS:
   LongPressReorder: 71b132d61786d45a1241dd0ff356a2bec1deff63
   NightNight: 2a5550fdd9cf424b75ebaab022c26aaba35304c8
 
-PODFILE CHECKSUM: cf855b011230c2e248060035be25b1977a987c4a
+PODFILE CHECKSUM: d96bb34cfb6be5deac0395d6d1972bf4c8ab774b
 
 COCOAPODS: 1.5.3

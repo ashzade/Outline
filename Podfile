@@ -9,6 +9,6 @@ target 'Outline' do
     pod 'LongPressReorder', '~> 1.1'
     pod "Floaty", "~> 4.0.0"
     pod 'NightNight'
-    pod 'CloudCore', '~> 2.0'
+    pod 'CloudCore'
 
 end
