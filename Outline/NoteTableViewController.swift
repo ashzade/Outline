@@ -226,7 +226,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 15,bottom: 5,right: 0)
         
-        // Add dot if parent
+        // Set up dot
         let frame = CGRect(x: 0, y: 10, width: 10, height: 10)
         let dot = UIImageView(frame: frame)
         dot.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
@@ -236,19 +236,32 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         dot.image = image
         dot.tag = 123
         
+        // Add dot if it's a parent and doesn't have one already
         if (noteArray[indexPath.row].hasChildren) {
-            cell.textView.addSubview(dot)
-        } else {
-            cell.textView.viewWithTag(123)?.isHidden = true
-        }
-        
-        // Add border if item has parent
-        if (noteArray[indexPath.row].item?.parent != nil) {
-            cell.textView.layer.addBorder(edge: UIRectEdge.left, color: UIColor(red:0.70, green:0.70, blue:0.70, alpha:1.0), thickness: 0.5)
+            if (cell.textView.viewWithTag(123) == nil) {
+                cell.textView.addSubview(dot)
             }
         } else {
-            print("no parents")
+            cell.textView.viewWithTag(123)?.removeFromSuperview()
         }
+        
+        // Set up cell border
+        let border = CGRect(x: 0, y: 0, width: 1.0, height: cell.frame.height)
+        let cellBorder = UIView(frame: border)
+        cellBorder.backgroundColor = UIColor(red:0.70, green:0.70, blue:0.70, alpha:1.0)
+        cellBorder.tag = 898
+        
+        
+        // Add border if item has parent and if doesn't have a border already
+        if (noteArray[indexPath.row].item?.parent != nil) {
+            if (cell.textView.viewWithTag(898) == nil) {
+                cell.textView.addSubview(cellBorder)
+            }
+        } else {
+            // Remove border
+            cell.textView.viewWithTag(898)?.removeFromSuperview()
+        }
+        
 
         // Set value
         cell.textView?.text = noteArray[indexPath.row].item?.value
@@ -256,13 +269,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Check for checkmark
         if (self.noteArray[indexPath.row].done == true) {
-            cell.accessoryType = .checkmark
             cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
-            cell.textView.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.ultraLight)
+            cell.textView.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.ultraLight)
         } else {
-            cell.accessoryType = .none
             cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-            cell.textView.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.light)
+            cell.textView.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
         }
         
         // Tag each cell and go to next one automatically
@@ -415,9 +426,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        // Select cell
+        let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
+        
+        // Outdent
         let outdentAction = UIContextualAction(style: .normal, title:  "Outdent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            // Select cell
-            let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
             
             // Only allow outdent if there is an indent
             if (self.noteArray[indexPath.row].indentationLevel > 0) {
@@ -430,37 +443,27 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         self.tableView.reloadRows(at: [IndexPath(item: ind, section: indexPath.section)], with: UITableViewRowAnimation.fade)
                         self.tableView.endUpdates()
                     }
-                    print(self.noteArray[ind].hasChildren)
                 }
                 
                 // Outdent
                 self.noteArray[indexPath.row].indentationLevel -= 1
+                let myIndent = self.noteArray[indexPath.row].indentationLevel
                 
+                // Adjust parents
                 
-                // Adjust parent relationship
-                if (indexPath.row-1 >= 0) {
-                    // Traverse backwards till you hit the first item with less indentation
+                // If indentation is at the start, set parent to nil
+                if (self.noteArray[indexPath.row].indentationLevel == 0) {
+                    self.noteArray[indexPath.row].item?.parent = nil
+                } else {
+                    // Traverse backwards till you hit the first item above with less indentation
                     for i in (0...indexPath.row-1).reversed() {
-//                        if (self.noteArray[i].indentationLevel < self.noteArray[indexPath.row].indentationLevel) {
-//                            // Check if parent has any other children
-////                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
-////                            self.noteArray[i].hasChildren = true
-//                            break
-//                        } else {
-//                            self.noteArray[indexPath.row].item?.parent = nil
-//                        }
-                        
-                        
+                        if (self.noteArray[i].indentationLevel < myIndent) {
+                            self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
+                            
+                            break
+                        }
                     }
                 }
-                
-                // Find parents
-//                if let child = self.noteArray.first(where: {$0.item?.parent === self.noteArray[indexPath.row].item}) {
-//                    print("parent found: \(self.noteArray[indexPath.row].item?.value)")
-//                    print("child \(child.item?.value)")
-//                } else {
-//                    print("I'm not a parent")
-//                }
                 
                 
                 
@@ -482,6 +485,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             success(true)
         })
         
+        // Delete
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
         
             // Delete children first
@@ -520,13 +524,15 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Mark item as done
         let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            // Toggle done value
-            if (self.noteArray[indexPath.row].done == false) {
-                self.noteArray[indexPath.row].done = true
-            } else if (self.noteArray[indexPath.row].done == true ) {
+            // Add checkmark
+            if cell.textView.text.contains("✓") {
+                self.noteArray[indexPath.row].item?.value = (self.noteArray[indexPath.row].item?.value)!.replacingOccurrences(of: "✓", with: "", options: NSString.CompareOptions.literal, range:nil)
                 self.noteArray[indexPath.row].done = false
+                
+            } else {
+                self.noteArray[indexPath.row].done = true
+                self.noteArray[indexPath.row].item?.value =  "✓\((self.noteArray[indexPath.row].item?.value)! ?? "")"
             }
-
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
 
