@@ -72,10 +72,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Add Share Button
         let menuButton = UIButton()
-        menuButton.setImage(#imageLiteral(resourceName: "share").withRenderingMode(.alwaysOriginal), for: .normal)
-        menuButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        menuButton.setImage(UIImage(named: "menu"), for: .normal)
+        menuButton.frame = CGRect(x: 0, y: -30, width: 44, height: 44)
         menuButton.imageView?.contentMode = .scaleAspectFit
-        menuButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        menuButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         menuButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
@@ -100,8 +100,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.view.addGestureRecognizer(tap)
         
         // Set up sidemenu
-        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        let menuRightNavigationController = storyboard!.instantiateViewController(withIdentifier: "RightMenuNavigationController") as! UISideMenuNavigationController
+        SideMenuManager.default.menuRightNavigationController = menuRightNavigationController
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .menuSlideIn
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
@@ -568,7 +568,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let myStringafd = formatter.string(from: yourDate!)
         self.NoteDate.text = myStringafd
         self.NoteDate.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.light)
-        self.NoteDate.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+        self.NoteDate.mixedTextColor = MixedColor(normal: 0x4b4b4b, night: 0xeaeaea)
     }
     
     
@@ -593,7 +593,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     // Fetch Title
                     if data.value(forKey: "title") != nil {
                         self.NoteTitle.text = data.value(forKey: "title") as? String
-                        self.NoteTitle.mixedTextColor = MixedColor(normal: UIColor(red:0.10, green:0.52, blue:0.63, alpha:1.0), night: UIColor(red:0.45, green:0.89, blue:0.97, alpha:1.0))
+                        self.NoteTitle.mixedTextColor = MixedColor(normal: 0x5e5e5e, night: 0xffffff)
                     }
                     
                     // Fetch Date

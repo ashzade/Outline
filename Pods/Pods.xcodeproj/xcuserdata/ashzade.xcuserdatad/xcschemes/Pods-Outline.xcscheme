@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C2CB1AB19DE350D06C8F5F45FC1DD932"
+               BlueprintIdentifier = "CD7D0ECA5DA5B69B872CEA1D2F91C1BB"
                BuildableName = "Pods_Outline.framework"
                BlueprintName = "Pods-Outline"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C2CB1AB19DE350D06C8F5F45FC1DD932"
+            BlueprintIdentifier = "CD7D0ECA5DA5B69B872CEA1D2F91C1BB"
             BuildableName = "Pods_Outline.framework"
             BlueprintName = "Pods-Outline"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -4,6 +4,7 @@ PODS:
   - LongPressReorder (1.2.1)
   - NightNight (0.5.0)
   - SideMenu (5.0.3)
+  - SwiftSVG (2.2.0)
 
 DEPENDENCIES:
   - CloudCore
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - LongPressReorder (~> 1.1)
   - NightNight
   - SideMenu
+  - SwiftSVG (~> 2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -19,6 +21,7 @@ SPEC REPOS:
     - LongPressReorder
     - NightNight
     - SideMenu
+    - SwiftSVG
 
 SPEC CHECKSUMS:
   CloudCore: 1d0eff6948afeb6964004b28819d77b3fbaf88be
@@ -26,7 +29,8 @@ SPEC CHECKSUMS:
   LongPressReorder: 71b132d61786d45a1241dd0ff356a2bec1deff63
   NightNight: 2a5550fdd9cf424b75ebaab022c26aaba35304c8
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
+  SwiftSVG: 19bc4e434dcf236ece45ddf75f5ee1d3ef8061e6
 
-PODFILE CHECKSUM: 099f3d355da73bcf23a625980e4237ca9685a598
+PODFILE CHECKSUM: f0ef3cf32a22da6602344adebd31d09b5ce8c0f3
 
 COCOAPODS: 1.5.3

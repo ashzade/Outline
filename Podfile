@@ -11,5 +11,6 @@ target 'Outline' do
     pod 'NightNight'
     pod 'CloudCore'
     pod 'SideMenu'
+    pod 'SwiftSVG', '~> 2.0'
 
 end

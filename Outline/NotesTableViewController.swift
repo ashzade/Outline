@@ -53,15 +53,15 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
         
-        var titleView : UIImageView
-        // set the dimensions you want here
-        titleView = UIImageView(frame:CGRect(x:0, y:0, width:20, height:20))
-        // Set how do you want to maintain the aspect
-        titleView.contentMode = .scaleAspectFit
-        titleView.image = UIImage(named: "title")
-        self.navigationItem.titleView = titleView
+        // Style title and height
+        let label = UILabel()
+        label.text = "Outline"
+        label.textAlignment = .left
+        label.textColor = UIColor(red:0.00, green:0.76, blue:0.71, alpha:1.0)
+        label.font = UIFont.systemFont(ofSize: 42, weight: UIFont.Weight.medium)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         
-        // Configure
+        // Configure add button
         floaty.buttonImage = UIImage(named: "add")
         floaty.tag = 200
         
@@ -71,11 +71,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         
         // Hide Back Button Text
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        // Add Back Button Image
-        let backButton = UIImage(named: "back")
-        self.navigationController?.navigationBar.backIndicatorImage = backButton
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButton
+        self.navigationController?.navigationBar.tintColor = UIColor(red:0.00, green:0.76, blue:0.71, alpha:1.0)
         
         // Reorder cells
         reorderTableView = LongPressReorderTableView(tableView)
@@ -84,6 +80,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         // Used for cell resizing
         self.tableView.estimatedRowHeight = 88.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
     
 
     }
