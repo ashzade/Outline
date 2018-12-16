@@ -320,13 +320,15 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 enter = true
                 let indent = noteArray[indexPath.row].indentationLevel
                 
-                noteArray.append(
+                noteArray.insert(
                     DisplayGroup(
                         indentationLevel: indent,
                         item: Item(value: ""),
                         hasChildren: false,
-                        done: false)
+                        done: false),
+                    at: indexPath.row + 1
                 )
+                
                 
                 // Save Data
                 self.updateEntity(id: selectedID, attribute: "group", value: self.noteArray)
