@@ -50,6 +50,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Themes
         self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        self.tableView.contentInset = UIEdgeInsetsMake(-10, 0, 0, 0)
         
         // Get timestamp
         currentDate = Date()
@@ -70,15 +71,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.NoteDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
         // Add Share Button
-        let shareButton = UIButton()
-        shareButton.setImage(#imageLiteral(resourceName: "share").withRenderingMode(.alwaysOriginal), for: .normal)
-        shareButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        shareButton.imageView?.contentMode = .scaleAspectFit
-        shareButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
-        shareButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
+        let menuButton = UIButton()
+        menuButton.setImage(#imageLiteral(resourceName: "share").withRenderingMode(.alwaysOriginal), for: .normal)
+        menuButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        menuButton.imageView?.contentMode = .scaleAspectFit
+        menuButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 5.0)
+        menuButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareButton)
-
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
 
         // Used for cell resizing
         tableView.estimatedRowHeight = 44
