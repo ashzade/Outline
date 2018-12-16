@@ -12,6 +12,7 @@ import CloudKit
 import CloudCore
 import LongPressReorder
 import NightNight
+import SideMenu
 
 // Get current timestamp
 var currentDate = Date()
@@ -94,11 +95,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Reset group title focus
         headerTag = 0
         
-        //Hide keyboard if tap anywhere
+        // Hide keyboard if tap anywhere
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         self.view.addGestureRecognizer(tap)
         
-        
+        // Set up sidemenu
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        SideMenuManager.default.menuFadeStatusBar = false
+        SideMenuManager.default.menuPresentMode = .menuSlideIn
+        SideMenuManager.default.menuAnimationFadeStrength = 0.5
     }
     
     //Calls this function when the tap is recognized.
@@ -533,7 +539,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 
             } else {
                 self.noteArray[indexPath.row].done = true
-                self.noteArray[indexPath.row].item?.value =  "✓\((self.noteArray[indexPath.row].item?.value)! ?? "")"
+                self.noteArray[indexPath.row].item?.value =  "✓ \((self.noteArray[indexPath.row].item?.value)! ?? "")"
             }
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
@@ -776,6 +782,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
 //
 //        // present the view controller
 //        self.present(activityViewController, animated: true, completion: nil)
+        performSegue(withIdentifier: "sideMenu", sender: self)
     }
     
 }
@@ -822,14 +829,14 @@ extension NoteTableViewController {
         noteArray.insert(movedObject, at: destinationIndexPath.row)
         
         // Move children
-        for i in (0...noteArray.count-1) {
-            if (noteArray[i].item?.parent === noteArray[destinationIndexPath.row].item) {
-                let movedChild = noteArray[i]
-                noteArray.remove(at: i)
-                noteArray.insert(movedChild, at: destinationIndexPath.row)
-            }
-        }
-        tableView.reloadData()
+//        for i in (0...noteArray.count-1) {
+//            if (noteArray[i].item?.parent === noteArray[destinationIndexPath.row].item) {
+//                let movedChild = noteArray[i]
+//                noteArray.remove(at: i)
+//                noteArray.insert(movedChild, at: destinationIndexPath.row)
+//            }
+//        }
+//        tableView.reloadData()
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)

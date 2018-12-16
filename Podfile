@@ -10,5 +10,6 @@ target 'Outline' do
     pod "Floaty", "~> 4.0.0"
     pod 'NightNight'
     pod 'CloudCore'
+    pod 'SideMenu'
 
 end
