@@ -136,7 +136,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="wx7-sZ-3Bg">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="wx7-sZ-3Bg">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -187,8 +187,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Zy-tMH">
+                                            <rect key="frame" x="20" y="0.0" width="335" height="44"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <attributedString key="attributedText"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="1NW-Cf-hDA" id="hTl-8H-6Ck"/>
+                                                <outlet property="pasteDelegate" destination="1NW-Cf-hDA" id="R97-X4-eTG"/>
+                                            </connections>
+                                        </textView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umq-sk-FwO" userLabel="Drag">
-                                            <rect key="frame" x="359" y="0.0" width="16" height="43"/>
+                                            <rect key="frame" x="356" y="0.0" width="19" height="43"/>
                                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="nightBackgroundColor">
@@ -199,24 +210,13 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Zy-tMH">
-                                            <rect key="frame" x="20" y="0.0" width="339" height="44"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <attributedString key="attributedText"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="1NW-Cf-hDA" id="hTl-8H-6Ck"/>
-                                                <outlet property="pasteDelegate" destination="1NW-Cf-hDA" id="R97-X4-eTG"/>
-                                            </connections>
-                                        </textView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" constant="20" identifier="cellIndent" id="3AM-20-c0s"/>
                                         <constraint firstAttribute="trailing" secondItem="umq-sk-FwO" secondAttribute="trailing" id="E49-ar-Qm9"/>
                                         <constraint firstAttribute="bottom" secondItem="8lJ-Zy-tMH" secondAttribute="bottom" id="HKW-qQ-OWR"/>
-                                        <constraint firstItem="umq-sk-FwO" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" constant="359" id="Ths-Og-1lF"/>
-                                        <constraint firstAttribute="trailing" secondItem="8lJ-Zy-tMH" secondAttribute="trailing" constant="16" id="ccm-D6-0vg">
+                                        <constraint firstItem="umq-sk-FwO" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" constant="356" id="Ths-Og-1lF"/>
+                                        <constraint firstAttribute="trailing" secondItem="8lJ-Zy-tMH" secondAttribute="trailing" constant="20" id="ccm-D6-0vg">
                                             <variation key="widthClass=regular" constant="36"/>
                                         </constraint>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="top" secondItem="uew-KF-3v3" secondAttribute="top" id="gj4-M6-ofC"/>
@@ -406,9 +406,6 @@
                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="24"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <color key="textShadowColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -30,13 +30,21 @@ class Item: NSObject, NSCoding {
         self.value = value
     }
     
-    required convenience init(coder aDecoder: NSCoder) {
-        let value = aDecoder.decodeObject(forKey: "value") as! String
-        self.init(value: value)
+//    required convenience init(coder aDecoder: NSCoder) {
+//        let value = aDecoder.decodeObject(forKey: "value") as! String
+//        let parent = aDecoder.decodeObject(forKey: "parent") as! Item
+//        self.init(value: value)
+//    }
+    
+    required init(coder aDecoder: NSCoder)
+    {
+        self.value = aDecoder.decodeObject(forKey: "value") as! String
+        self.parent = aDecoder.decodeObject(forKey: "parent") as? Item
     }
     
     func encode(with aCoder: NSCoder){
         aCoder.encode(value, forKey: "value")
+        aCoder.encode(parent, forKey: "parent")
     }
 }
 

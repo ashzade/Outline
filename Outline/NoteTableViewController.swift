@@ -73,7 +73,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Add Share Button
         let menuButton = UIButton()
         menuButton.setImage(UIImage(named: "menu"), for: .normal)
-        menuButton.frame = CGRect(x: 0, y: -30, width: 44, height: 44)
+        menuButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         menuButton.imageView?.contentMode = .scaleAspectFit
         menuButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         menuButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
@@ -105,6 +105,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .menuSlideIn
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
+        
     }
     
     //Calls this function when the tap is recognized.
@@ -220,8 +221,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
         
+        // Set value
+        cell.textView?.text = noteArray[indexPath.row].item?.value
+        
         // Add cell text indentation
-        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20 + 15)
+        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20)
         for constraint in cell.contentView.constraints {
             if constraint.identifier == "cellIndent" {
                 constraint.constant = indent
@@ -230,10 +234,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         self.tableView.layoutIfNeeded()
         
-        cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 15,bottom: 5,right: 0)
-        
         // Set up dot
-        let frame = CGRect(x: 0, y: 10, width: 10, height: 10)
+        let frame = CGRect(x: 8, y: 8, width: 10, height: 10)
         let dot = UIImageView(frame: frame)
         dot.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         dot.contentMode = .scaleAspectFit
@@ -241,52 +243,51 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         image = resizeImage(image: image, newWidth: 12)!
         dot.image = image
         dot.tag = 123
-        
+
         // Add dot if it's a parent and doesn't have one already
-        if (noteArray[indexPath.row].hasChildren) {
+        if (noteArray[indexPath.row].indentationLevel == 0) {
             if (cell.textView.viewWithTag(123) == nil) {
-                cell.textView.addSubview(dot)
+                // Cell padding for parent
+                cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 18,bottom: 5,right: 0)
+                
+                // Add dot
+                cell.textView?.addSubview(dot)
+                
+                // Remove border if it's there
+                for layers in cell.textView.layer.sublayers as! [CALayer] {
+                    if (layers.name == "cellBorder") {
+                        layers.isHidden = true
+                    }
+                }
             }
         } else {
-            cell.textView.viewWithTag(123)?.removeFromSuperview()
-        }
-        
-        // Set up cell border
-        let border = CGRect(x: 0, y: 0, width: 1.0, height: cell.frame.height)
-        let cellBorder = UIView(frame: border)
-        cellBorder.backgroundColor = UIColor(red:0.70, green:0.70, blue:0.70, alpha:1.0)
-        cellBorder.tag = 898
-        
-        
-        // Add border if item has parent and if doesn't have a border already
-        if (noteArray[indexPath.row].item?.parent != nil) {
-            if (cell.textView.viewWithTag(898) == nil) {
-                cell.textView.addSubview(cellBorder)
+            // Cell padding for children
+            cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 8,bottom: 5,right: 0)
+            
+            // Remove dot if it's there
+            if (cell.textView?.viewWithTag(123) != nil) {
+                cell.textView.viewWithTag(123)?.removeFromSuperview()
             }
-        } else {
-            // Remove border
-            cell.textView.viewWithTag(898)?.removeFromSuperview()
+            
+            // Add border
+            cell.textView?.addBorderLeft(size: 1, color: UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5))
+        
         }
-        
 
-        // Set value
-        cell.textView?.text = noteArray[indexPath.row].item?.value
-
-        
         // Check for checkmark
         if (self.noteArray[indexPath.row].done == true) {
-            cell.textView.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
-            cell.textView.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.ultraLight)
+            cell.textView?.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
+            cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.ultraLight)
         } else {
-            cell.textView.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-            cell.textView.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
+            cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+            cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
         }
         
         // Tag each cell and go to next one automatically
-        cell.textView.delegate = self
-        cell.textView.tag = indexPath.row + 100
+        cell.textView?.delegate = self
+        cell.textView?.tag = indexPath.row + 100
         
-        cell.textView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        cell.textView?.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
         return cell
     }
@@ -370,7 +371,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let indentAction = UIContextualAction(style: .normal, title:  "Indent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // Select cell
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
-            
                 
             // Indent
             self.noteArray[indexPath.row].indentationLevel += 1
@@ -384,8 +384,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         // Make the item you hit the parent
                         self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
                         self.noteArray[i].hasChildren = true
-
-                        break
+                        print("parent is \(self.noteArray[indexPath.row].item?.parent)")
+                        
+                        // Save Data
+                        self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
                     }
                     
                     
@@ -394,29 +396,29 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             }
             
             // Move any children
-            var count = 0
-            if (indexPath.row < self.noteArray.count-1) {
-                
-                for i in (indexPath.row...self.noteArray.count-1) {
-                    if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
-                        // Found children
-                        self.noteArray[i].indentationLevel += 1
-                        count += 1
-                        
-                        // Check next level
-                        if (i+count <= self.noteArray.count-1) {
-                            while (i+count <= self.noteArray.count-1) {
-                                if (self.noteArray[i+1].item?.parent === self.noteArray[i].item) {
-                                    self.noteArray[i+1].indentationLevel += 1
-                                    count += 1
-                                }
-                            }
-                        }
-                        
-                    }
-                    
-                }
-            }
+//            var count = 0
+//            if (indexPath.row < self.noteArray.count-1) {
+//
+//                for i in (indexPath.row...self.noteArray.count-1) {
+//                    if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
+//                        // Found children
+//                        self.noteArray[i].indentationLevel += 1
+//                        count += 1
+//
+//                        // Check next level
+//                        if (i+count <= self.noteArray.count-1) {
+//                            while (i+count <= self.noteArray.count-1) {
+//                                if (self.noteArray[i+1].item?.parent === self.noteArray[i].item) {
+//                                    self.noteArray[i+1].indentationLevel += 1
+//                                    count += 1
+//                                }
+//                            }
+//                        }
+//
+//                    }
+//
+//                }
+//            }
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
@@ -496,23 +498,45 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Delete
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
         
+            
+            let selectedRow = self.noteArray[indexPath.row].item?.value
+            
             // Delete children first
             for i in stride(from: self.noteArray.count - 1, through: indexPath.row, by: -1) {
-                if self.noteArray[i].item?.parent?.value == self.noteArray[indexPath.row].item?.value {
-                    self.noteArray.remove(at: i)
-                    tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
+                if (self.noteArray[i].item?.parent?.value == selectedRow) {
+                    // Alert for confirmation
+                    let alert = UIAlertController(title: "Delete group", message: "Are you sure you want to delete this item and it's children?", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                        
+                        // Start with children
+                        self.noteArray.remove(at: i)
+                        tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
+
+                        // Delete item in that row
+                        self.noteArray.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                    }))
+                    
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    
                 }
             }
-
-            // Delete item in that row
-            self.noteArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+                // Delete item in that row
+//                self.noteArray.remove(at: indexPath.row)
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+            
             
             // Add empty item note is empty
             if (self.noteArray.count == 0) {
                 self.noteArray.append(
                     DisplayGroup(
-                        indentationLevel: 1,
+                        indentationLevel: 0,
                         item: Item(value: ""),
                         hasChildren: false,
                         done: false)
