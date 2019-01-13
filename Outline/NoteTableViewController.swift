@@ -502,34 +502,34 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             let selectedRow = self.noteArray[indexPath.row].item?.value
             
             // Delete children first
-            for i in stride(from: self.noteArray.count - 1, through: indexPath.row, by: -1) {
-                if (self.noteArray[i].item?.parent?.value == selectedRow) {
-                    // Alert for confirmation
-                    let alert = UIAlertController(title: "Delete group", message: "Are you sure you want to delete this item and it's children?", preferredStyle: UIAlertControllerStyle.alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-                        
-                        // Start with children
-                        self.noteArray.remove(at: i)
-                        tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
-
-                        // Delete item in that row
-                        self.noteArray.remove(at: indexPath.row)
-                        tableView.deleteRows(at: [indexPath], with: .fade)
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
-                    }))
-                    
-                    
-                    self.present(alert, animated: true, completion: nil)
-                    
-                    
-                }
-            }
+//            for i in stride(from: self.noteArray.count - 1, through: indexPath.row, by: -1) {
+//                if (self.noteArray[i].item?.parent?.value == selectedRow) {
+//                    // Alert for confirmation
+//                    let alert = UIAlertController(title: "Delete group", message: "Are you sure you want to delete this item and it's children?", preferredStyle: UIAlertControllerStyle.alert)
+//
+//                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+//
+//                        // Start with children
+//                        self.noteArray.remove(at: i)
+//                        tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
+//
+//                        // Delete item in that row
+//                        self.noteArray.remove(at: indexPath.row)
+//                        tableView.deleteRows(at: [indexPath], with: .fade)
+//                    }))
+//
+//                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+//                    }))
+//
+//
+//                    self.present(alert, animated: true, completion: nil)
+//
+//
+//                }
+//            }
                 // Delete item in that row
-//                self.noteArray.remove(at: indexPath.row)
-//                tableView.deleteRows(at: [indexPath], with: .fade)
+                self.noteArray.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             
             
             // Add empty item note is empty

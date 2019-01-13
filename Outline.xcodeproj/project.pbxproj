@@ -10,7 +10,6 @@
 		C47D751838388848A02144D7 /* Pods_Outline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF61014B9A1B3120CC75456 /* Pods_Outline.framework */; };
 		D51A965721546F1500BFA574 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51A965621546F1500BFA574 /* CloudKit.framework */; };
 		D52A6AA1205D52BE0019EA87 /* InfoUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A6AA0205D52BE0019EA87 /* InfoUIViewController.swift */; };
-		D539746321C554C0008E7D51 /* NotificationsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539746221C554C0008E7D51 /* NotificationsObserver.swift */; };
 		D539746521C6F190008E7D51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D539746421C6F190008E7D51 /* Assets.xcassets */; };
 		D5674C40201ABCEC001FB175 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5674C3F201ABCEC001FB175 /* NoteCell.swift */; };
 		D576433B1FF69C4D000D0D7F /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576433A1FF69C4D000D0D7F /* Note.swift */; };
@@ -30,7 +29,6 @@
 		D51A965521546F1300BFA574 /* Outline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outline.entitlements; sourceTree = "<group>"; };
 		D51A965621546F1500BFA574 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D52A6AA0205D52BE0019EA87 /* InfoUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUIViewController.swift; sourceTree = "<group>"; };
-		D539746221C554C0008E7D51 /* NotificationsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsObserver.swift; sourceTree = "<group>"; };
 		D539746421C6F190008E7D51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5674C3F201ABCEC001FB175 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		D576433A1FF69C4D000D0D7F /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				D539746421C6F190008E7D51 /* Assets.xcassets */,
-				D539746221C554C0008E7D51 /* NotificationsObserver.swift */,
 				D51A965521546F1300BFA574 /* Outline.entitlements */,
 				D57D48AA1FF2C95300F7336B /* AppDelegate.swift */,
 				D57D48AC1FF2C95300F7336B /* NoteTableViewController.swift */,
@@ -256,7 +253,6 @@
 				D576433B1FF69C4D000D0D7F /* Note.swift in Sources */,
 				D5674C40201ABCEC001FB175 /* NoteCell.swift in Sources */,
 				D52A6AA1205D52BE0019EA87 /* InfoUIViewController.swift in Sources */,
-				D539746321C554C0008E7D51 /* NotificationsObserver.swift in Sources */,
 				D5A3EB591FF9BDFF005C31B2 /* NotesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

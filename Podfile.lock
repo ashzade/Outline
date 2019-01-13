@@ -24,7 +24,7 @@ SPEC REPOS:
     - SwiftSVG
 
 SPEC CHECKSUMS:
-  CloudCore: 1d0eff6948afeb6964004b28819d77b3fbaf88be
+  CloudCore: f06924bdb58285a834f550633e28a67e6196d7b1
   Floaty: 82854e1a5ef4fa208281ebd4da2f3d1e51ba67a6
   LongPressReorder: 71b132d61786d45a1241dd0ff356a2bec1deff63
   NightNight: 2a5550fdd9cf424b75ebaab022c26aaba35304c8

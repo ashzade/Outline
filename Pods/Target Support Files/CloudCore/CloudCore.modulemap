@@ -1,0 +1,6 @@
+framework module CloudCore {
+  umbrella header "CloudCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

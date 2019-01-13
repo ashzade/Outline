@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    let delegateHandler = CloudCoreDelegateHandler()
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Register for push notifications about changes
         application.registerForRemoteNotifications()
@@ -27,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CloudCore.config.container = CKContainer(identifier: "iCloud.com.ashzade.Outline2")
         
         // Enable CloudCore syncing
-        CloudCore.delegate = delegateHandler
         CloudCore.enable(persistentContainer: persistentContainer)
         
         // Override point for customization after application launch.
