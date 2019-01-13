@@ -20,6 +20,7 @@
 		D57D48B51FF2C95300F7336B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57D48B31FF2C95300F7336B /* LaunchScreen.storyboard */; };
 		D57D48BD1FF2CEB200F7336B /* ExpandingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D48BC1FF2CEB200F7336B /* ExpandingCell.swift */; };
 		D5A3EB591FF9BDFF005C31B2 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A3EB581FF9BDFF005C31B2 /* NotesTableViewController.swift */; };
+		D5E4B2C721EBBA5C000A628B /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E4B2C621EBBA5C000A628B /* SideMenuTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		D57D48B61FF2C95300F7336B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D57D48BC1FF2CEB200F7336B /* ExpandingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandingCell.swift; sourceTree = "<group>"; };
 		D5A3EB581FF9BDFF005C31B2 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		D5E4B2C621EBBA5C000A628B /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				D5A3EB581FF9BDFF005C31B2 /* NotesTableViewController.swift */,
 				D5674C3F201ABCEC001FB175 /* NoteCell.swift */,
 				D52A6AA0205D52BE0019EA87 /* InfoUIViewController.swift */,
+				D5E4B2C621EBBA5C000A628B /* SideMenuTableViewController.swift */,
 			);
 			path = Outline;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				D57D48AD1FF2C95300F7336B /* NoteTableViewController.swift in Sources */,
 				D57D48AB1FF2C95300F7336B /* AppDelegate.swift in Sources */,
 				D57D48BD1FF2CEB200F7336B /* ExpandingCell.swift in Sources */,
+				D5E4B2C721EBBA5C000A628B /* SideMenuTableViewController.swift in Sources */,
 				D576433B1FF69C4D000D0D7F /* Note.swift in Sources */,
 				D5674C40201ABCEC001FB175 /* NoteCell.swift in Sources */,
 				D52A6AA1205D52BE0019EA87 /* InfoUIViewController.swift in Sources */,

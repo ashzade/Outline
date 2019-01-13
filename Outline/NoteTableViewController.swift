@@ -16,6 +16,8 @@ import SideMenu
 
 // Get current timestamp
 var currentDate = Date()
+var shareTitle : String = ""
+var shareNoteArray = [DisplayGroup]()
 
 // Initialize group tag
 var headerTag : Int = 0
@@ -40,6 +42,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             hasChildren: false,
             done: false)
     ]
+    
+    var dataToSend: AnyObject?
 
     @IBOutlet weak var NoteTitle: UITextView!
     var placeholderLabel : UILabel!
@@ -105,6 +109,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .menuSlideIn
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
+        
+        // Set up sidemnu links
+        
         
     }
     
@@ -225,7 +232,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         cell.textView?.text = noteArray[indexPath.row].item?.value
         
         // Add cell text indentation
-        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 20)
+        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 13)
         for constraint in cell.contentView.constraints {
             if constraint.identifier == "cellIndent" {
                 constraint.constant = indent
@@ -779,37 +786,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Share note function
     @objc func shareNote(_ sender: UIButton!) {
-        
-//        // text to share
-//        var text = self.NoteTitle.text
-//        text?.append("\n")
-//
-//        for (index, group) in self.note!.groups.enumerated() {
-//            text?.append("\n *\(group)*")
-//            for items in self.note!.groupItems[index] {
-//                text?.append("\n - \(items)")
-//            }
-//            text?.append("\n")
-//        }
-//
-//        text?.append("\n [Shared from the Outline App]")
-//
-//        // set up activity view controller
-//        let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "plus")) { sharedItems in
-//            self.createTemplate()
-//        }
-//
-//
-//        let textToShare = [ text ]
-//        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: [createTemplate])
-//        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-//
-//        // present the view controller
-//        self.present(activityViewController, animated: true, completion: nil)
+        shareTitle = NoteTitle.text
+        shareNoteArray = noteArray
         performSegue(withIdentifier: "sideMenu", sender: self)
     }
-    
+        
 }
+
+
 
 // Border creator
 extension CALayer {
