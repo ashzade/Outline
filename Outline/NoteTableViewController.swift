@@ -80,7 +80,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         menuButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         menuButton.imageView?.contentMode = .scaleAspectFit
         menuButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        menuButton.addTarget(self, action: #selector(shareNote), for: .touchUpInside)
+        menuButton.addTarget(self, action: #selector(sideMenu), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
 
@@ -659,34 +659,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
     }
     
-    // Create template
-//    func createTemplate() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//
-//        let entity =  NSEntityDescription.entity(forEntityName: "Templates", in:managedContext)
-//        let templateEntity = NSManagedObject(entity: entity!,insertInto: managedContext)
-//
-//        templateEntity.setValue(self.NoteTitle.text, forKey: "title")
-//
-//        let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
-//        templateEntity.setValue(groupData, forKey: "groups")
-//
-//        let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
-//        templateEntity.setValue(groupItemData, forKey: "groupItems")
-//
-//        do {
-//            try managedContext.save()
-//            let alert = UIAlertController(title: "Template created!", message: "Tap the Add button on the homescreen to select it.", preferredStyle: UIAlertControllerStyle.alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-//            }))
-//            self.present(alert, animated: true, completion: nil)
-//
-//        } catch let error as NSError  {
-//            print("Could not save \(error), \(error.userInfo)")
-//        }
-//    }
-    
     // Update Note
     func updateEntity(id: Any?, attribute: String, value: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -785,7 +757,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     
     // Share note function
-    @objc func shareNote(_ sender: UIButton!) {
+    @objc func sideMenu(_ sender: UIButton!) {
         shareTitle = NoteTitle.text
         shareNoteArray = noteArray
         performSegue(withIdentifier: "sideMenu", sender: self)
