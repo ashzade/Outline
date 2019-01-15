@@ -8,6 +8,7 @@
 
 import Foundation
 import SideMenu
+import CoreData
 
 class SideMenuTableViewController: UITableViewController{
     
@@ -18,32 +19,30 @@ class SideMenuTableViewController: UITableViewController{
     }
     
     // Create template
-    //    func createTemplate() {
-    //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    //        let managedContext = appDelegate.persistentContainer.viewContext
-    //
-    //        let entity =  NSEntityDescription.entity(forEntityName: "Templates", in:managedContext)
-    //        let templateEntity = NSManagedObject(entity: entity!,insertInto: managedContext)
-    //
-    //        templateEntity.setValue(self.NoteTitle.text, forKey: "title")
-    //
-    //        let groupData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groups)
-    //        templateEntity.setValue(groupData, forKey: "groups")
-    //
-    //        let groupItemData = NSKeyedArchiver.archivedData(withRootObject: self.note!.groupItems)
-    //        templateEntity.setValue(groupItemData, forKey: "groupItems")
-    //
-    //        do {
-    //            try managedContext.save()
-    //            let alert = UIAlertController(title: "Template created!", message: "Tap the Add button on the homescreen to select it.", preferredStyle: UIAlertControllerStyle.alert)
-    //            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-    //            }))
-    //            self.present(alert, animated: true, completion: nil)
-    //
-    //        } catch let error as NSError  {
-    //            print("Could not save \(error), \(error.userInfo)")
-    //        }
-    //    }
+        func createTemplate() {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedContext = appDelegate.persistentContainer.viewContext
+    
+            let entity =  NSEntityDescription.entity(forEntityName: "Templates", in:managedContext)
+            let templateEntity = NSManagedObject(entity: entity!,insertInto: managedContext)
+    
+            templateEntity.setValue(shareTitle, forKey: "title")
+    
+            let groupData = NSKeyedArchiver.archivedData(withRootObject: shareNoteArray)
+            templateEntity.setValue(groupData, forKey: "groups")
+    
+    
+            do {
+                try managedContext.save()
+                let alert = UIAlertController(title: "Template created!", message: "Tap the Add button on the homescreen to select it.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                }))
+                self.present(alert, animated: true, completion: nil)
+    
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+        }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
@@ -68,18 +67,15 @@ class SideMenuTableViewController: UITableViewController{
     
             text.append("\n[Shared from the Outline App]")
             
-                    // set up activity view controller
-//                    let createTemplate = TemplateActivity(title: "Create Template", image: UIImage(named: "plus")) { sharedItems in
-//                        self.createTemplate()
-//                    }
-            
-            
-                    let textToShare = [ text ]
-                    let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-            
-                    // present the view controller
-                self.present(activityViewController, animated: true, completion: nil)
+            // Add to share controller
+            let textToShare = [ text ]
+            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+    
+            // present the view controller
+            self.present(activityViewController, animated: true, completion: nil)
+        case 1:
+            createTemplate()
         case 3:
             let appID = "1342189178"
             let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"

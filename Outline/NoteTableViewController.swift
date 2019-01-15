@@ -646,8 +646,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     
                     if template.isEmpty == false {
                         self.NoteTitle.text = template[0] as! String
-//                        note?.groups = template[1] as! [String]
-//                        note?.groupItems = template[2] as! [[String]]
+                        self.noteArray = template[1] as! [DisplayGroup]
                     }
                     
                 }

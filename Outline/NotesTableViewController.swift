@@ -135,7 +135,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
                 
                 floaty.addItem(floatyTitle, icon: UIImage(named: "plus")!, handler: { item in
                     selectedID = nil
-                    template = [floatyTitle, templateItem[1], templateItem[2]]
+                    template = [floatyTitle, templateItem[1]]
                     // HIDE ADD BUTTON SUBVIEW HERE
                     self.parent?.view.viewWithTag(200)?.isHidden = true
                     self.performSegue(withIdentifier: "editNote", sender: self)
@@ -298,17 +298,11 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
                         
                         // Fetch Groups
                         let groupData = data.value(forKey: "groups") as! NSData
-                        let unarchiveGroup = NSKeyedUnarchiver.unarchiveObject(with: groupData as Data)
-                        let arrayGroup = unarchiveGroup as AnyObject! as! [String]
-                        var groups = arrayGroup
+                        let unarchiveObject = NSKeyedUnarchiver.unarchiveObject(with: groupData as Data)
+                        let arrayObject = unarchiveObject as AnyObject! as! [DisplayGroup]
+                        var groups = arrayObject
                         
-                        // Fetch Group Items
-                        let groupItemData = data.value(forKey: "groupItems") as! NSData
-                        let unarchiveGroupItem = NSKeyedUnarchiver.unarchiveObject(with: groupItemData as Data)
-                        let arrayGroupItem = unarchiveGroupItem as AnyObject! as! [[String]]
-                        var groupItems = arrayGroupItem
-                        
-                        templates.append([templateTitle, groups, groupItems ])
+                        templates.append([templateTitle, groups])
                     }
                 }
                     
