@@ -63,12 +63,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.NoteTitle.tag = 1
         self.NoteTitle.delegate = self
         self.NoteTitle.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        self.NoteTitle.mixedTextColor = MixedColor(normal: 0x5e5e5e, night: 0xffffff)
         placeholderLabel = UILabel()
         placeholderLabel.text = "Add a title"
         placeholderLabel.sizeToFit()
         self.NoteTitle.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (self.NoteTitle.font?.pointSize)! / 2)
         placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.font = placeholderLabel.font.withSize(22)
         placeholderLabel.isHidden = !self.NoteTitle.text.isEmpty
         
         // Add border to date
