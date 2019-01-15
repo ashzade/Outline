@@ -94,7 +94,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         getNote()
         
         // Init row reorder
-        reorderTableView = LongPressReorderTableView(tableView)
+        reorderTableView = LongPressReorderTableView(tableView, scrollBehaviour: .early)
         reorderTableView.delegate = self
         reorderTableView.enableLongPressReorder()
         
@@ -158,6 +158,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
                 if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
                     if enter == true {
+                        self.tableView.scrollToRow(at: nextIndexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
                         textCell.textView.becomeFirstResponder()
                         enter = false
                     }
@@ -366,6 +367,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
             }
+        }
+        
+        // Title lose focus and don't allow return
+        if (textView.tag == 1) {
+            textView.resignFirstResponder()
         }
         
         return true
@@ -647,7 +653,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     updateDate(dateVar: currentDate)
                     
                     if template.isEmpty == false {
-                        self.NoteTitle.text = template[0] as! String
+                        self.NoteTitle.text = (template[0] as! String)
                         self.noteArray = template[1] as! [DisplayGroup]
                     }
                     
@@ -833,49 +839,3 @@ extension NoteTableViewController {
     
     
 }
-
-
-class TemplateActivity: UIActivity {
-    
-    var _activityTitle: String
-    var _activityImage: UIImage?
-    var activityItems = [Any]()
-    var action: ([Any]) -> Void
-    
-    init(title: String, image: UIImage?, performAction: @escaping ([Any]) -> Void) {
-        _activityTitle = title
-        _activityImage = image
-        action = performAction
-        super.init()
-    }
-    
-    override var activityTitle: String? {
-        return _activityTitle
-    }
-    
-    override var activityImage: UIImage? {
-        return _activityImage
-    }
-    
-    override var activityType: UIActivityType? {
-        return UIActivityType(rawValue: "com.ashzade.outline.addtemplate")
-    }
-    
-    override class var activityCategory: UIActivityCategory {
-        return .action
-    }
-    
-    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
-        return true
-    }
-    
-    override func prepare(withActivityItems activityItems: [Any]) {
-        self.activityItems = activityItems
-    }
-    
-    override func perform() {
-        action(activityItems)
-        activityDidFinish(true)
-    }
-}
-
