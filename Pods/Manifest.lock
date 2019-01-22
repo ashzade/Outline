@@ -9,7 +9,7 @@ PODS:
 DEPENDENCIES:
   - CloudCore
   - Floaty (~> 4.0.0)
-  - LongPressReorder (~> 1.1)
+  - LongPressReorder
   - NightNight
   - SideMenu
   - SwiftSVG (~> 2.0)
@@ -31,6 +31,6 @@ SPEC CHECKSUMS:
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SwiftSVG: 19bc4e434dcf236ece45ddf75f5ee1d3ef8061e6
 
-PODFILE CHECKSUM: f0ef3cf32a22da6602344adebd31d09b5ce8c0f3
+PODFILE CHECKSUM: 817352d410b596922392bcf766c3f421284bfbd7
 
 COCOAPODS: 1.5.3

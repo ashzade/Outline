@@ -93,7 +93,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         
         // Add button logic
         if templates.isEmpty {
-            
             // If Add button already exists just show it
             if ((addButtonView) != nil) {
                 self.parent?.view.viewWithTag(100)?.isHidden = false
@@ -108,7 +107,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
                 addButton.setImage(#imageLiteral(resourceName: "add").withRenderingMode(.alwaysOriginal), for: .normal)
                 addButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
                 addButton.addTarget(self, action: #selector(addNote), for: .touchUpInside)
-                addButton.tag = 100
+                addButtonView?.tag = 100
                 
                 addButtonView?.addSubview(addButton)
                 self.parent?.view.addSubview(addButtonView!)
@@ -257,6 +256,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
     @objc func addNote(_ sender: UIButton!) {
         selectedID = nil
         template = []
+
         // HIDE ADD BUTTON SUBVIEW HERE
         view.superview?.superview?.superview?.viewWithTag(100)?.isHidden = true
         view.superview?.superview?.superview?.viewWithTag(200)?.isHidden = true

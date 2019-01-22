@@ -76,7 +76,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Add border to date
         self.NoteDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor(red:0.87, green:0.90, blue:0.91, alpha:1.0), thickness: 0.5)
         
-        // Add Share Button
+        // Add Side Menu Button
         let menuButton = UIButton()
         menuButton.setImage(UIImage(named: "menu"), for: .normal)
         menuButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
@@ -111,10 +111,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .menuSlideIn
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
-        
-        // Set up sidemnu links
-        
-        
+
     }
     
     //Calls this function when the tap is recognized.
@@ -131,12 +128,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             var headerFrame = headerView.frame
             headerView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
             
-            //Comparison necessary to avoid infinite loop
-            if height != headerFrame.size.height {
-                headerFrame.size.height = height
-                headerView.frame = headerFrame
-                tableView.tableHeaderView = headerView
-            }
         }
         
         // Set focus to note title

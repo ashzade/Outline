@@ -6,7 +6,7 @@ target 'Outline' do
   use_frameworks!
 
   # Pods for Outline
-    pod 'LongPressReorder', '~> 1.1'
+    pod 'LongPressReorder'
     pod "Floaty", "~> 4.0.0"
     pod 'NightNight'
     pod 'CloudCore'
