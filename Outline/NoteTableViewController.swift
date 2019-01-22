@@ -37,7 +37,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     var noteArray = [
         DisplayGroup(
-            indentationLevel: 0,
+            indentationLevel: 1,
             item: Item(value: ""),
             hasChildren: false,
             done: false)
@@ -226,17 +226,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         cell.textView?.text = noteArray[indexPath.row].item?.value
         
         // Add cell text indentation
-        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 13)
-        for constraint in cell.contentView.constraints {
-            if constraint.identifier == "cellIndent" {
-                constraint.constant = indent
-            }
-        }
+        let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 10)
         
         self.tableView.layoutIfNeeded()
         
         // Set up dot
-        let frame = CGRect(x: 8, y: 8, width: 10, height: 10)
+        let frame = CGRect(x: 0, y: 8, width: 10, height: 10)
         let dot = UIImageView(frame: frame)
         dot.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         dot.contentMode = .scaleAspectFit
@@ -246,24 +241,30 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         dot.tag = 123
 
         // Add dot if it's a parent and doesn't have one already
-        if (noteArray[indexPath.row].indentationLevel == 0) {
+        if (noteArray[indexPath.row].indentationLevel == 1) {
+            for constraint in cell.contentView.constraints {
+                if constraint.identifier == "cellIndent" {
+                    constraint.constant = 8
+                }
+            }
+            
             if (cell.textView.viewWithTag(123) == nil) {
                 // Cell padding for parent
-                cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 18,bottom: 5,right: 0)
+                cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 10,bottom: 5,right: 0)
                 
                 // Add dot
                 cell.textView?.addSubview(dot)
-                
-                // Remove border if it's there
-                for layers in cell.textView.layer.sublayers as! [CALayer] {
-                    if (layers.name == "cellBorder") {
-                        layers.isHidden = true
-                    }
-                }
+
             }
         } else {
+            for constraint in cell.contentView.constraints {
+                if constraint.identifier == "cellIndent" {
+                    constraint.constant = 13
+                }
+            }
+            
             // Cell padding for children
-            cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 8,bottom: 5,right: 0)
+            cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: indent,bottom: 5,right: 0)
             
             // Remove dot if it's there
             if (cell.textView?.viewWithTag(123) != nil) {
@@ -390,7 +391,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         // Make the item you hit the parent
                         self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
                         self.noteArray[i].hasChildren = true
-                        print("parent is \(self.noteArray[indexPath.row].item?.parent)")
+//                        print("parent is \(self.noteArray[indexPath.row].item?.parent)")
                         
                         // Save Data
                         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
@@ -449,7 +450,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let outdentAction = UIContextualAction(style: .normal, title:  "Outdent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             // Only allow outdent if there is an indent
-            if (self.noteArray[indexPath.row].indentationLevel > 0) {
+            if (self.noteArray[indexPath.row].indentationLevel > 1) {
                 
                 // Remove hasChildren from parent
                 for (ind, element) in self.noteArray.enumerated() {
@@ -468,7 +469,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 // Adjust parents
                 
                 // If indentation is at the start, set parent to nil
-                if (self.noteArray[indexPath.row].indentationLevel == 0) {
+                if (self.noteArray[indexPath.row].indentationLevel == 1) {
                     self.noteArray[indexPath.row].item?.parent = nil
                 } else {
                     // Traverse backwards till you hit the first item above with less indentation
@@ -542,7 +543,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             if (self.noteArray.count == 0) {
                 self.noteArray.append(
                     DisplayGroup(
-                        indentationLevel: 0,
+                        indentationLevel: 1,
                         item: Item(value: ""),
                         hasChildren: false,
                         done: false)
