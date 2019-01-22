@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZFa-yM-zVz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZFa-yM-zVz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,6 +13,10 @@
         <scene sceneID="dAQ-Qa-xNa">
             <objects>
                 <viewController title="Loading..." id="etQ-hW-TJw" customClass="InfoUIViewControler" customModule="Outline" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Euj-Rw-T8T"/>
+                        <viewControllerLayoutGuide type="bottom" id="PUF-fr-cuj"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XAa-sw-J1c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,11 +33,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QtP-Oj-V7m" secondAttribute="trailing" id="5dH-pS-o6M"/>
-                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="bottom" secondItem="Job-EK-jtJ" secondAttribute="bottom" id="Ghw-jR-x3e"/>
+                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="bottom" secondItem="PUF-fr-cuj" secondAttribute="top" id="Ghw-jR-x3e"/>
                             <constraint firstItem="QtP-Oj-V7m" firstAttribute="leading" secondItem="XAa-sw-J1c" secondAttribute="leading" id="JYN-ua-S8y"/>
-                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="top" secondItem="Job-EK-jtJ" secondAttribute="top" id="wSf-Rh-THd"/>
+                            <constraint firstItem="QtP-Oj-V7m" firstAttribute="top" secondItem="Euj-Rw-T8T" secondAttribute="bottom" id="wSf-Rh-THd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Job-EK-jtJ"/>
                     </view>
                     <connections>
                         <outlet property="webView" destination="QtP-Oj-V7m" id="7Z5-1F-kPn"/>
@@ -190,9 +192,6 @@
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" scrollEnabled="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Zy-tMH">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="355" id="mJI-V8-VRv"/>
-                                            </constraints>
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -218,8 +217,9 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="8lJ-Zy-tMH" firstAttribute="top" secondItem="uew-KF-3v3" secondAttribute="top" id="0Tq-Qi-Zeh"/>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="leading" secondItem="uew-KF-3v3" secondAttribute="leading" identifier="cellIndent" id="9az-Io-ihH"/>
+                                        <constraint firstItem="8lJ-Zy-tMH" firstAttribute="top" secondItem="uew-KF-3v3" secondAttribute="top" id="BhJ-Yp-mmp"/>
+                                        <constraint firstAttribute="bottom" secondItem="8lJ-Zy-tMH" secondAttribute="bottom" id="FQX-x7-wKF"/>
                                         <constraint firstItem="8lJ-Zy-tMH" firstAttribute="bottom" secondItem="umq-sk-FwO" secondAttribute="bottom" constant="1" id="LTo-oL-T80"/>
                                         <constraint firstAttribute="bottom" secondItem="umq-sk-FwO" secondAttribute="bottom" constant="1" id="MHI-KU-ji9"/>
                                         <constraint firstAttribute="bottom" secondItem="8lJ-Zy-tMH" secondAttribute="bottom" id="SoC-zb-cR8"/>

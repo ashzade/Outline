@@ -87,8 +87,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
 
         // Used for cell resizing
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.rowHeight = UITableViewAutomaticDimension
+        
         
         // Fetch Note Data
         getNote()
@@ -113,6 +114,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         SideMenuManager.default.menuAnimationFadeStrength = 0.5
 
     }
+    
     
     //Calls this function when the tap is recognized.
     @objc func hideKeyBoard(sender: UITapGestureRecognizer? = nil){
@@ -161,6 +163,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -220,16 +225,14 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Declare the cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ExpandingCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! ExpandingCell
         
         // Set value
         cell.textView?.text = noteArray[indexPath.row].item?.value
         
         // Add cell text indentation
         let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 10)
-        
-        self.tableView.layoutIfNeeded()
-        
+
         // Set up dot
         let frame = CGRect(x: 0, y: 8, width: 10, height: 10)
         let dot = UIImageView(frame: frame)
@@ -240,40 +243,48 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         dot.image = image
         dot.tag = 123
 
-        // Add dot if it's a parent and doesn't have one already
+        // Group properties
         if (noteArray[indexPath.row].indentationLevel == 1) {
+
+            // Padding
             for constraint in cell.contentView.constraints {
                 if constraint.identifier == "cellIndent" {
                     constraint.constant = 8
                 }
             }
-            
-            if (cell.textView.viewWithTag(123) == nil) {
+
+            if (cell.textView?.viewWithTag(123) == nil) {
                 // Cell padding for parent
                 cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 10,bottom: 5,right: 0)
-                
+
                 // Add dot
                 cell.textView?.addSubview(dot)
 
+                // Remove border
+//                cell.textView?.addBorderLeft(size: 1, color: UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5))
+
             }
         } else {
+            // Children properties
+
+            // Padding
             for constraint in cell.contentView.constraints {
                 if constraint.identifier == "cellIndent" {
                     constraint.constant = 13
                 }
             }
-            
+
             // Cell padding for children
             cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: indent,bottom: 5,right: 0)
-            
+
             // Remove dot if it's there
             if (cell.textView?.viewWithTag(123) != nil) {
                 cell.textView.viewWithTag(123)?.removeFromSuperview()
             }
-            
+
             // Add border
-            cell.textView?.addBorderLeft(size: 1, color: UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5))
-        
+//            cell.textView?.addBorderLeft(size: 1, color: UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5))
+
         }
 
         // Check for checkmark
@@ -284,16 +295,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
             cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
         }
-        
+
         // Tag each cell and go to next one automatically
-        cell.textView?.delegate = self
-        cell.textView?.tag = indexPath.row + 100
-        
-        cell.textView?.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        
+//        cell.textView?.tag = indexPath.row + 1000
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         for subview in cell.contentView.subviews {
