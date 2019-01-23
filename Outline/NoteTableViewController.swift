@@ -261,12 +261,15 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 cell.textView?.addSubview(dot)
 
                 // Remove border
-//                cell.textView?.addBorderLeft(size: 1, color: UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5))
+                cell.textView?.removeLeftBorder()
 
             }
         } else {
             // Children properties
 
+            // Reset border
+            cell.textView?.removeLeftBorder()
+            
             // Padding
             for constraint in cell.contentView.constraints {
                 if constraint.identifier == "cellIndent" {
@@ -283,7 +286,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             }
 
             // Add border
-//            cell.textView?.addBorderLeft(size: 1, color: UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5))
+            cell.textView?.addLeftBorder()
 
         }
 
@@ -799,11 +802,35 @@ extension CALayer {
         }
         
         border.backgroundColor = color.cgColor;
-        self.name = "border"
+        border.name = "border"
         
         self.addSublayer(border)
     }
     
+}
+
+// Add and remove border
+extension UITextView {
+    func addLeftBorder (){
+        
+        let border = CALayer()
+        border.frame = CGRect(x: 0, y: 0, width: 1.0, height: self.frame.height)
+        border.backgroundColor = UIColor(red:0.79, green:0.79, blue:0.79, alpha:0.5).cgColor
+        border.name = "border"
+        
+        self.layer.addSublayer(border)
+    }
+    
+    func removeLeftBorder() {
+
+        for subview in self.layer.sublayers! {
+            if subview.name == "border" {
+                subview.removeFromSuperlayer()
+                break
+            }
+        }
+        
+    }
 }
 
 // Reordering cells
