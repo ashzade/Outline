@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E79017C1564520DD534505965CC6ADE3"
+               BlueprintIdentifier = "C24461454E20C85AEE979E2D3775CA78"
                BlueprintName = "LongPressReorder"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "LongPressReorder.framework">

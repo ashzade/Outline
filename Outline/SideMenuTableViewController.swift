@@ -9,12 +9,27 @@
 import Foundation
 import SideMenu
 import CoreData
+import NightNight
 
 class SideMenuTableViewController: UITableViewController{
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        
+        // Style title and height
+        let label = UILabel()
+        label.text = "Options"
+        label.textAlignment = .left
+        label.textColor = UIColor(red:0.00, green:0.76, blue:0.71, alpha:1.0)
+        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
+        
+        // Remove Navigation Bar border
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
     }
     
