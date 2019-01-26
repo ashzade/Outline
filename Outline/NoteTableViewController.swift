@@ -144,22 +144,22 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
         // Set active item textview
-        if (!indexPathFocus.isEmpty) {
-            let rows = tableView.numberOfRows(inSection: indexPathFocus.section) - 1
-            // If user hit enter
-            if indexPathFocus.row < rows {
-                nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
-                if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
-                    if enter == true {
-                        self.tableView.scrollToRow(at: nextIndexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
-                        textCell.textView.becomeFirstResponder()
-                        enter = false
-                    }
-                    
-                }
-                
-            } 
-        }
+//        if (!indexPathFocus.isEmpty) {
+//            let rows = tableView.numberOfRows(inSection: indexPathFocus.section) - 1
+//            // If user hit enter
+//            if indexPathFocus.row < rows {
+//                nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
+//                if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
+//                    if enter == true {
+//                        self.tableView.scrollToRow(at: nextIndexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
+//                        textCell.textView.becomeFirstResponder()
+//                        enter = false
+//                    }
+//
+//                }
+//
+//            }
+//        }
         
     }
 
@@ -252,6 +252,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     constraint.constant = 8
                 }
             }
+            
 
             if (cell.textView?.viewWithTag(123) == nil) {
                 // Cell padding for parent
@@ -294,6 +295,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         if (self.noteArray[indexPath.row].done == true) {
             cell.textView?.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
             cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.ultraLight)
+        } else if (noteArray[indexPath.row].indentationLevel == 1){
+            cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+            cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         } else {
             cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
             cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
@@ -336,6 +340,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Enter creates new item
             if(text == "\n" || text == "\r") {
                 
+                
                 indexPathFocus = indexPath
                 enter = true
                 let indent = noteArray[indexPath.row].indentationLevel
@@ -372,9 +377,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             }
         }
         
+        
         // Title lose focus and don't allow return
-        if (textView.tag == 1) {
-            textView.resignFirstResponder()
+        if(text == "\n" || text == "\r") {
+            if (textView.tag == 1) {
+                textView.resignFirstResponder()
+            }
         }
         
         return true
@@ -833,24 +841,21 @@ extension UITextView {
     }
 }
 
+var nextParent : Int = 0
+var childrenItems = [Int]()
+
 // Reordering cells
 extension NoteTableViewController {
     
     override func positionChanged(currentIndex sourceIndexPath: IndexPath, newIndex destinationIndexPath: IndexPath) {
         
         let movedObject = noteArray[sourceIndexPath.row]
+        
+        // Move item
         noteArray.remove(at: sourceIndexPath.row)
         noteArray.insert(movedObject, at: destinationIndexPath.row)
         
-        // Move children
-//        for i in (0...noteArray.count-1) {
-//            if (noteArray[i].item?.parent === noteArray[destinationIndexPath.row].item) {
-//                let movedChild = noteArray[i]
-//                noteArray.remove(at: i)
-//                noteArray.insert(movedChild, at: destinationIndexPath.row)
-//            }
-//        }
-//        tableView.reloadData()
+        tableView.reloadData()
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
@@ -861,7 +866,53 @@ extension NoteTableViewController {
         // Dismiss keyboard
         hideKeyBoard()
         
+        // Find next parent
+        if (indexPath.row+1 < noteArray.count-1) {
+            for i in (indexPath.row+1...noteArray.count-1) {
+                if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
+                    nextParent = i
+                    break
+                }
+            }
+        }
+        
+        
+        // Clear children array
+        childrenItems.removeAll()
+        
+        // Create array of children indexes
+        print("nextParent: \(nextParent)")
+        if (indexPath.row+1 <= nextParent-1) {
+            for i in (indexPath.row+1...nextParent-1) {
+                childrenItems.append(i)
+            }
+        }
+        print("children: \(childrenItems)")
+        
+        
         return true
+    }
+    
+    override func reorderFinished(initialIndex: IndexPath, finalIndex: IndexPath) {
+        // Gesture is finished and cell is back inside the table at finalIndex position
+        print(finalIndex.row)
+        // Move children now that parent is done
+//        if (childrenItems.count > 0 && initialIndex != finalIndex) {
+//            for i in childrenItems {
+//                print("item: \(i-1)")
+////                var destination = finalIndex.row - childrenItems.count
+////                print("dest: \(destination)")
+//                let child = noteArray.remove(at: i-1)
+//                noteArray.insert(child, at: finalIndex.row+i)
+//            }
+//        }
+        
+        for (i, item) in noteArray.enumerated() {
+            print("ind: \(i)")
+            print(noteArray[i].item?.value)
+        }
+        
+//        tableView.reloadData()
     }
     
     

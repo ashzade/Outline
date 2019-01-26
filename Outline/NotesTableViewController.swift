@@ -147,7 +147,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
                 item.addGestureRecognizer(recognizer)
             }
         
-
             // Add to view
             self.parent?.view.addSubview(floaty)
         }
