@@ -27,6 +27,11 @@ var indexPathFocus = IndexPath()
 var nextIndexPath = NSIndexPath()
 var enter = false
 
+// For moving and deleting groups
+var nextGroup : Int = 0
+var childrenItems = [DisplayGroup]()
+var parentInd : Int = 0
+
 class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Row reorder
@@ -135,18 +140,18 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         if (parentRow+1 < noteArray.count-1) {
             for i in (parentRow+1...noteArray.count-1) {
                 if (noteArray[i].indentationLevel == noteArray[parentRow].indentationLevel) {
-                    nextParent = i
+                    nextGroup = i
                     break
                 }
             }
         } else {
             // No more groups
-            nextParent = noteArray.count
+            nextGroup = noteArray.count
         }
         
         // Toggle expanded for children
-        if (parentRow+1 <= nextParent-1) {
-            for i in (parentRow+1...nextParent-1) {
+        if (parentRow+1 <= nextGroup-1) {
+            for i in (parentRow+1...nextGroup-1) {
                 noteArray[i].isExpanded.toggle()
                 
             }
@@ -580,38 +585,57 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
         
             
-            let selectedRow = self.noteArray[indexPath.row].item?.value
-            
-            // Delete children first
-//            for i in stride(from: self.noteArray.count - 1, through: indexPath.row, by: -1) {
-//                if (self.noteArray[i].item?.parent?.value == selectedRow) {
-//                    // Alert for confirmation
-//                    let alert = UIAlertController(title: "Delete group", message: "Are you sure you want to delete this item and it's children?", preferredStyle: UIAlertControllerStyle.alert)
-//
-//                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-//
-//                        // Start with children
-//                        self.noteArray.remove(at: i)
-//                        tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
-//
-//                        // Delete item in that row
-//                        self.noteArray.remove(at: indexPath.row)
-//                        tableView.deleteRows(at: [indexPath], with: .fade)
-//                    }))
-//
-//                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
-//                    }))
-//
-//
-//                    self.present(alert, animated: true, completion: nil)
-//
-//
-//                }
-//            }
-                // Delete item in that row
+            // If group
+            if (self.noteArray[indexPath.row].hasChildren) {
+                // Alert for confirmation
+                let alert = UIAlertController(title: "Delete group", message: "Are you sure you want to delete this item and it's children?", preferredStyle: UIAlertControllerStyle.alert)
+
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    
+                    // Find next group
+                    if (indexPath.row+1 < self.noteArray.count-1) {
+                        for i in (indexPath.row+1...self.noteArray.count-1) {
+                            // If there is another group
+                            if (self.noteArray[i].indentationLevel == self.noteArray[indexPath.row].indentationLevel) {
+                                nextGroup = i
+                                break
+                            } else {
+                                // No more groups
+                                nextGroup = self.noteArray.count
+                            }
+                        }
+                    }
+                    
+                    // Delete children first
+                    if (indexPath.row+1 <= nextGroup-1) {
+                        for i in (indexPath.row+1...nextGroup-1).reversed() {
+                            self.noteArray.remove(at: i)
+                            tableView.deleteRows(at: [IndexPath(row: i, section: indexPath.section)], with: .fade)
+
+                        }
+                    }
+
+                    // Delete item in that row
+                    self.noteArray.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    
+                }))
+
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { action in
+                }))
+
+
+                self.present(alert, animated: true, completion: nil)
+                
+            } else {
+                
+                // Delete item
                 self.noteArray.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+            }
             
+            
+
             
             // Add empty item note is empty
             if (self.noteArray.count == 0) {
@@ -626,7 +650,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 // Reload table to see the empty item
                 tableView.reloadData()
             }
-        
+
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
@@ -897,10 +921,6 @@ extension UITextView {
     }
 }
 
-var nextParent : Int = 0
-var childrenItems = [DisplayGroup]()
-var parentInd : Int = 0
-
 // Reordering cells
 extension NoteTableViewController {
     
@@ -929,11 +949,11 @@ extension NoteTableViewController {
             for i in (indexPath.row+1...noteArray.count-1) {
                 // If there is another group
                 if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
-                    nextParent = i
+                    nextGroup = i
                     break
                 } else {
                     // No more groups
-                    nextParent = noteArray.count
+                    nextGroup = noteArray.count
                 }
             }
         }
@@ -942,11 +962,10 @@ extension NoteTableViewController {
         childrenItems.removeAll()
         
         // Create array of children indexes
-        if (indexPath.row+1 <= nextParent-1) {
-            for i in (indexPath.row+1...nextParent-1) {
+        if (indexPath.row+1 <= nextGroup-1) {
+            for i in (indexPath.row+1...nextGroup-1) {
                 childrenItems.append(noteArray[i])
             }
-            
         }
         
         
@@ -958,8 +977,6 @@ extension NoteTableViewController {
         
         // Only move hcildren if they exist and group has moved
         if (initialIndex != finalIndex && childrenItems.count > 0) {
-            
-            
             
             // Insert children back into array
             for (i, child) in childrenItems.enumerated() {
