@@ -40,7 +40,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             indentationLevel: 1,
             item: Item(value: ""),
             hasChildren: false,
-            done: false)
+            done: false,
+            isExpanded: true)
     ]
     
     var dataToSend: AnyObject?
@@ -121,6 +122,48 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         view.endEditing(true)
     }
     
+    // Collapse group
+    @objc func collapseGroup(sender: UITapGestureRecognizer? = nil){
+        let tappedImage = sender?.view as! UIImageView
+        
+        var cell = tappedImage.superview?.superview?.superview as! UITableViewCell
+        
+        let indexPath = self.tableView.indexPath(for: cell)
+        let parentRow = indexPath!.row
+        
+        // Find next parent if there is another group
+        if (parentRow+1 < noteArray.count-1) {
+            for i in (parentRow+1...noteArray.count-1) {
+                if (noteArray[i].indentationLevel == noteArray[parentRow].indentationLevel) {
+                    nextParent = i
+                    break
+                }
+            }
+        } else {
+            // No more groups
+            nextParent = noteArray.count
+        }
+        
+        // Toggle expanded for children
+        if (parentRow+1 <= nextParent-1) {
+            for i in (parentRow+1...nextParent-1) {
+                noteArray[i].isExpanded.toggle()
+                
+            }
+        }
+            
+        
+        
+        for i in (0...noteArray.count-1) {
+            print("loop: \(noteArray[i].isExpanded)")
+        }
+        
+        // Save Data
+        self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+        
+        tableView.reloadData()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -164,6 +207,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        print(noteArray[indexPath.row].isExpanded)
+//        if (noteArray[indexPath.row].isExpanded == false) {
+//            return 1.0
+//        } else {
+//            return UITableViewAutomaticDimension
+//        }
+        
         return UITableViewAutomaticDimension
     }
 
@@ -242,6 +292,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         image = resizeImage(image: image, newWidth: 12)!
         dot.image = image
         dot.tag = 123
+        dot.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(collapseGroup))
+        dot.addGestureRecognizer(tap)
 
         // Group properties
         if (noteArray[indexPath.row].indentationLevel == 1) {
@@ -350,7 +404,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         indentationLevel: indent,
                         item: Item(value: ""),
                         hasChildren: false,
-                        done: false),
+                        done: false,
+                        isExpanded: true),
                     at: indexPath.row + 1
                 )
                 
@@ -565,7 +620,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         indentationLevel: 1,
                         item: Item(value: ""),
                         hasChildren: false,
-                        done: false)
+                        done: false,
+                        isExpanded: true)
                 )
                 // Reload table to see the empty item
                 tableView.reloadData()
@@ -842,7 +898,8 @@ extension UITextView {
 }
 
 var nextParent : Int = 0
-var childrenItems = [Int]()
+var childrenItems = [DisplayGroup]()
+var parentInd : Int = 0
 
 // Reordering cells
 extension NoteTableViewController {
@@ -850,6 +907,7 @@ extension NoteTableViewController {
     override func positionChanged(currentIndex sourceIndexPath: IndexPath, newIndex destinationIndexPath: IndexPath) {
         
         let movedObject = noteArray[sourceIndexPath.row]
+        parentInd = destinationIndexPath.row
         
         // Move item
         noteArray.remove(at: sourceIndexPath.row)
@@ -876,18 +934,17 @@ extension NoteTableViewController {
             }
         }
         
-        
         // Clear children array
         childrenItems.removeAll()
         
         // Create array of children indexes
-        print("nextParent: \(nextParent)")
         if (indexPath.row+1 <= nextParent-1) {
             for i in (indexPath.row+1...nextParent-1) {
-                childrenItems.append(i)
+                childrenItems.append(noteArray[i])
+//                noteArray.remove(at: i)
             }
+            
         }
-        print("children: \(childrenItems)")
         
         
         return true
@@ -895,7 +952,7 @@ extension NoteTableViewController {
     
     override func reorderFinished(initialIndex: IndexPath, finalIndex: IndexPath) {
         // Gesture is finished and cell is back inside the table at finalIndex position
-        print(finalIndex.row)
+        
         // Move children now that parent is done
 //        if (childrenItems.count > 0 && initialIndex != finalIndex) {
 //            for i in childrenItems {
@@ -907,12 +964,39 @@ extension NoteTableViewController {
 //            }
 //        }
         
-        for (i, item) in noteArray.enumerated() {
-            print("ind: \(i)")
-            print(noteArray[i].item?.value)
+        // Only move hcildren if they exist and group has moved
+        if (initialIndex != finalIndex && childrenItems.count > 0) {
+            for (i, child) in childrenItems.enumerated() {
+                
+                // Find and remove children from main array first
+//                if let index = noteArray.index(of:child) {
+//                    print("Remove ind: \(index)")
+//                    noteArray.remove(at: index)
+//                }
+            
+                
+//                print("note count: \(noteArray.count)")
+                
+                // Insert children back into array
+//                print("child: \(child.item?.value)")
+                var ind = (i + 1) + (finalIndex.row)
+//                print("ind: \(ind)")
+                noteArray.insert(child, at: ind)
+                
+                
+            }
+            
+            for (i, child) in childrenItems.enumerated() {
+                // Remove originals
+                if let ind = noteArray.index(where: {$0 == child}) {
+                    noteArray.remove(at: ind)
+                }
+                
+            }
+            
         }
         
-//        tableView.reloadData()
+        tableView.reloadData()
     }
     
     

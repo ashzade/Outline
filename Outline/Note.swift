@@ -30,12 +30,6 @@ class Item: NSObject, NSCoding {
         self.value = value
     }
     
-//    required convenience init(coder aDecoder: NSCoder) {
-//        let value = aDecoder.decodeObject(forKey: "value") as! String
-//        let parent = aDecoder.decodeObject(forKey: "parent") as! Item
-//        self.init(value: value)
-//    }
-    
     required init(coder aDecoder: NSCoder)
     {
         self.value = aDecoder.decodeObject(forKey: "value") as! String
@@ -53,12 +47,14 @@ class DisplayGroup: NSObject, NSCoding {
     var item: Item?
     var hasChildren: Bool
     var done: Bool
+    var isExpanded: Bool
     
-    init(indentationLevel: Int, item: Item, hasChildren: Bool, done: Bool ) {
+    init(indentationLevel: Int, item: Item, hasChildren: Bool, done: Bool, isExpanded: Bool ) {
         self.indentationLevel = indentationLevel
         self.item = item
         self.hasChildren = hasChildren
         self.done = done
+        self.isExpanded = true
     }
     
     required init(coder aDecoder: NSCoder)
@@ -67,6 +63,7 @@ class DisplayGroup: NSObject, NSCoding {
         self.hasChildren = aDecoder.decodeBool(forKey: "hasChildren")
         self.item = aDecoder.decodeObject(forKey: "item") as! Item
         self.done = aDecoder.decodeBool(forKey: "done")
+        self.isExpanded = aDecoder.decodeBool(forKey: "isExpanded")
     }
     
     func encode(with aCoder: NSCoder)
@@ -75,5 +72,6 @@ class DisplayGroup: NSObject, NSCoding {
         aCoder.encode(hasChildren, forKey: "hasChildren")
         aCoder.encode(indentationLevel, forKey: "indentationLevel")
         aCoder.encode(done, forKey: "done")
+        aCoder.encode(done, forKey: "isExpanded")
     }
 }
