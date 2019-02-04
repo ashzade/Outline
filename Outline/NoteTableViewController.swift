@@ -959,21 +959,36 @@ extension NoteTableViewController {
         // Only move hcildren if they exist and group has moved
         if (initialIndex != finalIndex && childrenItems.count > 0) {
             
+            
+            
             // Insert children back into array
             for (i, child) in childrenItems.enumerated() {
-                var ind = (i + 1) + (finalIndex.row)
+                let ind = (i + 1) + (finalIndex.row)
                 noteArray.insert(child, at: ind)
                 
             }
             
-            // Find and remove originals
-            for (i, child) in childrenItems.enumerated() {
-                
-                if let ind = noteArray.index(where: {$0 == child}) {
-                    noteArray.remove(at: ind)
+            // If moving top to bottom
+            if (initialIndex < finalIndex) {
+                // Find and remove originals from the top down
+                for (i, child) in childrenItems.enumerated() {
+                    
+                    if let ind = noteArray.index(where: {$0 == child}) {
+                        noteArray.remove(at: ind)
+                    }
+                    
                 }
-                
+            } else {
+                // Find and remove originals from the bottom up
+                for (i, child) in childrenItems.enumerated() {
+                    
+                    if let ind = noteArray.reversed().index(where: {$0 == child}) {
+                        noteArray.remove(at: ind.base-1)
+                    }
+                    
+                }
             }
+            
             
         }
         
