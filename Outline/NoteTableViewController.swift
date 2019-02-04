@@ -924,12 +924,16 @@ extension NoteTableViewController {
         // Dismiss keyboard
         hideKeyBoard()
         
-        // Find next parent
+        // Find next group
         if (indexPath.row+1 < noteArray.count-1) {
             for i in (indexPath.row+1...noteArray.count-1) {
+                // If there is another group
                 if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
                     nextParent = i
                     break
+                } else {
+                    // No more groups
+                    nextParent = noteArray.count
                 }
             }
         }
@@ -941,7 +945,6 @@ extension NoteTableViewController {
         if (indexPath.row+1 <= nextParent-1) {
             for i in (indexPath.row+1...nextParent-1) {
                 childrenItems.append(noteArray[i])
-//                noteArray.remove(at: i)
             }
             
         }
@@ -953,41 +956,19 @@ extension NoteTableViewController {
     override func reorderFinished(initialIndex: IndexPath, finalIndex: IndexPath) {
         // Gesture is finished and cell is back inside the table at finalIndex position
         
-        // Move children now that parent is done
-//        if (childrenItems.count > 0 && initialIndex != finalIndex) {
-//            for i in childrenItems {
-//                print("item: \(i-1)")
-////                var destination = finalIndex.row - childrenItems.count
-////                print("dest: \(destination)")
-//                let child = noteArray.remove(at: i-1)
-//                noteArray.insert(child, at: finalIndex.row+i)
-//            }
-//        }
-        
         // Only move hcildren if they exist and group has moved
         if (initialIndex != finalIndex && childrenItems.count > 0) {
-            for (i, child) in childrenItems.enumerated() {
-                
-                // Find and remove children from main array first
-//                if let index = noteArray.index(of:child) {
-//                    print("Remove ind: \(index)")
-//                    noteArray.remove(at: index)
-//                }
             
-                
-//                print("note count: \(noteArray.count)")
-                
-                // Insert children back into array
-//                print("child: \(child.item?.value)")
+            // Insert children back into array
+            for (i, child) in childrenItems.enumerated() {
                 var ind = (i + 1) + (finalIndex.row)
-//                print("ind: \(ind)")
                 noteArray.insert(child, at: ind)
-                
                 
             }
             
+            // Find and remove originals
             for (i, child) in childrenItems.enumerated() {
-                // Remove originals
+                
                 if let ind = noteArray.index(where: {$0 == child}) {
                     noteArray.remove(at: ind)
                 }
