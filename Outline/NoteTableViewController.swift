@@ -856,6 +856,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     @objc func sideMenu(_ sender: UIButton!) {
         shareTitle = NoteTitle.text
         shareNoteArray = noteArray
+        hideKeyBoard()
         performSegue(withIdentifier: "sideMenu", sender: self)
     }
         
@@ -1008,6 +1009,9 @@ extension NoteTableViewController {
         }
         
         tableView.reloadData()
+        
+        // Save Data
+        self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
     }
     
     
