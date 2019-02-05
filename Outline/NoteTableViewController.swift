@@ -192,22 +192,22 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
         // Set active item textview
-//        if (!indexPathFocus.isEmpty) {
-//            let rows = tableView.numberOfRows(inSection: indexPathFocus.section) - 1
-//            // If user hit enter
-//            if indexPathFocus.row < rows {
-//                nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
-//                if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
-//                    if enter == true {
-//                        self.tableView.scrollToRow(at: nextIndexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
-//                        textCell.textView.becomeFirstResponder()
-//                        enter = false
-//                    }
-//
-//                }
-//
-//            }
-//        }
+        if (!indexPathFocus.isEmpty) {
+            let rows = self.noteArray.count - 1
+            // If user hit enter
+            if indexPathFocus.row < rows {
+                nextIndexPath = NSIndexPath(row: indexPathFocus.row + 1, section: indexPathFocus.section)
+                if let textCell = tableView.cellForRow(at: nextIndexPath as IndexPath) as? ExpandingCell {
+                    if enter == true {
+                        self.tableView.scrollToRow(at: nextIndexPath as IndexPath, at: UITableViewScrollPosition.middle, animated: true)
+                        textCell.textView.becomeFirstResponder()
+                        enter = false
+                    }
+
+                }
+
+            }
+        }
         
     }
 
@@ -635,8 +635,6 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             }
             
             
-
-            
             // Add empty item note is empty
             if (self.noteArray.count == 0) {
                 self.noteArray.append(
@@ -664,7 +662,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             // Add checkmark
             if cell.textView.text.contains("✓") {
-                self.noteArray[indexPath.row].item?.value = (self.noteArray[indexPath.row].item?.value)!.replacingOccurrences(of: "✓", with: "", options: NSString.CompareOptions.literal, range:nil)
+                self.noteArray[indexPath.row].item?.value = (self.noteArray[indexPath.row].item?.value)!.replacingOccurrences(of: "✓ ", with: "", options: NSString.CompareOptions.literal, range:nil)
                 self.noteArray[indexPath.row].done = false
                 
             } else {
