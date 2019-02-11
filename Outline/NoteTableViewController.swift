@@ -49,6 +49,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             isExpanded: true)
     ]
     
+    var cellHeights: [IndexPath : CGFloat] = [:]
+    
     var dataToSend: AnyObject?
 
     @IBOutlet weak var NoteTitle: UITextView!
@@ -222,6 +224,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         return UITableViewAutomaticDimension
     }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[indexPath] ?? 40.0
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -376,6 +382,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                subview.mixedBackgroundColor = MixedColor(normal: 0xefefef, night: 0x4b4b4b)
             }
         }
+        
+        cellHeights[indexPath] = cell.frame.size.height
     }
     
     // Override to support editing the table view.

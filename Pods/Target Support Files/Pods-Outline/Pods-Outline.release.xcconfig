@@ -1,10 +1,10 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/CloudCore" "${PODS_CONFIGURATION_BUILD_DIR}/Floaty" "${PODS_CONFIGURATION_BUILD_DIR}/LongPressReorder" "${PODS_CONFIGURATION_BUILD_DIR}/NightNight" "${PODS_CONFIGURATION_BUILD_DIR}/SideMenu" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftSVG"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/CloudCore/CloudCore.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Floaty/Floaty.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/LongPressReorder/LongPressReorder.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/NightNight/NightNight.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SideMenu/SideMenu.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftSVG/SwiftSVG.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/CloudCore/CloudCore.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Floaty/Floaty.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/LongPressReorder/LongPressReorder.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/NightNight/NightNight.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SideMenu/SideMenu.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SwiftSVG/SwiftSVG.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "CloudCore" -framework "Floaty" -framework "LongPressReorder" -framework "NightNight" -framework "SideMenu" -framework "SwiftSVG"
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+OTHER_LDFLAGS = $(inherited) -framework "CloudCore" -framework "CloudKit" -framework "CoreData" -framework "Floaty" -framework "Foundation" -framework "LongPressReorder" -framework "NightNight" -framework "SideMenu" -framework "SwiftSVG" -framework "UIKit"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
