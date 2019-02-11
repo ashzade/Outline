@@ -93,6 +93,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         menuButton.addTarget(self, action: #selector(sideMenu), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
+        
 
         // Used for cell resizing
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
@@ -169,7 +170,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
         
+        let contentOffset = tableView.contentOffset
         tableView.reloadData()
+        tableView.setContentOffset(contentOffset, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -368,7 +371,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
             cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
         }
-
+        
         // Tag each cell and go to next one automatically
 //        cell.textView?.tag = indexPath.row + 1000
 
@@ -378,10 +381,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         for subview in cell.contentView.subviews {
-            if subview.tag == 0 {
+            if subview.tag == 1234 {
                subview.mixedBackgroundColor = MixedColor(normal: 0xefefef, night: 0x4b4b4b)
             }
         }
+        
         
         cellHeights[indexPath] = cell.frame.size.height
     }
@@ -428,7 +432,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 self.updateEntity(id: selectedID, attribute: "group", value: self.noteArray)
             
                 // Reload the table to reflect the new item
+                let contentOffset = tableView.contentOffset
                 tableView.reloadData()
+                tableView.setContentOffset(contentOffset, animated: false)
                 
                 return false
             }
@@ -517,7 +523,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
+            let contentOffset = tableView.contentOffset
             tableView.reloadData()
+            tableView.setContentOffset(contentOffset, animated: false)
+            
             success(true)
         })
         
@@ -586,7 +595,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
+            let contentOffset = tableView.contentOffset
             tableView.reloadData()
+            tableView.setContentOffset(contentOffset, animated: false)
+            
             success(true)
         })
         
@@ -655,7 +667,9 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         isExpanded: true)
                 )
                 // Reload table to see the empty item
+                let contentOffset = tableView.contentOffset
                 tableView.reloadData()
+                tableView.setContentOffset(contentOffset, animated: false)
             }
 
             // Save Data
@@ -682,7 +696,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
 
             success(true)
-            self.tableView.reloadData()
+            
+            let contentOffset = tableView.contentOffset
+            tableView.reloadData()
+            tableView.setContentOffset(contentOffset, animated: false)
         })
         doneAction.backgroundColor = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
         
@@ -941,7 +958,9 @@ extension NoteTableViewController {
         noteArray.remove(at: sourceIndexPath.row)
         noteArray.insert(movedObject, at: destinationIndexPath.row)
         
+        let contentOffset = tableView.contentOffset
         tableView.reloadData()
+        tableView.setContentOffset(contentOffset, animated: false)
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
@@ -1017,7 +1036,9 @@ extension NoteTableViewController {
             
         }
         
+        let contentOffset = tableView.contentOffset
         tableView.reloadData()
+        tableView.setContentOffset(contentOffset, animated: false)
         
         // Save Data
         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
