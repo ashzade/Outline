@@ -199,7 +199,7 @@
                                                 <outlet property="pasteDelegate" destination="1NW-Cf-hDA" id="R97-X4-eTG"/>
                                             </connections>
                                         </textView>
-                                        <view tag="1234" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umq-sk-FwO" userLabel="Drag">
+                                        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umq-sk-FwO" userLabel="Drag">
                                             <rect key="frame" x="355" y="0.0" width="20" height="43"/>
                                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -355,6 +355,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="vgh-13-9HZ"/>
+                    <connections>
+                        <outlet property="feedback" destination="h7H-iq-uBb" id="Q9t-Ga-zPx"/>
+                        <outlet property="rate" destination="84a-dM-urj" id="WnG-82-Oqg"/>
+                        <outlet property="share" destination="qfI-5h-fzE" id="XBo-88-5oj"/>
+                        <outlet property="template" destination="NOp-2h-c10" id="vWM-D1-mlo"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHY-kZ-K8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,6 +13,10 @@ import NightNight
 
 class SideMenuTableViewController: UITableViewController{
     
+    @IBOutlet weak var share: UILabel!
+    @IBOutlet weak var template: UILabel!
+    @IBOutlet weak var rate: UILabel!
+    @IBOutlet weak var feedback: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,6 +34,12 @@ class SideMenuTableViewController: UITableViewController{
         // Remove Navigation Bar border
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Theming options
+        share.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+        template.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+        rate.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+        feedback.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         
     }
     
@@ -110,6 +120,11 @@ class SideMenuTableViewController: UITableViewController{
             print("default")
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
     }
     
 }
