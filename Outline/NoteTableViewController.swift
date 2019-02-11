@@ -99,6 +99,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         // Fetch Note Data
         getNote()
+        self.restorationIdentifier = "NoteVC"
         
         // Init row reorder
         reorderTableView = LongPressReorderTableView(tableView, scrollBehaviour: .early)
@@ -470,13 +471,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         // Make the item you hit the parent
                         self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
                         self.noteArray[i].hasChildren = true
-//                        print("parent is \(self.noteArray[indexPath.row].item?.parent)")
                         
                         // Save Data
                         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+                        
+                        break
+                        
                     }
-                    
-                    
                     
                 }
             }

@@ -203,7 +203,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Outline/Pods-Outline-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Outline/Pods-Outline-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CloudCore/CloudCore.framework",
 				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
 				"${BUILT_PRODUCTS_DIR}/LongPressReorder/LongPressReorder.framework",
@@ -222,7 +222,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Outline/Pods-Outline-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Outline/Pods-Outline-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7D64619E8CCBBF7C9C33527 /* [CP] Check Pods Manifest.lock */ = {
