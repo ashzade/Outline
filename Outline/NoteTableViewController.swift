@@ -93,14 +93,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         menuButton.imageView?.contentMode = .scaleAspectFit
         menuButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         menuButton.addTarget(self, action: #selector(sideMenu), for: .touchUpInside)
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
         
-
         // Used for cell resizing
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.rowHeight = UITableViewAutomaticDimension
-        
         
         // Fetch Note Data
         getNote()
@@ -532,7 +529,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             success(true)
         })
         
-        
+        indentAction.image = UIImage(named: "indent")
         
         return UISwipeActionsConfiguration(actions: [indentAction])
         
@@ -546,7 +543,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
         
         // Outdent
-        let outdentAction = UIContextualAction(style: .normal, title:  "Outdent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let outdentAction = UIContextualAction(style: .normal, title:  "Outdent >", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             // Only allow outdent if there is an indent
             if (self.noteArray[indexPath.row].indentationLevel > 1) {
@@ -603,6 +600,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             success(true)
         })
+        
+        outdentAction.image = UIImage(named: "outdent")
         
         // Delete
         let deleteAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
@@ -681,6 +680,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             success(true)
         })
         deleteAction.backgroundColor = .red
+        deleteAction.image = UIImage(named: "delete")
         
         // Mark item as done
         let doneAction = UIContextualAction(style: .normal, title:  "Done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
@@ -703,7 +703,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             tableView.reloadData()
             tableView.setContentOffset(contentOffset, animated: false)
         })
-        doneAction.backgroundColor = UIColor(red:0.38, green:0.38, blue:0.38, alpha:1.0)
+        doneAction.backgroundColor = UIColor(red:0.00, green:0.76, blue:0.71, alpha:1.0)
+        doneAction.image = UIImage(named: "check")
         
         return UISwipeActionsConfiguration(actions: [outdentAction, doneAction, deleteAction ])
     }

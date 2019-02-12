@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "delete-1.png",
+      "filename" : "check-mark.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "delete-2.png",
+      "filename" : "check-mark-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "delete.png",
+      "filename" : "check-mark-2.png",
       "scale" : "3x"
     }
   ],
