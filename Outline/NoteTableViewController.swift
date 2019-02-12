@@ -479,7 +479,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 if (indexPath.row+1 < self.noteArray.count-1) {
                     for j in (indexPath.row+1...self.noteArray.count-1) {
                         // If there is another group
-                        if (self.noteArray[j].indentationLevel == self.noteArray[indexPath.row].indentationLevel) {
+                        if (self.noteArray[j].indentationLevel <= self.noteArray[indexPath.row].indentationLevel) {
                             nextGroup = j
                             break
                         } else {
@@ -580,7 +580,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 if (indexPath.row+1 < self.noteArray.count-1) {
                     for j in (indexPath.row+1...self.noteArray.count-1) {
                         // If there is another group
-                        if (self.noteArray[j].indentationLevel == self.noteArray[indexPath.row].indentationLevel) {
+                        if (self.noteArray[j].indentationLevel <= myIndent) {
                             nextGroup = j
                             break
                         } else {
@@ -592,17 +592,23 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     // Outdent children
                     if (indexPath.row+1 < nextGroup-1) {
                         for k in (indexPath.row+1...nextGroup-1) {
-                            self.noteArray[k].indentationLevel -= 1
+                            if (self.noteArray[k].indentationLevel > 0) {
+                                self.noteArray[k].indentationLevel -= 1
+                            }
+                            
                         }
                     } else {
-                        self.noteArray[indexPath.row+1].indentationLevel -= 1
+                        if (self.noteArray[indexPath.row+1].indentationLevel > 0) {
+                            self.noteArray[indexPath.row+1].indentationLevel -= 1
+                        }
+                       
                     }
                 }
                 
+                // Outdent
+                self.noteArray[indexPath.row].indentationLevel -= 1
             }
             
-            // Outdent
-            self.noteArray[indexPath.row].indentationLevel -= 1
             
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
