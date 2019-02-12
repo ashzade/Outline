@@ -79,7 +79,7 @@ class SideMenuTableViewController: UITableViewController{
             
             for (i, group) in shareNoteArray.enumerated() {
                 if let item = group.item?.value {
-                    text.append(String(repeating: "- ", count: group.indentationLevel))
+                    text.append(String(repeating: "- ", count: group.indentationLevel - 1))
                     if (group.hasChildren) {
                         text.append("• \(item)")
                     } else {
