@@ -471,12 +471,33 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let indentAction = UIContextualAction(style: .normal, title:  "Indent", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // Select cell
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
-                
-            // Indent
-            self.noteArray[indexPath.row].indentationLevel += 1
             
-            // Create parent relationship
+            // Create parent relationship and move children first
             if (indexPath.row-1 >= 0) {
+                
+                // Find next group
+                if (indexPath.row+1 < self.noteArray.count-1) {
+                    for j in (indexPath.row+1...self.noteArray.count-1) {
+                        // If there is another group
+                        if (self.noteArray[j].indentationLevel == self.noteArray[indexPath.row].indentationLevel) {
+                            nextGroup = j
+                            break
+                        } else {
+                            // No more groups
+                            nextGroup = self.noteArray.count
+                        }
+                    }
+                    
+                    // Indent children
+                    if (indexPath.row+1 < nextGroup-1) {
+                        for k in (indexPath.row+1...nextGroup-1) {
+                            self.noteArray[k].indentationLevel += 1
+                        }
+                    } else {
+                        self.noteArray[indexPath.row+1].indentationLevel += 1
+                    }
+                }
+                
                 // Traverse backwards till you hit the first item with less indentation
                 for i in (0...indexPath.row-1).reversed() {
                    
@@ -484,41 +505,21 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         // Make the item you hit the parent
                         self.noteArray[indexPath.row].item?.parent = self.noteArray[i].item
                         self.noteArray[i].hasChildren = true
-                        
+
                         // Save Data
                         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
-                        
+
                         break
-                        
+
                     }
                     
                 }
+                
             }
             
-            // Move any children
-//            var count = 0
-//            if (indexPath.row < self.noteArray.count-1) {
-//
-//                for i in (indexPath.row...self.noteArray.count-1) {
-//                    if self.noteArray[i].item?.parent === self.noteArray[indexPath.row].item {
-//                        // Found children
-//                        self.noteArray[i].indentationLevel += 1
-//                        count += 1
-//
-//                        // Check next level
-//                        if (i+count <= self.noteArray.count-1) {
-//                            while (i+count <= self.noteArray.count-1) {
-//                                if (self.noteArray[i+1].item?.parent === self.noteArray[i].item) {
-//                                    self.noteArray[i+1].indentationLevel += 1
-//                                    count += 1
-//                                }
-//                            }
-//                        }
-//
-//                    }
-//
-//                }
-//            }
+            // Indent
+            self.noteArray[indexPath.row].indentationLevel += 1
+    
             // Save Data
             self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
             
