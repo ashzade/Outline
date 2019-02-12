@@ -21,8 +21,6 @@ class SideMenuTableViewController: UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
-        
         // Style title and height
         let label = UILabel()
         label.text = "Options"
@@ -40,6 +38,8 @@ class SideMenuTableViewController: UITableViewController{
         template.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         rate.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         feedback.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+        self.navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: 0xffffff, night: 0x263238)
+        self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
     }
     

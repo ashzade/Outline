@@ -43,6 +43,7 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
         tap.numberOfTapsRequired = 2
         self.navigationController?.navigationBar.addGestureRecognizer(tap)
+        self.navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: 0xffffff, night: 0x263238)
         
         // Add Info Button
         let infoButton = UIButton()
@@ -60,7 +61,6 @@ class NotesTableViewController: UITableViewController, NSFetchedResultsControlle
         label.textColor = UIColor(red:0.00, green:0.76, blue:0.71, alpha:1.0)
         label.font = UIFont.systemFont(ofSize: 42, weight: UIFont.Weight.medium)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-//        self.navigationController?.navigationBar.mixedBarStyle = MixedBarStyle(normal: .default, night: UIColor(red:0.15, green:0.20, blue:0.22, alpha:1.0))
         
         // Configure add button
         floaty.buttonImage = UIImage(named: "add")

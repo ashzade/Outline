@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import NightNight
 
 class InfoUIViewControler: UIViewController, WKNavigationDelegate {
     
