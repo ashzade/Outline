@@ -15,9 +15,18 @@ public class Note {
     // Properties
     var noteTitle: String
     var updatedDate = Date()
+    var groupItems = [[String]]()
+    var groups = [String]()
 
-    init?(noteTitle: String, date: Date) {
+    init?(noteTitle: String, groupItems: [[String]], groups: [String], date: Date) {
+        
+        if groups.isEmpty || groupItems.isEmpty {
+            return nil
+        }
+        
         self.noteTitle = noteTitle
+        self.groupItems = groupItems
+        self.groups = groups
         self.updatedDate = date
     }
 }

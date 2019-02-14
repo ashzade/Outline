@@ -31,6 +31,7 @@ var enter = false
 var nextGroup : Int = 0
 var childrenItems = [DisplayGroup]()
 var parentInd : Int = 0
+var old : Bool = false
 
 class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
@@ -38,7 +39,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     var reorderTableView: LongPressReorderTableView!
     
     // Create new note data object
-    var note = Note(noteTitle: "", date: currentDate)
+    var note = Note(noteTitle: "", groupItems: [[""]], groups: [""], date: currentDate)
     
     // Initialize note
     var noteArray = [
@@ -100,8 +101,8 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         // Fetch Note Data
+        old = false
         getNote()
-        self.restorationIdentifier = "NoteVC"
         
         // Init row reorder
         reorderTableView = LongPressReorderTableView(tableView, scrollBehaviour: .early)
@@ -219,7 +220,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        print(noteArray[indexPath.row].isExpanded)
 //        if (noteArray[indexPath.row].isExpanded == false) {
-//            return 1.0
+//            return 10.0
 //        } else {
 //            return UITableViewAutomaticDimension
 //        }
@@ -278,12 +279,16 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
     // Create groups
     override func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 1
+        
     }
     
     // Create rows per group
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         return noteArray.count
+        
     }
     
     
@@ -292,11 +297,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! ExpandingCell
         
         // Set value
+        
         cell.textView?.text = noteArray[indexPath.row].item?.value
         
         // Add cell text indentation
         let indent = CGFloat(noteArray[indexPath.row].indentationLevel * 10)
-
+        
         // Set up dot
         let frame = CGRect(x: 0, y: 8, width: 10, height: 10)
         let dot = UIImageView(frame: frame)
@@ -310,10 +316,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(collapseGroup))
         dot.addGestureRecognizer(tap)
-
+        
         // Group properties
         if (noteArray[indexPath.row].indentationLevel == 1) {
-
+            
             // Padding
             for constraint in cell.contentView.constraints {
                 if constraint.identifier == "cellIndent" {
@@ -321,21 +327,21 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 }
             }
             
-
+            
             if (cell.textView?.viewWithTag(123) == nil) {
                 // Cell padding for parent
                 cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: 10,bottom: 5,right: 0)
-
+                
                 // Add dot
                 cell.textView?.addSubview(dot)
-
+                
                 // Remove border
                 cell.textView?.removeLeftBorder()
-
+                
             }
         } else {
             // Children properties
-
+            
             // Reset border
             cell.textView?.removeLeftBorder()
             
@@ -345,20 +351,20 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     constraint.constant = 13
                 }
             }
-
+            
             // Cell padding for children
             cell.textView?.textContainerInset = UIEdgeInsets(top: 5,left: indent,bottom: 5,right: 0)
-
+            
             // Remove dot if it's there
             if (cell.textView?.viewWithTag(123) != nil) {
                 cell.textView.viewWithTag(123)?.removeFromSuperview()
             }
-
+            
             // Add border
             cell.textView?.addLeftBorder()
-
+            
         }
-
+        
         // Check for checkmark
         if (self.noteArray[indexPath.row].done == true) {
             cell.textView?.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
@@ -372,9 +378,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         }
         
         // Tag each cell and go to next one automatically
-//        cell.textView?.tag = indexPath.row + 1000
-
+        //        cell.textView?.tag = indexPath.row + 1000
+        
         return cell
+        
+        
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -784,6 +792,52 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         let arrayObject = unarchiveObject as AnyObject! as! [DisplayGroup]
                         noteArray = arrayObject
                         
+                    }
+                    
+                    // Fetch Group Items
+                    if data.value(forKey: "groupItems") != nil {
+                        let groupItemData = data.value(forKey: "groupItems") as! NSData
+                        let unarchiveObject = NSKeyedUnarchiver.unarchiveObject(with: groupItemData as Data)
+                        let arrayObject = unarchiveObject as AnyObject! as! [[String]]
+                        note?.groupItems = arrayObject
+                        if (arrayObject.count) > 0 {
+                            let groupData = data.value(forKey: "groups") as! NSData
+                            let unarchiveObjectOld = NSKeyedUnarchiver.unarchiveObject(with: groupData as Data)
+                            let arrayObjectOld = unarchiveObjectOld as AnyObject! as! [String]
+
+                            note?.groups = arrayObjectOld
+                            old = true
+                            
+                            var oldNote = [DisplayGroup]()
+                            
+                            for (i, group) in (note?.groups.enumerated())! {
+                                
+                                oldNote.append(
+                                    DisplayGroup(
+                                        indentationLevel: 1,
+                                        item: Item(value: group),
+                                        hasChildren: false,
+                                        done: false,
+                                        isExpanded: true)
+                                )
+                                
+                                
+                                for groupItem in (note?.groupItems[i])! {
+                                    
+                                    oldNote.append(
+                                        DisplayGroup(
+                                            indentationLevel: 2,
+                                            item: Item(value: groupItem),
+                                            hasChildren: false,
+                                            done: false,
+                                            isExpanded: true)
+                                    )
+                                    
+                                }
+                            }
+                            
+                            noteArray = oldNote
+                        }
                     }
                 } else if selectedID == nil {
                     // Set current datetime
