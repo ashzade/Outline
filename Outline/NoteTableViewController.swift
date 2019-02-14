@@ -803,40 +803,44 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                         if (arrayObject.count) > 0 {
                             let groupData = data.value(forKey: "groups") as! NSData
                             let unarchiveObjectOld = NSKeyedUnarchiver.unarchiveObject(with: groupData as Data)
-                            let arrayObjectOld = unarchiveObjectOld as AnyObject! as! [String]
-
-                            note?.groups = arrayObjectOld
-                            old = true
-                            
-                            var oldNote = [DisplayGroup]()
-                            
-                            for (i, group) in (note?.groups.enumerated())! {
+                            let arrayObjectOld = unarchiveObjectOld as AnyObject! as! [Any]
+                            if arrayObjectOld[0] is DisplayGroup {
                                 
-                                oldNote.append(
-                                    DisplayGroup(
-                                        indentationLevel: 1,
-                                        item: Item(value: group),
-                                        hasChildren: false,
-                                        done: false,
-                                        isExpanded: true)
-                                )
-                                
-                                
-                                for groupItem in (note?.groupItems[i])! {
-                                    
+                            } else {
+                                note?.groups = arrayObjectOld as! [String]
+                                old = true
+    
+                                var oldNote = [DisplayGroup]()
+    
+                                for (i, group) in (note?.groups.enumerated())! {
+    
                                     oldNote.append(
                                         DisplayGroup(
-                                            indentationLevel: 2,
-                                            item: Item(value: groupItem),
+                                            indentationLevel: 1,
+                                            item: Item(value: group),
                                             hasChildren: false,
                                             done: false,
                                             isExpanded: true)
                                     )
-                                    
+    
+    
+                                    for groupItem in (note?.groupItems[i])! {
+    
+                                        oldNote.append(
+                                            DisplayGroup(
+                                                indentationLevel: 2,
+                                                item: Item(value: groupItem),
+                                                hasChildren: false,
+                                                done: false,
+                                                isExpanded: true)
+                                        )
+    
+                                    }
                                 }
+    
+                                noteArray = oldNote
                             }
-                            
-                            noteArray = oldNote
+
                         }
                     }
                 } else if selectedID == nil {
