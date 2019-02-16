@@ -1057,30 +1057,35 @@ extension NoteTableViewController {
         // Dismiss keyboard
         hideKeyBoard()
         
-        // Find next group
-        if (indexPath.row+1 < noteArray.count-1) {
-            for i in (indexPath.row+1...noteArray.count-1) {
-                // If there is another group
-                if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
-                    nextGroup = i
-                    break
-                } else {
-                    // No more groups
-                    nextGroup = noteArray.count
-                }
-            }
-        }
-        
         // Clear children array
         childrenItems.removeAll()
         
-        // Create array of children indexes
-        if (indexPath.row+1 <= nextGroup-1) {
-            for i in (indexPath.row+1...nextGroup-1) {
-                childrenItems.append(noteArray[i])
-            }
-        }
         
+        // If item has children
+        if (noteArray[indexPath.row].indentationLevel < noteArray[indexPath.row+1].indentationLevel) {
+            // Find next group
+            if (indexPath.row+1 < noteArray.count-1) {
+                for i in (indexPath.row+1...noteArray.count-1) {
+                    // If there is another group
+                    if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
+                        nextGroup = i
+                        break
+                    } else {
+                        // No more groups
+                        nextGroup = noteArray.count
+                    }
+                }
+                
+                
+                // Create array of children indexes
+                if (indexPath.row+1 <= nextGroup-1) {
+                    for i in (indexPath.row+1...nextGroup-1) {
+                        childrenItems.append(noteArray[i])
+                    }
+                }
+            }
+            
+        }
         
         return true
     }
