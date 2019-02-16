@@ -422,7 +422,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 
                 indexPathFocus = indexPath
                 enter = true
-                let indent = noteArray[indexPath.row].indentationLevel
+                var indent = noteArray[indexPath.row].indentationLevel
+                
+                // Create child item if part of a group
+                if (noteArray.indices.contains(indexPath.row+1) && noteArray[indexPath.row+1].indentationLevel > 1) {
+                    indent = 2
+                }
                 
                 noteArray.insert(
                     DisplayGroup(
@@ -810,10 +815,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                                 note?.groups = arrayObjectOld as! [String]
                                 old = true
     
+                                // Create new array
                                 var oldNote = [DisplayGroup]()
-    
+                                
+                                // Loop through and create array
                                 for (i, group) in (note?.groups.enumerated())! {
-    
+                                    // Start with groups
                                     oldNote.append(
                                         DisplayGroup(
                                             indentationLevel: 1,
@@ -822,8 +829,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                                             done: false,
                                             isExpanded: true)
                                     )
-    
-    
+                                    // Add children
                                     for groupItem in (note?.groupItems[i])! {
     
                                         oldNote.append(
@@ -837,7 +843,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     
                                     }
                                 }
-    
+                                // Set the note array
                                 noteArray = oldNote
                             }
 
