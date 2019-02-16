@@ -720,6 +720,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             // Add checkmark
             if cell.textView.text.contains("✓") {
                 self.noteArray[indexPath.row].item?.value = (self.noteArray[indexPath.row].item?.value)!.replacingOccurrences(of: "✓ ", with: "", options: NSString.CompareOptions.literal, range:nil)
+                self.noteArray[indexPath.row].item?.value = (self.noteArray[indexPath.row].item?.value)!.replacingOccurrences(of: "✓", with: "", options: NSString.CompareOptions.literal, range:nil)
                 self.noteArray[indexPath.row].done = false
                 
             } else {
