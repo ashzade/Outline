@@ -1063,9 +1063,11 @@ extension NoteTableViewController {
         
         
         // If item has children
-        if (noteArray[indexPath.row].indentationLevel < noteArray[indexPath.row+1].indentationLevel) {
-            // Find next group
-            if (indexPath.row+1 < noteArray.count-1) {
+        if (indexPath.row+1 < noteArray.count-1) {
+        
+                if (noteArray[indexPath.row].indentationLevel < noteArray[indexPath.row+1].indentationLevel) {
+                // Find next group
+            
                 for i in (indexPath.row+1...noteArray.count-1) {
                     // If there is another group
                     if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
