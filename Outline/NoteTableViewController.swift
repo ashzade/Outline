@@ -1070,7 +1070,7 @@ extension NoteTableViewController {
             
                 for i in (indexPath.row+1...noteArray.count-1) {
                     // If there is another group
-                    if (noteArray[i].indentationLevel == noteArray[indexPath.row].indentationLevel) {
+                    if (noteArray[indexPath.row].indentationLevel >= noteArray[i].indentationLevel ) {
                         nextGroup = i
                         break
                     } else {
