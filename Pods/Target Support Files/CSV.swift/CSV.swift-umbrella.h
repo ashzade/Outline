@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SwiftSVGVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftSVGVersionString[];
+FOUNDATION_EXPORT double CSVVersionNumber;
+FOUNDATION_EXPORT const unsigned char CSVVersionString[];
 

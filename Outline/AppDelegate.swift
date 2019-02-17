@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import CloudKit
 import CloudCore
+import CSV
 
 let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
 
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var openNote = [DisplayGroup]()
+    var openNoteTitle = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Register for push notifications about changes
@@ -122,16 +124,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         do {
-            let data = try Data(contentsOf: url)
-            // Do something with the file
-            openNote = [
-                DisplayGroup(
-                    indentationLevel: 1,
-                    item: Item(value: "file Opened"),
-                    hasChildren: false,
-                    done: false,
-                    isExpanded: true)
-            ]
+            
+            let stream = InputStream(url: url)!
+            let csv = try! CSVReader(stream: stream,
+                                     hasHeaderRow: true) // It must be true.
+            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: "-outline.csv", with: "")
+            
+            
+            while csv.next() != nil {
+                let indent = Int(csv["indentation"]!)
+                openNote.append(DisplayGroup(indentationLevel: indent ?? 1, item: Item(value: csv["item"]!), hasChildren: (csv["hasChildren"] != nil), done: (csv["done"] != nil), isExpanded: false))
+            }
+           
             
             self.window?.rootViewController!.performSegue(withIdentifier: "openNote", sender: nil)
             

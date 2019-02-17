@@ -64,9 +64,21 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // For opening outline files
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            self.noteArray = delegate.openNote
-            print(self.noteArray)
+            if (delegate.openNote.count > 0) {
+                self.noteArray = delegate.openNote
+                self.NoteTitle.text = delegate.openNoteTitle
+                
+                // Save Data
+                self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+                
+                // Save to core data
+                self.updateEntity(id: selectedID, attribute: "title", value: self.NoteTitle.text)
+                
+                delegate.openNote.removeAll()
+            }
+            
         }
         
         // Themes

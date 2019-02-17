@@ -1,36 +1,36 @@
 PODS:
   - CloudCore (2.0.1)
+  - CSV.swift (2.3.1)
   - Floaty (4.0.1)
   - LongPressReorder (1.2.1)
   - NightNight (0.5.0)
   - SideMenu (5.0.3)
-  - SwiftSVG (2.2.0)
 
 DEPENDENCIES:
   - CloudCore
+  - CSV.swift (~> 2.3.1)
   - Floaty (~> 4.0.0)
   - LongPressReorder
   - NightNight
   - SideMenu
-  - SwiftSVG (~> 2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CloudCore
+    - CSV.swift
     - Floaty
     - LongPressReorder
     - NightNight
     - SideMenu
-    - SwiftSVG
 
 SPEC CHECKSUMS:
   CloudCore: f06924bdb58285a834f550633e28a67e6196d7b1
+  CSV.swift: d16f671b3090a2c0525d5f2165b18319074aae2b
   Floaty: 82854e1a5ef4fa208281ebd4da2f3d1e51ba67a6
   LongPressReorder: 71b132d61786d45a1241dd0ff356a2bec1deff63
   NightNight: 2a5550fdd9cf424b75ebaab022c26aaba35304c8
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
-  SwiftSVG: 19bc4e434dcf236ece45ddf75f5ee1d3ef8061e6
 
-PODFILE CHECKSUM: 817352d410b596922392bcf766c3f421284bfbd7
+PODFILE CHECKSUM: 9c072cf8a2d3cd2d560eb4e1eda297f1c8394880
 
 COCOAPODS: 1.6.0
