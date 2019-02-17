@@ -72,35 +72,11 @@ class SideMenuTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            // text to share
-            var text = "* \(shareTitle) * \n"
-            text.append("\n")
-            
-            
-            for (i, group) in shareNoteArray.enumerated() {
-                if let item = group.item?.value {
-                    text.append(String(repeating: "- ", count: group.indentationLevel - 1))
-                    if (group.hasChildren) {
-                        text.append("• \(item)")
-                    } else {
-                        text.append(item)
-                    }
-                }
-                
-                text.append("\n")
-            }
+            creatCSV()
     
-            text.append("\n[Shared from the Outline App]")
-            
-            // Add to share controller
-            let textToShare = [ text ]
-            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-    
-            // present the view controller
-            self.present(activityViewController, animated: true, completion: nil)
         case 1:
             createTemplate()
+            
         case 3:
             let appID = "1342189178"
             let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
@@ -126,5 +102,71 @@ class SideMenuTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.contentView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
     }
+    
+    func creatCSV() -> Void {
+        let activityItem = CustomActivityItemProvider(placeholderItem: "")
+        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+        
+    }
+    
+    class CustomActivityItemProvider: UIActivityItemProvider
+    {
+        override var item: Any{
+            switch self.activityType!
+            {
+            case UIActivityType.message:
+                
+                // text to share
+                var text = "* \(shareTitle) * \n"
+                text.append("\n")
+                
+                
+                for (i, group) in shareNoteArray.enumerated() {
+                    if let item = group.item?.value {
+                        text.append(String(repeating: "- ", count: group.indentationLevel - 1))
+                        if (group.hasChildren) {
+                            text.append("• \(item)")
+                        } else {
+                            text.append(item)
+                        }
+                    }
+                    
+                    text.append("\n")
+                }
+                
+                text.append("\n[Shared from the Outline App]")
+                
+                return text
+                
+            default:
+                
+                let fileName = "\(shareTitle)-outline.csv"
+                let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+                var csvText = "item,indentation,hasChildren,done\n"
+                
+                for note in shareNoteArray {
+                    let newLine = "\(note.item!.value),\(note.indentationLevel),\(note.hasChildren),\(note.done)\n"
+                    csvText.append(newLine)
+                }
+                
+                do {
+                    try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+                    
+                } catch {
+                    print("Failed to create file")
+                    print("\(error)")
+                }
+                print(path ?? "not found")
+                
+                return path
+                
+            }
+        }
+    }
+
     
 }

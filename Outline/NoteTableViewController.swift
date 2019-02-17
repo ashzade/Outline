@@ -64,6 +64,11 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            self.noteArray = delegate.openNote
+            print(self.noteArray)
+        }
+        
         // Themes
         self.tableView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
         self.tableView.contentInset = UIEdgeInsetsMake(-10, 0, 0, 0)
@@ -1138,5 +1143,5 @@ extension NoteTableViewController {
         self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
     }
     
-    
+
 }

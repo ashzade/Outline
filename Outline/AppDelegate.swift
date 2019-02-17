@@ -17,6 +17,7 @@ let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persis
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var openNote = [DisplayGroup]()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Register for push notifications about changes
@@ -116,6 +117,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        do {
+            let data = try Data(contentsOf: url)
+            // Do something with the file
+            openNote = [
+                DisplayGroup(
+                    indentationLevel: 1,
+                    item: Item(value: "file Opened"),
+                    hasChildren: false,
+                    done: false,
+                    isExpanded: true)
+            ]
+            
+            self.window?.rootViewController!.performSegue(withIdentifier: "openNote", sender: nil)
+            
+        } catch {
+            print("Unable to load data: \(error)")
+        }
+        
         return true
     }
 

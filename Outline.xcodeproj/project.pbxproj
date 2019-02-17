@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		179EAD7B22189457004B3469 /* outline-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 179EAD7A22189457004B3469 /* outline-logo.png */; };
 		C47D751838388848A02144D7 /* Pods_Outline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF61014B9A1B3120CC75456 /* Pods_Outline.framework */; };
 		D51A965721546F1500BFA574 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D51A965621546F1500BFA574 /* CloudKit.framework */; };
 		D52A6AA1205D52BE0019EA87 /* InfoUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52A6AA0205D52BE0019EA87 /* InfoUIViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		179EAD7A22189457004B3469 /* outline-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "outline-logo.png"; path = "../../outline-assets/outline-logo.png"; sourceTree = "<group>"; };
 		21AC2F5AB0BCD187AEF903E3 /* Pods-Outline.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outline.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outline/Pods-Outline.release.xcconfig"; sourceTree = "<group>"; };
 		46F502DC032AFDD236E42613 /* Pods-Outline.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outline.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outline/Pods-Outline.debug.xcconfig"; sourceTree = "<group>"; };
 		BCF61014B9A1B3120CC75456 /* Pods_Outline.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outline.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 		D57D48A91FF2C95300F7336B /* Outline */ = {
 			isa = PBXGroup;
 			children = (
+				179EAD7A22189457004B3469 /* outline-logo.png */,
 				D539746421C6F190008E7D51 /* Assets.xcassets */,
 				D51A965521546F1300BFA574 /* Outline.entitlements */,
 				D57D48AA1FF2C95300F7336B /* AppDelegate.swift */,
@@ -189,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57D48B51FF2C95300F7336B /* LaunchScreen.storyboard in Resources */,
+				179EAD7B22189457004B3469 /* outline-logo.png in Resources */,
 				D539746521C6F190008E7D51 /* Assets.xcassets in Resources */,
 				D57D48B01FF2C95300F7336B /* Main.storyboard in Resources */,
 			);
