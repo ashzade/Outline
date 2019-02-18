@@ -128,12 +128,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let stream = InputStream(url: url)!
             let csv = try! CSVReader(stream: stream,
                                      hasHeaderRow: true) // It must be true.
-            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: "-outline.csv", with: "")
+            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: "-outline", with: "")
+            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: ".csv", with: "")
             
             
             while csv.next() != nil {
                 let indent = Int(csv["indentation"]!)
-                openNote.append(DisplayGroup(indentationLevel: indent ?? 1, item: Item(value: csv["item"]!), hasChildren: (csv["hasChildren"] != nil), done: (csv["done"] != nil), isExpanded: false))
+                openNote.append(DisplayGroup(indentationLevel: indent ?? 1, item: Item(value: csv["item"]!), hasChildren: Bool(csv["hasChildren"]!) ?? false, done: Bool(csv["done"]!) ?? false, isExpanded: false))
             }
            
             

@@ -874,6 +874,12 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                     if template.isEmpty == false {
                         self.NoteTitle.text = (template[0] as! String)
                         self.noteArray = template[1] as! [DisplayGroup]
+                        
+                        // Save Data
+                        self.updateEntity(id: selectedID, attribute: "groups", value: self.noteArray)
+                        
+                        // Save to core data
+                        self.updateEntity(id: selectedID, attribute: "title", value: self.NoteTitle.text)
                     }
                     
                 }
