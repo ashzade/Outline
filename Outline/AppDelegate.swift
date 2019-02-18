@@ -126,10 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             
             let stream = InputStream(url: url)!
-            let csv = try! CSVReader(stream: stream,
-                                     hasHeaderRow: true) // It must be true.
-            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: "-outline", with: "")
-            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: ".csv", with: "")
+            let csv = try! CSVReader(stream: stream, hasHeaderRow: true) // It must be true.
+            openNoteTitle = url.lastPathComponent.replacingOccurrences(of: "-outline|.csv", with: "", options: .regularExpression)
             
             
             while csv.next() != nil {
