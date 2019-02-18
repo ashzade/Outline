@@ -17,6 +17,7 @@ class SideMenuTableViewController: UITableViewController{
     @IBOutlet weak var template: UILabel!
     @IBOutlet weak var rate: UILabel!
     @IBOutlet weak var feedback: UILabel!
+    @IBOutlet weak var export: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,6 +37,7 @@ class SideMenuTableViewController: UITableViewController{
         // Theming options
         share.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         template.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
+        export.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         rate.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         feedback.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
         self.navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: 0xffffff, night: 0x263238)
@@ -72,10 +74,37 @@ class SideMenuTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            creatCSV()
+            // text to share
+            var text = "* \(shareTitle) * \n"
+            text.append("\n")
+            
+            
+            for (i, group) in shareNoteArray.enumerated() {
+                if let item = group.item?.value {
+                    text.append(String(repeating: "- ", count: group.indentationLevel - 1))
+                    if (group.hasChildren) {
+                        text.append("• \(item)")
+                    } else {
+                        text.append(item)
+                    }
+                }
+                
+                text.append("\n")
+            }
+            
+            text.append("\n[Shared from the Outline App]")
+            
+            let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+            
+            // present the view controller
+            self.present(activityViewController, animated: true, completion: nil)
     
         case 1:
             createTemplate()
+            
+        case 2:
+            creatCSV()
             
         case 3:
             let appID = "1342189178"
@@ -104,68 +133,31 @@ class SideMenuTableViewController: UITableViewController{
     }
     
     func creatCSV() -> Void {
-        let activityItem = CustomActivityItemProvider(placeholderItem: "")
-        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: nil)
+        
+        let fileName = "\(shareTitle)-outline.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        var csvText = "item,indentation,hasChildren,done\n"
+        
+        for note in shareNoteArray {
+            let newLine = "\(note.item!.value),\(note.indentationLevel),\(note.hasChildren),\(note.done)\n"
+            csvText.append(newLine)
+        }
+        
+        do {
+            try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+            
+        } catch {
+            print("Failed to create file")
+            print("\(error)")
+        }
+        print(path ?? "not found")
+        
+        let activityViewController = UIActivityViewController(activityItems: [path], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
         
-    }
-    
-    class CustomActivityItemProvider: UIActivityItemProvider
-    {
-        override var item: Any{
-            switch self.activityType!
-            {
-            case UIActivityType.message:
-                
-                // text to share
-                var text = "* \(shareTitle) * \n"
-                text.append("\n")
-                
-                
-                for (i, group) in shareNoteArray.enumerated() {
-                    if let item = group.item?.value {
-                        text.append(String(repeating: "- ", count: group.indentationLevel - 1))
-                        if (group.hasChildren) {
-                            text.append("• \(item)")
-                        } else {
-                            text.append(item)
-                        }
-                    }
-                    
-                    text.append("\n")
-                }
-                
-                text.append("\n[Shared from the Outline App]")
-                
-                return text
-                
-            default:
-                
-                let fileName = "\(shareTitle)-outline.csv"
-                let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
-                var csvText = "item,indentation,hasChildren,done\n"
-                
-                for note in shareNoteArray {
-                    let newLine = "\(note.item!.value),\(note.indentationLevel),\(note.hasChildren),\(note.done)\n"
-                    csvText.append(newLine)
-                }
-                
-                do {
-                    try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
-                    
-                } catch {
-                    print("Failed to create file")
-                    print("\(error)")
-                }
-                print(path ?? "not found")
-                
-                return path
-                
-            }
-        }
     }
 
     
