@@ -499,7 +499,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             let cell = tableView.cellForRow(at: indexPath) as! ExpandingCell
             
             // Create parent relationship and move children first
-            if (indexPath.row-1 >= 0 && indexPath.row+1 < self.noteArray.count-1) {
+            if (indexPath.row-1 >= 0 && indexPath.row+1 <= self.noteArray.count-1) {
                 
                 // Only do this if the next item is a child
                 if (self.noteArray[indexPath.row].indentationLevel < self.noteArray[indexPath.row+1].indentationLevel) {
@@ -610,33 +610,32 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 if (indexPath.row+1 <= self.noteArray.count-1 && self.noteArray[indexPath.row].indentationLevel < self.noteArray[indexPath.row+1].indentationLevel) {
                     
                     // Find next group
-                    if (indexPath.row+1 < self.noteArray.count-1) {
-                        for j in (indexPath.row+1...self.noteArray.count-1) {
-                            // If there is another group
-                            if (self.noteArray[j].indentationLevel <= myIndent) {
-                                nextGroup = j
-                                break
-                            } else {
-                                // No more groups
-                                nextGroup = self.noteArray.count
-                            }
-                        }
-                        
-                        // Outdent children
-                        if (indexPath.row+1 < nextGroup-1) {
-                            for k in (indexPath.row+1...nextGroup-1) {
-                                if (self.noteArray[k].indentationLevel > 0) {
-                                    self.noteArray[k].indentationLevel -= 1
-                                }
-                                
-                            }
+                    for j in (indexPath.row+1...self.noteArray.count-1) {
+                        // If there is another group
+                        if (self.noteArray[j].indentationLevel <= myIndent) {
+                            nextGroup = j
+                            break
                         } else {
-                            if (self.noteArray[indexPath.row+1].indentationLevel > 0) {
-                                self.noteArray[indexPath.row+1].indentationLevel -= 1
-                            }
-                           
+                            // No more groups
+                            nextGroup = self.noteArray.count
                         }
                     }
+                    
+                    // Outdent children
+                    if (indexPath.row+1 < nextGroup-1) {
+                        for k in (indexPath.row+1...nextGroup-1) {
+                            if (self.noteArray[k].indentationLevel > 0) {
+                                self.noteArray[k].indentationLevel -= 1
+                            }
+                            
+                        }
+                    } else {
+                        if (self.noteArray[indexPath.row+1].indentationLevel > 0) {
+                            self.noteArray[indexPath.row+1].indentationLevel -= 1
+                        }
+                       
+                    }
+                    
                 }
                 
                 // Outdent
