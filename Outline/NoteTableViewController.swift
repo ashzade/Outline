@@ -198,6 +198,10 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
             
             let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
             var headerFrame = headerView.frame
+            if (headerFrame.height < ((headerView.viewWithTag(1)?.frame.height)!) + 30) {
+                tableView.tableHeaderView?.frame.size = CGSize(width: headerFrame.width, height: (headerView.viewWithTag(1)?.frame.height)! + 35)
+                tableView.reloadData()
+            }
             headerView.mixedBackgroundColor = MixedColor(normal: 0xffffff, night: 0x263238)
             
         }
@@ -259,6 +263,17 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // If title
         if textView.tag == 1 {
             placeholderLabel.isHidden = !textView.text.isEmpty
+            
+            // Set title view height
+            if (textView.frame.height > self.tableView.viewWithTag(9999)?.frame.height ?? 80) {
+                tableView.beginUpdates()
+                self.tableView.viewWithTag(9999)?.frame = CGRect(x: 0, y: 0, width: (self.tableView.viewWithTag(9999)?.frame.width)!, height: textView.frame.height + 40)
+                tableView.endUpdates()
+            } else {
+                tableView.beginUpdates()
+                self.tableView.viewWithTag(9999)?.frame = CGRect(x: 0, y: 0, width: (self.tableView.viewWithTag(9999)?.frame.width)!, height: textView.frame.height + 40)
+                tableView.endUpdates()
+            }
             
             // Set note object and title
             self.note!.noteTitle = textView.text!
