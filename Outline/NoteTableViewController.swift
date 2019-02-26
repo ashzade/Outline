@@ -610,7 +610,7 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
                 // If indentation is at the start, set parent to nil
                 if (self.noteArray[indexPath.row].indentationLevel == 1) {
                     self.noteArray[indexPath.row].item?.parent = nil
-                } else {
+                } else if (indexPath.row-1 > 0) {
                     // Traverse backwards till you hit the first item above with less indentation
                     for i in (0...indexPath.row-1).reversed() {
                         if (self.noteArray[i].indentationLevel < myIndent) {
