@@ -399,13 +399,13 @@ class NoteTableViewController: UITableViewController, UITextViewDelegate {
         // Check for checkmark
         if (self.noteArray[indexPath.row].done == true) {
             cell.textView?.mixedTextColor = MixedColor(normal: UIColor(red:0.79, green:0.79, blue:0.79, alpha:1.0), night: UIColor(red:0.71, green:0.71, blue:0.71, alpha:1.0))
-            cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.ultraLight)
+            cell.textView?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.ultraLight)
         } else if (noteArray[indexPath.row].indentationLevel == 1){
             cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-            cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
+            cell.textView?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
         } else {
             cell.textView?.mixedTextColor = MixedColor(normal: 0x585858, night: 0xffffff)
-            cell.textView?.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
+            cell.textView?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.light)
         }
         
         return cell
